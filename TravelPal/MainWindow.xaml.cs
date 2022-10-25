@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using TravelPal.Managers;
 
 namespace TravelPal
 {
@@ -7,9 +8,12 @@ namespace TravelPal
     /// </summary>
     public partial class MainWindow : Window
     {
+        UserManager userManager = new();
+
         public MainWindow()
         {
             InitializeComponent();
+            userManager.AddGandalf();
         }
     }
 }

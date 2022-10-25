@@ -9,13 +9,13 @@ namespace TravelPal.Models
         public string UserName { get; set; }
         public string Password { get; set; }
         public Countries Location { get; set; }
-        public List<Travel> Travels { get; set; }
+        public List<Travel> Travels { get; set; } = new();
 
         public User(string userName, string password, Countries location)
         {
-            UserName = userName;
-            Password = password;
-            Location = location;
+            this.UserName = userName;
+            this.Password = password;
+            this.Location = location;
         }
     }
 }

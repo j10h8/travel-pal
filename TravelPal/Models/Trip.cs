@@ -9,9 +9,9 @@ namespace TravelPal.Models
     {
         public TripTypes Type { get; set; }
 
-        public Trip(TripTypes type, string destination, Countries country, int travellers, List<IPackingListItem> packingList, DateTime startDate, DateTime endDate, int travelDays) : base(destination, country, travellers, packingList, startDate, endDate, travelDays)
+        public Trip(TripTypes type, string destination, Countries country, int travellers, List<IPackingListItem> packingList, DateTime startDate, DateTime endDate) : base(destination, country, travellers, packingList, startDate, endDate)
         {
-            Type = type;
+            this.Type = type;
         }
 
         public string GetInfo()

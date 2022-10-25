@@ -9,8 +9,8 @@ namespace TravelPal.Models
 
         public OtherItem(string name, int quantity)
         {
-            Name = name;
-            Quantity = quantity;
+            this.Name = name;
+            this.Quantity = quantity;
         }
 
         public string GetInfo()     // TODO: Possibly change what is returned. 

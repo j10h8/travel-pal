@@ -121,7 +121,7 @@
             HorizontalContentAlignment="Center"
             VerticalContentAlignment="Center"/>
         <Button
-            Name="btnRegister"
+            Name="btnToRegister"
             Grid.Column="0"
             Grid.Row="7"
             Grid.ColumnSpan="2"
@@ -131,7 +131,8 @@
             Background="MediumSlateBlue"
             Foreground="MintCream"
             Margin="10"
-            BorderThickness="0">
+            BorderThickness="0"
+            Click="btnToRegister_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

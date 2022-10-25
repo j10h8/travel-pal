@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using TravelPal.Interfaces;
 using TravelPal.Managers;
 
 namespace TravelPal
@@ -9,15 +8,13 @@ namespace TravelPal
     /// </summary>
     public partial class TravelsWindow : Window
     {
-        public TravelManager TravelManager { get; }
-        public UserManager UserManager { get; }
-        public IUser SignedInUser { get; }
+        private TravelManager _travelManager;
+        private UserManager _userManager;
 
-        public TravelsWindow(TravelManager travelManager, UserManager userManager, IUser signedInUser)
+        public TravelsWindow(TravelManager travelManager, UserManager userManager)
         {
-            TravelManager = travelManager;
-            UserManager = userManager;
-            SignedInUser = signedInUser;
+            _travelManager = travelManager;
+            _userManager = userManager;
 
             InitializeComponent();
         }

@@ -26,5 +26,44 @@ namespace TravelPal.Managers
         {
             Users.Remove(user);         // TODO: Check if a foreach is needed here.
         }
+
+        public bool UpdateUserName(IUser user, string userName)
+        {
+            if (ValidateUserName(userName))
+            {
+                user.UserName = userName;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool ValidateUserName(string userName)
+        {
+            foreach (IUser user in Users)
+            {
+                if (user.UserName == userName)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public bool SignInUser(string userName, string password)
+        {
+            foreach (IUser user in Users)
+            {
+                if (user.UserName == userName && user.Password == password)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

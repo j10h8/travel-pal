@@ -7,19 +7,22 @@
         mc:Ignorable="d"
         Title="MainWindow" 
         Height="600" 
+        MinHeight="600"
+        MaxHeight="600"
         Width="1000"
+        MinWidth="1000"
+        MaxWidth="1000"
         Background="MintCream"
         FontFamily="Calibri"
-        FontSize="22">
+        FontSize="20">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="425"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="10"/>
@@ -41,7 +44,7 @@
             Foreground="MediumSlateBlue"/>
         <Label
             Grid.Column="0"
-            Grid.Row="3"
+            Grid.Row="2"
             Content="User name:"
             Foreground="MediumSlateBlue"
             HorizontalContentAlignment="Right"
@@ -49,7 +52,7 @@
         <TextBox
             Name="tbUserName"
             Grid.Column="2"
-            Grid.Row="3"
+            Grid.Row="2"
             Width="240"
             Height="45"
             Background="MintCream"
@@ -68,13 +71,13 @@
         </TextBox>
         <Label
             Grid.Column="0"
-            Grid.Row="4"
+            Grid.Row="3"
             Content="Password:"
             Foreground="MediumSlateBlue"
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"/>
         <Border CornerRadius="5"
-                Grid.Row="4"
+                Grid.Row="3"
                 Grid.Column="2"
                 Width="240"
                 Height="45"
@@ -93,11 +96,11 @@
         <Button
             Name="btnSignIn"
             Grid.Column="0"
-            Grid.Row="6"
+            Grid.Row="5"
             Grid.ColumnSpan="2"
             Width="150"
             Content="Sign in"
-            FontSize="20"
+            FontSize="18"
             Background="MediumSlateBlue"
             Foreground="MintCream"
             Margin="10"
@@ -110,7 +113,7 @@
         </Button>
         <Label
             Grid.Column="0"
-            Grid.Row="7"
+            Grid.Row="6"
             Grid.ColumnSpan="2"
             Content="- or -"
             Foreground="MediumSlateBlue"
@@ -119,11 +122,11 @@
         <Button
             Name="btnRegister"
             Grid.Column="0"
-            Grid.Row="8"
+            Grid.Row="7"
             Grid.ColumnSpan="2"
             Width="150"
             Content="Register"
-            FontSize="20"
+            FontSize="18"
             Background="MediumSlateBlue"
             Foreground="MintCream"
             Margin="10"

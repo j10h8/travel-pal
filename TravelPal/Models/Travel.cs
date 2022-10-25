@@ -31,6 +31,12 @@ namespace TravelPal.Models
             return $"Destination: {Destination}";   // Possibly add more of the properties to return.
         }
 
+        /// <summary>
+        /// Method calculating the number of days between two dates
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns>The calculated number as int</returns>
         private int CalculateTravelDays(DateTime startDate, DateTime endDate)
         {
             TimeSpan timeSpan = endDate - startDate;

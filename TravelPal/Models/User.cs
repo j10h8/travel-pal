@@ -13,9 +13,9 @@ namespace TravelPal.Models
 
         public User(string userName, string password, Countries location)
         {
-            this.UserName = userName;
-            this.Password = password;
-            this.Location = location;
+            UserName = userName;
+            Password = password;
+            Location = location;
         }
     }
 }

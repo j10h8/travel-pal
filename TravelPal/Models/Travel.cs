@@ -17,13 +17,13 @@ namespace TravelPal.Models
 
         public Travel(string destination, Countries country, int travellers, List<IPackingListItem> packingList, DateTime startDate, DateTime endDate)
         {
-            this.Destination = destination;
-            this.Country = country;
-            this.Travellers = travellers;
-            this.PackingList = packingList;
-            this.StartDate = startDate;
-            this.EndDate = endDate;
-            this.TravelDays = CalculateTravelDays(startDate, endDate);
+            Destination = destination;
+            Country = country;
+            Travellers = travellers;
+            PackingList = packingList;
+            StartDate = startDate;
+            EndDate = endDate;
+            TravelDays = CalculateTravelDays(startDate, endDate);
         }
 
         public virtual string GetInfo()

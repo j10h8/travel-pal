@@ -1,2 +1,0 @@
-﻿Users.Contains(user)
-Trim inputs 

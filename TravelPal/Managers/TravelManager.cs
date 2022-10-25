@@ -9,12 +9,12 @@ namespace TravelPal.Managers
 
         public void AddTravel(Travel travel)
         {
-            this.Travels.Add(travel);
+            Travels.Add(travel);
         }
 
         public void RemoveTravel(Travel travel)
         {
-            this.Travels.Remove(travel);
+            Travels.Remove(travel);
         }
     }
 }

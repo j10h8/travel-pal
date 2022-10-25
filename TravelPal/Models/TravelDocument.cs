@@ -9,8 +9,8 @@ namespace TravelPal.Models
 
         public TravelDocument(string name, bool required)
         {
-            this.Name = name;
-            this.Required = required;
+            Name = name;
+            Required = required;
         }
 
         public string GetInfo()     // TODO: Possibly change what is returned.

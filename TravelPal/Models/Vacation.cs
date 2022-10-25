@@ -11,7 +11,7 @@ namespace TravelPal.Models
 
         public Vacation(bool allInclusive, string destination, Countries country, int travellers, List<IPackingListItem> packingList, DateTime startDate, DateTime endDate) : base(destination, country, travellers, packingList, startDate, endDate)
         {
-            this.AllInclusive = allInclusive;
+            AllInclusive = allInclusive;
         }
 
         public string GetInfo()     // Change this to return bool instead? 

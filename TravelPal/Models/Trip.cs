@@ -11,7 +11,7 @@ namespace TravelPal.Models
 
         public Trip(TripTypes type, string destination, Countries country, int travellers, List<IPackingListItem> packingList, DateTime startDate, DateTime endDate) : base(destination, country, travellers, packingList, startDate, endDate)
         {
-            this.Type = type;
+            Type = type;
         }
 
         public string GetInfo()

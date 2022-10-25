@@ -50,7 +50,7 @@
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"/>
         <TextBox
-            Name="tbUserName"
+            Name="txtUserName"
             Grid.Column="2"
             Grid.Row="2"
             Width="240"
@@ -104,7 +104,8 @@
             Background="MediumSlateBlue"
             Foreground="MintCream"
             Margin="10"
-            BorderThickness="0">
+            BorderThickness="0"
+            Click="btnSignIn_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

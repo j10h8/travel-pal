@@ -8,30 +8,42 @@ namespace TravelPal
     /// </summary>
     public partial class MainWindow : Window
     {
-        UserManager userManager = new();
-        TravelManager travelManager = new();
+        UserManager _userManager;
+        TravelManager _travelManager;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            userManager.AddGandalf();
-            userManager.AddAdmin();
+            _userManager = new();
+            _travelManager = new();
+
+            _userManager.AddGandalf();
+            _userManager.AddAdmin();
         }
 
+        public MainWindow(UserManager userManager, TravelManager travelManager)
+        {
+            InitializeComponent();
+
+            _userManager = userManager;
+            _travelManager = travelManager;
+        }
+
+        // ******************** EVENTS *********************
         private void btnSignIn_Click(object sender, RoutedEventArgs e)
         {
             if (txtUserName.Text.Trim().Length == 0 || pbPassword.Password.Trim().Length == 0)
             {
                 MessageBox.Show("Please enter username and password!");
             }
-            else if (!userManager.SignInUser(txtUserName.Text.Trim(), pbPassword.Password.Trim()))
+            else if (!_userManager.SignInUser(txtUserName.Text.Trim(), pbPassword.Password.Trim()))
             {
                 MessageBox.Show("User name and/or password do/does not exist!");
             }
-            else if (userManager.SignInUser(txtUserName.Text.Trim(), pbPassword.Password.Trim()))
+            else if (_userManager.SignInUser(txtUserName.Text.Trim(), pbPassword.Password.Trim()))
             {
-                TravelsWindow travelsWindow = new(travelManager, userManager);
+                TravelsWindow travelsWindow = new(_userManager, _travelManager);
                 travelsWindow.Show();
 
                 Close();
@@ -40,10 +52,12 @@ namespace TravelPal
 
         private void btnToRegisterWindow_Click(object sender, RoutedEventArgs e)
         {
-            RegisterWindow registerWindow = new(userManager);
+            RegisterWindow registerWindow = new(_userManager, _travelManager);
             registerWindow.Show();
 
             Close();
         }
+
+        // ******************** METHODS ********************
     }
 }

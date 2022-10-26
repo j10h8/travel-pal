@@ -2,6 +2,7 @@
 using System.Windows;
 using TravelPal.Enums;
 using TravelPal.Managers;
+using TravelPal.Models;
 
 namespace TravelPal
 {
@@ -11,10 +12,12 @@ namespace TravelPal
     public partial class RegisterWindow : Window
     {
         private UserManager _userManager;
+        private TravelManager _travelManager;
 
-        public RegisterWindow(UserManager userManager)
+        public RegisterWindow(UserManager userManager, TravelManager travelManager)
         {
             _userManager = userManager;
+            _travelManager = travelManager;
 
             InitializeComponent();
 
@@ -26,25 +29,40 @@ namespace TravelPal
         {
             if (txtRegisterUserName.Text.Trim().Length == 0 || pbRegisterPassword.Password.Trim().Length == 0 || string.IsNullOrEmpty(cbCountries.Text))
             {
-                MessageBox.Show("Please provide all required inputs (user name, password, and country)!");
+                MessageBox.Show("Please provide all required inputs (user name, password, and country).");
             }
             else if (txtRegisterUserName.Text.Trim().Length < 3)
             {
-                MessageBox.Show("Please enter a username with at least three characters!");
+                MessageBox.Show("Please enter a username with at least three characters.");
             }
             else if (pbRegisterPassword.Password.Trim().Length < 5)
             {
-                MessageBox.Show("Please enter a password with at least five characters!");
+                MessageBox.Show("Please enter a password with at least five characters.");
             }
             else
             {
-                // Register new user, message that user was created, open mainwindow, and close registerwindow 
+                Countries location = (Countries)Enum.Parse(typeof(Countries), cbCountries.SelectedItem.ToString());
+                User user = new(txtRegisterUserName.Text.ToString(), pbRegisterPassword.Password.ToString(), location);
+
+                if (!_userManager.AddUser(user))
+                {
+                    MessageBox.Show("The user name is not available. Please choose a different user name.");
+                }
+                else
+                {
+                    MessageBox.Show("You have been successfully registered!");
+
+                    MainWindow mainWindow = new(_userManager, _travelManager);
+                    mainWindow.Show();
+
+                    Close();
+                }
             }
         }
 
         private void btnCancelRegister_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new();
+            MainWindow mainWindow = new(_userManager, _travelManager);
             mainWindow.Show();
 
             Close();

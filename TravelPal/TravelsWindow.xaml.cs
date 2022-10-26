@@ -8,15 +8,19 @@ namespace TravelPal
     /// </summary>
     public partial class TravelsWindow : Window
     {
-        private TravelManager _travelManager;
-        private UserManager _userManager;
+        TravelManager _travelManager;
+        UserManager _userManager;
 
-        public TravelsWindow(TravelManager travelManager, UserManager userManager)
+        public TravelsWindow(UserManager userManager, TravelManager travelManager)
         {
             _travelManager = travelManager;
             _userManager = userManager;
 
             InitializeComponent();
         }
+
+        // ******************** EVENTS *********************
+
+        // ******************** METHODS ********************
     }
 }

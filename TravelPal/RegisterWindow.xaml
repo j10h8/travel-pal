@@ -32,7 +32,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-
+        
         <Label
             Grid.Column="0"
             Grid.Row="1"

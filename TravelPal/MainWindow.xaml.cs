@@ -25,16 +25,25 @@ namespace TravelPal
             {
                 MessageBox.Show("Please enter username and password!");
             }
-            else if (!userManager.SignInUser(txtUserName.Text, pbPassword.Password))
+            else if (!userManager.SignInUser(txtUserName.Text.Trim(), pbPassword.Password.Trim()))
             {
                 MessageBox.Show("User name and/or password do/does not exist!");
             }
-            else if (userManager.SignInUser(txtUserName.Text, pbPassword.Password))
+            else if (userManager.SignInUser(txtUserName.Text.Trim(), pbPassword.Password.Trim()))
             {
-                TravelsWindow travelsWindow = new(travelManager, userManager, userManager.SignedInUser);
-
+                TravelsWindow travelsWindow = new(travelManager, userManager);
                 travelsWindow.Show();
+
+                Close();
             }
+        }
+
+        private void btnToRegisterWindow_Click(object sender, RoutedEventArgs e)
+        {
+            RegisterWindow registerWindow = new(userManager);
+            registerWindow.Show();
+
+            Close();
         }
     }
 }

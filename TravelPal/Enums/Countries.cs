@@ -5,8 +5,6 @@ namespace TravelPal.Enums
     public enum Countries
     {
         Afghanistan,
-        [Display(Name = "Åland Islands")]
-        Åland_Islands,
         Albania,
         Algeria,
         [Display(Name = "American Samoa")]
@@ -321,6 +319,8 @@ namespace TravelPal.Enums
         Western_Sahara,
         Yemen,
         Zambia,
-        Zimbabwe
+        Zimbabwe,
+        [Display(Name = "Åland Islands")]
+        Åland_Islands,
     }
 }

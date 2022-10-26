@@ -1,4 +1,7 @@
-﻿namespace TravelPal
+﻿using System.Windows;
+using TravelPal.Managers;
+
+namespace TravelPal
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

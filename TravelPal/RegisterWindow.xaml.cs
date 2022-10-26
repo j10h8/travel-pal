@@ -1,4 +1,9 @@
-﻿namespace TravelPal
+﻿using System;
+using System.Windows;
+using TravelPal.Enums;
+using TravelPal.Managers;
+
+namespace TravelPal
 {
     /// <summary>
     /// Interaction logic for RegisterWindow.xaml

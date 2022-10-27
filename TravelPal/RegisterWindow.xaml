@@ -104,6 +104,7 @@
             x:Name="cbCountries"
             Grid.Column="1"
             Grid.Row="4"
+            Foreground="MediumSlateBlue"
             Width="240"
             HorizontalAlignment="Left"
             HorizontalContentAlignment="Left"

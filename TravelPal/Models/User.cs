@@ -17,5 +17,10 @@ namespace TravelPal.Models
             Password = password;
             Location = location;
         }
+
+        public List<Travel> GetUserTravelList()
+        {
+            return Travels;
+        }
     }
 }

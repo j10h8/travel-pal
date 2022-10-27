@@ -91,7 +91,7 @@ namespace TravelPal.Managers
             packingList.Add(travelDocument);
             packingList.Add(otherItem);
             DateTime startDate = new DateTime(2022, 12, 4);
-            DateTime endDate = new DateTime(2022, 12, 18);
+            DateTime endDate = new DateTime(2022, 12, 5);
             Vacation vacation = new(true, "Kingston", Countries.Jamaica, 1, packingList, startDate, endDate);
 
             // Create Gandalf's trip

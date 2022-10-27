@@ -90,8 +90,7 @@
             BorderThickness="2"
             Width="375"
             HorizontalAlignment="Left"
-            SelectionMode="Single"
-            SelectionChanged="lvYourTravels_SelectionChanged">
+            SelectionMode="Single">
             <ListView.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -108,7 +107,8 @@
             Background="MediumSlateBlue"
             Foreground="MintCream"
             Margin="10"
-            BorderThickness="0">
+            BorderThickness="0"
+            Click="btnViewDetails_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -143,9 +143,7 @@
             Foreground="MintCream"
             Margin="10"
             BorderThickness="0"
-            Click="btnRemoveTravel_Click"
-            IsEnabled="False"
-            Visibility="Hidden">
+            Click="btnRemoveTravel_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

@@ -29,28 +29,28 @@ namespace TravelPal
         {
             if (txtRegisterUserName.Text.Trim().Length == 0 || pbRegisterPassword.Password.Trim().Length == 0 || string.IsNullOrEmpty(cbCountries.Text))
             {
-                MessageBox.Show("Please provide all required inputs (user name, password, and country).");
+                MessageBox.Show("Please provide all required inputs (user name, password, and country).", "Warning!");
             }
             else if (txtRegisterUserName.Text.Trim().Length < 3)
             {
-                MessageBox.Show("Please enter a username with at least three characters.");
+                MessageBox.Show("Please enter a username with at least three characters.", "Warning!");
             }
             else if (pbRegisterPassword.Password.Trim().Length < 5)
             {
-                MessageBox.Show("Please enter a password with at least five characters.");
+                MessageBox.Show("Please enter a password with at least five characters.", "Warning!");
             }
             else
             {
-                Countries location = (Countries)Enum.Parse(typeof(Countries), cbCountries.SelectedItem.ToString());
+                Countries location = (Countries)Enum.Parse(typeof(Countries), cbCountries.SelectedItem.ToString().Replace(' ', '_'));
                 User user = new(txtRegisterUserName.Text.ToString(), pbRegisterPassword.Password.ToString(), location);
 
                 if (!_userManager.AddUser(user))
                 {
-                    MessageBox.Show("The user name is not available. Please choose a different user name.");
+                    MessageBox.Show("The user name is not available. Please choose a different user name.", "Warning!");
                 }
                 else
                 {
-                    MessageBox.Show("You have been successfully registered!");
+                    MessageBox.Show("You have been successfully registered!", "Warning!");
 
                     MainWindow mainWindow = new(_userManager, _travelManager);
                     mainWindow.Show();

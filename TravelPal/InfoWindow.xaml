@@ -39,13 +39,13 @@
             <LineBreak/>
             <LineBreak />
             You can overview all your travels in the 
-            Your travels-list, see and change the details 
+            'Your travels' list, see and change the details 
             of a selected travel, add new travels to the 
             list, and remove existing travels. 
             <LineBreak />
             <LineBreak />
             Click the User-button to see details about 
-            your user account. Here you're also able to 
+            your user account. Here, you're also able to 
             change your user details.
         </TextBlock>
         <Button

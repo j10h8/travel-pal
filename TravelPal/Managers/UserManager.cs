@@ -113,8 +113,8 @@ namespace TravelPal.Managers
             user.Travels.Add(trip);
             Users.Add(user);
 
-            travelManager.Travels.Add(vacation);
-            travelManager.Travels.Add(trip);
+            travelManager.AddTravel(vacation);
+            travelManager.AddTravel(trip);
         }
 
         public void AddAdmin()
@@ -123,20 +123,22 @@ namespace TravelPal.Managers
 
             Users.Add(admin);
         }
-
-        public List<User> GetFilteredUserList()
-        {
-            List<User> users = new();
-
-            foreach (IUser iUser in Users)
-            {
-                if (iUser is User)
-                {
-                    users.Add(iUser as User);
-                }
-            }
-
-            return users;
-        }
     }
 }
+
+
+
+//public List<User> GetFilteredUserList()
+//{
+//    List<User> users = new();
+
+//    foreach (IUser iUser in Users)
+//    {
+//        if (iUser is User)
+//        {
+//            users.Add(iUser as User);
+//        }
+//    }
+
+//    return users;
+//}

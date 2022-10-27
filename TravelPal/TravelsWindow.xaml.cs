@@ -28,6 +28,8 @@ namespace TravelPal
         // ******************** EVENTS *********************
         private void btnSignOut_Click(object sender, RoutedEventArgs e)
         {
+            _userManager.SignedInUser = null;
+
             MainWindow mainWindow = new(_userManager, _travelManager);
             mainWindow.Show();
 

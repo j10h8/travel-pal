@@ -18,6 +18,9 @@ namespace TravelPal.Models
             Location = location;
         }
 
+
+
+        // ******************** METHODS ********************
         public List<Travel> GetUserTravelList()
         {
             return Travels;

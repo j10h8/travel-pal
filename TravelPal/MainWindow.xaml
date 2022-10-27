@@ -139,5 +139,25 @@
                 </Style>
             </Button.Resources>
         </Button>
+        <Button
+            Name="btnCloseApplication"
+            Grid.Column="0"
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Width="100"
+            Content="Close app"
+            FontSize="18"
+            Background="MediumSlateBlue"
+            Foreground="MintCream"
+            Margin="20"
+            BorderThickness="0"
+            HorizontalAlignment="Right"
+            Click="btnCloseApplication_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
     </Grid>
 </Window>

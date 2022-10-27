@@ -13,6 +13,9 @@ namespace TravelPal.Models
             Required = required;
         }
 
+
+
+        // ******************** METHODS ********************
         public string GetInfo()     // TODO: Possibly change what is returned.
         {
             if (Required)

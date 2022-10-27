@@ -11,21 +11,26 @@ namespace TravelPal.Models
         public Countries Country { get; set; }
         public int Travellers { get; set; }
         public List<IPackingListItem> PackingList { get; set; } = new();
+        public string CreatorsUserName { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int TravelDays { get; set; }
 
-        public Travel(string destination, Countries country, int travellers, List<IPackingListItem> packingList, DateTime startDate, DateTime endDate)
+        public Travel(string destination, Countries country, int travellers, List<IPackingListItem> packingList, string creatorsUserName, DateTime startDate, DateTime endDate)
         {
             Destination = destination;
             Country = country;
             Travellers = travellers;
             PackingList = packingList;
+            CreatorsUserName = creatorsUserName;
             StartDate = startDate;
             EndDate = endDate;
             TravelDays = CalculateTravelDays(startDate, endDate);
         }
 
+
+
+        // ******************** METHODS ********************
         public virtual string GetInfo()
         {
             return $"Destination: {Destination}";   // Possibly add more of the properties to return.

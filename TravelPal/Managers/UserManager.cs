@@ -11,6 +11,9 @@ namespace TravelPal.Managers
         public List<IUser> Users { get; set; } = new();
         public IUser SignedInUser { get; set; }
 
+
+
+        // ******************** METHODS ********************
         public bool AddUser(IUser user)
         {
             if (ValidateUserName(user.UserName))        // TODO: Check if return pattern behaves as espected. Check if the bool is intended to be used in this manner.
@@ -55,7 +58,7 @@ namespace TravelPal.Managers
             return false;
         }
 
-        public bool UpdateUserName(IUser user, string userName)     // TODO: Implement logic (in calling class or window XAML) to restrict usernames with 3 or less characters prior to method call/btnSave (e.g. if (lvText.Count < 3) MessageBox.Show("Warning message...")).
+        public bool UpdateUserName(IUser user, string userName)
         {
             if (ValidateUserName(userName))
             {
@@ -92,7 +95,7 @@ namespace TravelPal.Managers
             packingList.Add(otherItem);
             DateTime startDate = new DateTime(2022, 12, 4);
             DateTime endDate = new DateTime(2022, 12, 5);
-            Vacation vacation = new(true, "Kingston", Countries.Jamaica, 1, packingList, startDate, endDate);
+            Vacation vacation = new(true, "Kingston", Countries.Jamaica, 1, packingList, user.UserName, startDate, endDate);
 
             // Create Gandalf's trip
             List<IPackingListItem> packingList2 = new();
@@ -104,7 +107,7 @@ namespace TravelPal.Managers
             packingList2.Add(otherItem2b);
             DateTime startDate2 = new DateTime(2022, 12, 19);
             DateTime endDate2 = new DateTime(2022, 12, 30);
-            Trip trip = new(TripTypes.Work, "Madrid", Countries.Spain, 1, packingList2, startDate2, endDate2);
+            Trip trip = new(TripTypes.Work, "Madrid", Countries.Spain, 1, packingList2, user.UserName, startDate2, endDate2);
 
             user.Travels.Add(vacation);
             user.Travels.Add(trip);
@@ -119,6 +122,21 @@ namespace TravelPal.Managers
             Admin admin = new("admin", "password", Countries.Sweden);
 
             Users.Add(admin);
+        }
+
+        public List<User> GetFilteredUserList()
+        {
+            List<User> users = new();
+
+            foreach (IUser iUser in Users)
+            {
+                if (iUser is User)
+                {
+                    users.Add(iUser as User);
+                }
+            }
+
+            return users;
         }
     }
 }

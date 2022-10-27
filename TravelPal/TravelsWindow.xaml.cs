@@ -22,16 +22,71 @@ namespace TravelPal
 
             lblUserName.Content = _userManager.SignedInUser.UserName;
 
+            GenerateUI();
+        }
+
+        // ******************** EVENTS *********************
+        private void btnSignOut_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new(_userManager, _travelManager);
+            mainWindow.Show();
+
+            Close();
+        }
+
+        private void btnTravelPalInfo_Click(object sender, RoutedEventArgs e)
+        {
+            InfoWindow infoWindow = new();
+            infoWindow.Show();
+        }
+
+        private void lvYourTravels_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lvYourTravels.SelectedItems.Count > 0)
+            {
+                btnRemoveTravel.IsEnabled = true;
+                btnRemoveTravel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                btnRemoveTravel.IsEnabled = false;
+                btnRemoveTravel.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void btnRemoveTravel_Click(object sender, RoutedEventArgs e)
+        {
+            ListViewItem item = lvYourTravels.SelectedItem as ListViewItem;
+            Travel travel = item.Tag as Travel;
+
+            _travelManager.RemoveTravel(travel);
+
+            foreach (User user in _userManager.GetFilteredUserList())
+            {
+                if (user.UserName == travel.CreatorsUserName)
+                {
+                    user.Travels.Remove(travel);
+                }
+            }
+
+            GenerateUI();
+        }
+
+        // ******************** METHODS ********************
+        private void GenerateUI()
+        {
+            lvYourTravels.Items.Clear();
+
             if (_userManager.SignedInUser is Admin)
             {
                 lblListviewTravels.Content = "All registered travels";
 
-                foreach (User user in _userManager.Users)       // TODO: solve admin/user bug 
+                foreach (User user in _userManager.GetFilteredUserList())
                 {
                     foreach (Travel travel in user.GetUserTravelList())
                     {
                         ListViewItem item = new();
-                        item.Tag = user;
+                        item.Tag = travel;
 
                         if (travel.TravelDays < 2)
                         {
@@ -70,17 +125,5 @@ namespace TravelPal
                 }
             }
         }
-
-        private void btnSignOut_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow mainWindow = new(_userManager, _travelManager);
-            mainWindow.Show();
-
-            Close();
-        }
-
-        // ******************** EVENTS *********************
-
-        // ******************** METHODS ********************
     }
 }

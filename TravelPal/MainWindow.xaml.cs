@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using TravelPal.Managers;
 
 namespace TravelPal
@@ -56,6 +57,11 @@ namespace TravelPal
             registerWindow.Show();
 
             Close();
+        }
+
+        private void btnCloseApplication_Click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
         }
 
         // ******************** METHODS ********************

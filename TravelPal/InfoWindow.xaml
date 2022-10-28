@@ -6,12 +6,12 @@
         xmlns:local="clr-namespace:TravelPal"
         mc:Ignorable="d"
         Title="InfoWindow"
-        Height="400" 
-        MinHeight="400"
-        MaxHeight="400"
-        Width="600"
-        MinWidth="600"
-        MaxWidth="600"
+        Height="300" 
+        MaxHeight="300"
+        MinHeight="300"
+        Width="500"
+        MaxWidth="500"
+        MinWidth="500"
         Background="MintCream"
         FontFamily="Calibri"
         FontSize="15"
@@ -22,17 +22,17 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <TextBlock
             Grid.Row="0"
-            TextWrapping="WrapWithOverflow"
+            TextWrapping="Wrap"
             TextAlignment="Justify"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Foreground="MediumSlateBlue"
-            Margin="30">
+            Margin="20">
             At - TravelPal - we strive to provide 
             the best place for you to specify and 
             manage your travels!
@@ -57,7 +57,6 @@
             FontSize="15"
             Background="MediumSlateBlue"
             Foreground="MintCream"
-            Margin="0 0 0 25"
             BorderThickness="0"
             Click="btnCloseInfoWindow_Click">
             <Button.Resources>

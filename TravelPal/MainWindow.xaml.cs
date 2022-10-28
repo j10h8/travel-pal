@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
+using TravelPal.Enums;
+using TravelPal.Interfaces;
 using TravelPal.Managers;
+using TravelPal.Models;
 
 namespace TravelPal
 {
@@ -19,8 +23,8 @@ namespace TravelPal
             _userManager = new();
             _travelManager = new();
 
-            _userManager.AddGandalf();
-            _userManager.AddAdmin();
+            AddGandalf();
+            AddAdmin();
         }
 
         public MainWindow(UserManager userManager, TravelManager travelManager)
@@ -65,5 +69,45 @@ namespace TravelPal
         }
 
         // ******************** METHODS ********************
+        public void AddGandalf()
+        {
+            User user = new("Gandalf", "password", Countries.Sweden);
+
+            // Create Gandalf's vacation
+            List<IPackingListItem> packingList = new();
+            TravelDocument travelDocument = new("Passport", true);
+            OtherItem otherItem = new("Magic wand", 1);
+            packingList.Add(travelDocument);
+            packingList.Add(otherItem);
+            DateTime startDate = new DateTime(2022, 12, 4);
+            DateTime endDate = new DateTime(2022, 12, 5);
+            Vacation vacation = new(true, "Kingston", Countries.Jamaica, 1, packingList, user.UserName, startDate, endDate);
+
+            // Create Gandalf's trip
+            List<IPackingListItem> packingList2 = new();
+            TravelDocument travelDocument2 = new("Passport", false);
+            OtherItem otherItem2 = new("Toothbrush", 1);
+            OtherItem otherItem2b = new("Toothpaste", 1);
+            packingList2.Add(travelDocument2);
+            packingList2.Add(otherItem2);
+            packingList2.Add(otherItem2b);
+            DateTime startDate2 = new DateTime(2022, 12, 19);
+            DateTime endDate2 = new DateTime(2022, 12, 30);
+            Trip trip = new(TripTypes.Work, "Madrid", Countries.Spain, 1, packingList2, user.UserName, startDate2, endDate2);
+
+            user.Travels.Add(vacation);
+            user.Travels.Add(trip);
+            _userManager.Users.Add(user);
+
+            _travelManager.AddTravel(vacation);
+            _travelManager.AddTravel(trip);
+        }
+
+        public void AddAdmin()
+        {
+            Admin admin = new("admin", "password", Countries.Sweden);
+
+            _userManager.Users.Add(admin);
+        }
     }
 }

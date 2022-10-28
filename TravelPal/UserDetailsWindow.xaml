@@ -1,0 +1,227 @@
+﻿<Window x:Class="TravelPal.UserDetailsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TravelPal"
+        mc:Ignorable="d"
+        Title="UserDetailsWindow"
+        Height="600" 
+        MinHeight="600"
+        MaxHeight="600"
+        Width="1000"
+        MinWidth="1000"
+        MaxWidth="1000"
+        Background="MintCream"
+        FontFamily="Calibri"
+        FontSize="20">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="100"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        
+        <Label
+            Grid.Column="2"
+            Grid.Row="1"
+            Content="- User details -"
+            Grid.ColumnSpan="2"
+            HorizontalContentAlignment="Center"
+            FontFamily="Arial"
+            FontSize="45"
+            Foreground="MediumSlateBlue"/>
+        <Label
+            Grid.Column="1"
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            Content="Current"
+            FontSize="30"
+            Foreground="MediumSlateBlue"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Bottom"/>
+        <Label
+            Grid.Column="3"
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            Content="Update"
+            FontSize="30"
+            Foreground="MediumSlateBlue"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Bottom"/>
+        <Label
+            Grid.Column="3"
+            Grid.Row="3"
+            Content="User name:"
+            Foreground="MediumSlateBlue"
+            HorizontalContentAlignment="Right"
+            VerticalContentAlignment="Center"/>
+        <Label
+            Grid.Column="1"
+            Grid.Row="3"
+            Content="User name:"
+            Foreground="MediumSlateBlue"
+            HorizontalContentAlignment="Right"
+            VerticalContentAlignment="Center"/>
+        <Label
+            Name="lblCurrentName"
+            Grid.Column="2"
+            Grid.Row="3"
+            Content="User name"
+            Foreground="MediumSlateBlue"
+            HorizontalContentAlignment="left"
+            VerticalContentAlignment="Center"/>
+        <Label
+            Grid.Column="1"
+            Grid.Row="4"
+            Content="Country:"
+            Foreground="MediumSlateBlue"
+            HorizontalContentAlignment="Right"
+            VerticalContentAlignment="Top"/>
+        <Label
+            Name="lblCurrentCountry"
+            Grid.Column="2"
+            Grid.Row="4"
+            Content="Country"
+            Foreground="MediumSlateBlue"
+            HorizontalContentAlignment="left"
+            VerticalContentAlignment="Top"/>
+        <TextBox
+            Grid.Column="4"
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            Width="240"
+            Height="45"
+            Background="MintCream"
+            Foreground="MediumSlateBlue"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            HorizontalContentAlignment="Left"
+            VerticalContentAlignment="Center"
+            BorderBrush="MediumSlateBlue"
+            BorderThickness="2">
+            <TextBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <Label
+            Grid.Column="3"
+            Grid.Row="4"
+            Content="Country:"
+            Foreground="MediumSlateBlue"
+            HorizontalContentAlignment="Right"
+            VerticalContentAlignment="Center"/>
+        <Border CornerRadius="5"
+                Grid.Row="5"
+                Grid.Column="4"
+                Grid.ColumnSpan="2"
+                Width="240"
+                Height="45"
+                HorizontalAlignment="Left"
+                BorderBrush="MediumSlateBlue"
+                BorderThickness="2">
+            <PasswordBox
+            Background="MintCream"
+            Foreground="MediumSlateBlue"
+            VerticalAlignment="Center"
+            HorizontalContentAlignment="Left"
+            VerticalContentAlignment="Center"
+            BorderThickness="0"/>
+        </Border>
+        <Label
+            Grid.Column="3"
+            Grid.Row="6"
+            Content="Confirm password:"
+            Foreground="MediumSlateBlue"
+            HorizontalContentAlignment="Right"
+            VerticalContentAlignment="Center"/>
+        <Border CornerRadius="5"
+                Grid.Row="6"
+                Grid.Column="4"
+                Grid.ColumnSpan="2"
+                Width="240"
+                Height="45"
+                HorizontalAlignment="Left"
+                BorderBrush="MediumSlateBlue"
+                BorderThickness="2">
+            <PasswordBox
+            Background="MintCream"
+            Foreground="MediumSlateBlue"
+            VerticalAlignment="Center"
+            HorizontalContentAlignment="Left"
+            VerticalContentAlignment="Center"
+            BorderThickness="0"/>
+        </Border>
+        <ComboBox
+            Name="cbUpdateCountry"
+            Grid.Column="4"
+            Grid.Row="4"
+            Grid.ColumnSpan="2"
+            Foreground="MediumSlateBlue"
+            Width="240"
+            HorizontalAlignment="Left"
+            HorizontalContentAlignment="Left"
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Center"/>
+        <Label
+            Grid.Column="3"
+            Grid.Row="5"
+            Content="New password:"
+            Foreground="MediumSlateBlue"
+            HorizontalContentAlignment="Right"
+            VerticalContentAlignment="Center"/>
+        <Button
+            Grid.Column="4"
+            Grid.Row="7"
+            Width="150"
+            Content="Save"
+            FontSize="18"
+            Background="MediumSlateBlue"
+            Foreground="MintCream"
+            Margin="0 10 0 10"
+            BorderThickness="0"
+            HorizontalAlignment="Right">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button
+            Name="btnCancelDetailsWindow"
+            Grid.Column="2"
+            Grid.Row="8"
+            Grid.ColumnSpan="2"
+            Width="150"
+            Content="Cancel"
+            FontSize="18"
+            Background="MediumSlateBlue"
+            Foreground="MintCream"
+            Margin="10"
+            BorderThickness="0"
+            Click="btnCancelDetailsWindow_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+    </Grid>
+</Window>

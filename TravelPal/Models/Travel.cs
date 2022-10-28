@@ -11,7 +11,7 @@ namespace TravelPal.Models
         public Countries Country { get; set; }
         public int Travellers { get; set; }
         public List<IPackingListItem> PackingList { get; set; } = new();
-        public string CreatorsUserName { get; set; }
+        public string CreatorUserName { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int TravelDays { get; set; }
@@ -22,7 +22,7 @@ namespace TravelPal.Models
             Country = country;
             Travellers = travellers;
             PackingList = packingList;
-            CreatorsUserName = creatorsUserName;
+            CreatorUserName = creatorsUserName;
             StartDate = startDate;
             EndDate = endDate;
             TravelDays = CalculateTravelDays(startDate, endDate);

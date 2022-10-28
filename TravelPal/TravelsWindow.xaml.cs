@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using TravelPal.Interfaces;
 using TravelPal.Managers;
 using TravelPal.Models;
 
@@ -20,7 +21,7 @@ namespace TravelPal
 
             InitializeComponent();
 
-            GenerateUI();
+            UpdateUI();
         }
 
         // ******************** EVENTS *********************
@@ -39,6 +40,13 @@ namespace TravelPal
             InfoWindow infoWindow = new();
             infoWindow.Show();
         }
+        private void btnViewUserDetails_Click(object sender, RoutedEventArgs e)
+        {
+            UserDetailsWindow userDetailsWindow = new(_userManager, _travelManager);
+            userDetailsWindow.Show();
+
+            Close();
+        }
 
         private void btnViewDetails_Click(object sender, RoutedEventArgs e)
         {
@@ -54,11 +62,31 @@ namespace TravelPal
             {
                 MessageBox.Show("Please select travel from list to remove.", "Warning!");
             }
+            else
+            {
+                ListViewItem item = lvYourTravels.SelectedItem as ListViewItem;
+                Travel travel = item.Tag as Travel;
+
+                _travelManager.RemoveTravel(travel);
+
+                foreach (IUser user in _userManager.Users)
+                {
+                    if (user.UserName == travel.CreatorUserName)
+                    {
+                        User identifiedUser = user as User;
+                        identifiedUser.Travels.Remove(travel);
+                    }
+                }
+
+                UpdateUI();
+            }
         }
 
         // ******************** METHODS ********************
-        private void GenerateUI()
+        private void UpdateUI()
         {
+            lvYourTravels.Items.Clear();
+
             lblUserName.Content = _userManager.SignedInUser.UserName;
 
             if (_userManager.SignedInUser is Admin)
@@ -104,107 +132,3 @@ namespace TravelPal
         }
     }
 }
-
-
-//private void GenerateUI()
-//{
-//    lvYourTravels.Items.Clear();
-
-//    if (_userManager.SignedInUser is Admin)
-//    {
-//        lblListviewTravels.Content = "All registered travels";
-
-//        foreach (User user in _userManager.GetFilteredUserList())       // Här använda main list, inte baserat på users...
-//        {
-//            foreach (Travel travel in user.GetUserTravelList())
-//            {
-//                ListViewItem item = new();
-//                item.Tag = travel;
-
-//                if (travel.TravelDays < 2)
-//                {
-//                    item.Content = $"{travel.Country}, {travel.TravelDays} day";
-//                    lvYourTravels.Items.Add(item);
-//                }
-//                else
-//                {
-//                    item.Content = $"{travel.Country}, {travel.TravelDays} days";
-//                    lvYourTravels.Items.Add(item);
-//                }
-//            }
-//        }
-//    }
-//    else
-//    {
-//        lblListviewTravels.Content = "Your travels";
-
-//        User user = _userManager.SignedInUser as User;
-
-//        foreach (Travel travel in user.GetUserTravelList())
-//        {
-//            ListViewItem item = new();
-//            item.Tag = travel;
-
-//            if (travel.TravelDays < 2)
-//            {
-//                item.Content = $"{travel.Country}, {travel.TravelDays} day";
-//                lvYourTravels.Items.Add(item);
-//            }
-//            else
-//            {
-//                item.Content = $"{travel.Country}, {travel.TravelDays} days";
-//                lvYourTravels.Items.Add(item);
-//            }
-//        }
-//    }
-//}
-
-
-//ListViewItem item = lvYourTravels.SelectedItem as ListViewItem;
-//Travel travel = item.Tag as Travel;
-
-//_travelManager.RemoveTravel(travel);
-
-//foreach (User user in _userManager.GetFilteredUserList())
-//{
-//    if (user.UserName == travel.CreatorsUserName)
-//    {
-//        user.Travels.Remove(travel);
-//    }
-//}
-
-//GenerateUI();
-
-//ListViewItem item = lvYourTravels.SelectedItem as ListViewItem;
-//Travel travel = item.Tag as Travel;
-
-//_travelManager.RemoveTravel(travel);
-
-//for (int i = 0; i < _travelManager.Travels.Count; i++)
-//{
-//    User user = _userManager.Users[i] as User;
-
-//    if (user.UserName == travel.CreatorsUserName)
-//    {
-//        user.Travels.Remove(travel);
-//    }
-//}
-
-
-////foreach (IUser iUser in _userManager.Users)
-////{
-////    User user = iUser as User;
-
-////    if (user.UserName == travel.CreatorsUserName)
-////    {
-////        user.Travels.Remove(travel);
-////    }
-////}
-
-////foreach (User user in _userManager.GetFilteredUserList())
-////{
-////    if (user.UserName == travel.CreatorsUserName)
-////    {
-////        user.Travels.Remove(travel);
-////    }
-////}

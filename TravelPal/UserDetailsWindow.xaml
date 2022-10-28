@@ -169,17 +169,24 @@
             VerticalContentAlignment="Center"
             BorderThickness="0"/>
         </Border>
-        <ComboBox
+        <Border CornerRadius="5"
+                Grid.Row="4"
+                Grid.Column="4"
+                Grid.ColumnSpan="2"
+                Width="240"
+                Height="45"
+                HorizontalAlignment="Left"
+                BorderBrush="MediumSlateBlue"
+                BorderThickness="2">
+            <ComboBox
             Name="cbUpdateCountry"
-            Grid.Column="4"
-            Grid.Row="4"
-            Grid.ColumnSpan="2"
             Foreground="MediumSlateBlue"
             Width="240"
             HorizontalAlignment="Left"
             HorizontalContentAlignment="Left"
             VerticalAlignment="Center"
             VerticalContentAlignment="Center"/>
+        </Border>
         <Label
             Grid.Column="3"
             Grid.Row="5"

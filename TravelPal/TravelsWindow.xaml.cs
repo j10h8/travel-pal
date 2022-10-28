@@ -54,6 +54,13 @@ namespace TravelPal
             {
                 MessageBox.Show("Please select travel from list before clicking Details.", "Warning!");
             }
+            else
+            {
+                TravelDetailsWindow travelDetailsWindow = new(_userManager, _travelManager);
+                travelDetailsWindow.Show();
+
+                Close();
+            }
         }
 
         private void btnRemoveTravel_Click(object sender, RoutedEventArgs e)

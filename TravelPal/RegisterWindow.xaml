@@ -100,16 +100,23 @@
             Foreground="MediumSlateBlue"
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"/>
-        <ComboBox
+        <Border CornerRadius="5"
+                Grid.Row="4"
+                Grid.Column="2"
+                Width="240"
+                Height="45"
+                HorizontalAlignment="Left"
+                BorderBrush="MediumSlateBlue"
+                BorderThickness="2">
+            <ComboBox
             x:Name="cbCountries"
-            Grid.Column="1"
-            Grid.Row="4"
             Foreground="MediumSlateBlue"
             Width="240"
             HorizontalAlignment="Left"
             HorizontalContentAlignment="Left"
             VerticalAlignment="Center"
             VerticalContentAlignment="Center"/>
+        </Border>
         <Button
             Name="btnRegister"
             Grid.Column="0"

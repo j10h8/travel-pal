@@ -23,6 +23,19 @@ namespace TravelPal.Managers
             return false;
         }
 
+        public bool ValidateUserNameUpdate(string newUserName)
+        {
+            foreach (IUser user in Users)
+            {
+                if (user.UserName == newUserName)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         private bool ValidateUserName(string userName)
         {
             foreach (IUser user in Users)

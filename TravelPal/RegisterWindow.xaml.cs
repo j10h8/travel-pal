@@ -27,7 +27,7 @@ namespace TravelPal
         // ******************** EVENTS *********************
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            if (txtRegisterUserName.Text.Trim().Length == 0 || pbRegisterPassword.Password.Trim().Length == 0 || string.IsNullOrEmpty(cbCountries.Text))
+            if (txtRegisterUserName.Text.Trim().Length == 0 || pbRegisterPassword.Password.Length == 0 || string.IsNullOrEmpty(cbCountries.Text))
             {
                 MessageBox.Show("Please provide all required inputs (user name, password, and country).", "Warning!");
             }
@@ -35,7 +35,7 @@ namespace TravelPal
             {
                 MessageBox.Show("Please enter a username with at least three characters.", "Warning!");
             }
-            else if (pbRegisterPassword.Password.Trim().Length < 5)
+            else if (pbRegisterPassword.Password.Length < 5)
             {
                 MessageBox.Show("Please enter a password with at least five characters.", "Warning!");
             }
@@ -50,7 +50,7 @@ namespace TravelPal
                 }
                 else
                 {
-                    MessageBox.Show("You have been successfully registered!", "Warning!");
+                    MessageBox.Show("You have been successfully registered!");
 
                     MainWindow mainWindow = new(_userManager, _travelManager);
                     mainWindow.Show();

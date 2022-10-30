@@ -26,9 +26,6 @@ namespace TravelPal
             UpdateUI();
         }
 
-
-
-
         // ******************** EVENTS *********************
         private void btnCancelTravelDetailsWindow_Click(object sender, RoutedEventArgs e)
         {
@@ -38,14 +35,13 @@ namespace TravelPal
             Close();
         }
 
-
-
-
         // ******************** METHODS ********************
         private void UpdateUI()
         {
+            // Destination 
             txtDestinationDetails.Text = _travel.Destination;
 
+            // Country 
             string[] countries = Enum.GetNames(typeof(Countries));
             foreach (string country in countries)
             {
@@ -60,10 +56,20 @@ namespace TravelPal
                 }
             }
 
-            txtTravellersDetails.Text = _travel.Travellers.ToString();
+            // No. of travellers 
+            if (_travel.Travellers > 1)
+            {
+                txtTravellersDetails.Text = $"{_travel.Travellers.ToString()} travellers";
+            }
+            else
+            {
+                txtTravellersDetails.Text = $"{_travel.Travellers.ToString()} traveller";
+            }
 
+            // Travel type 
             txtTravelTypeDetails.Text = _travel.GetType().Name.ToString();
 
+            // XAML elements visibility if travel type is Trip 
             if (_travel.GetType().Name.ToString() == "Trip")
             {
                 txtIfNotATrip.Visibility = Visibility.Hidden;
@@ -76,11 +82,38 @@ namespace TravelPal
                     cbTripTypeDetails.Items.Add(tripType);
                 }
 
-                cbTripTypeDetails.SelectedItem = trip.GetInfo();
+                cbTripTypeDetails.SelectedItem = trip.Type.ToString();
             }
+            // XAML elements visibility if travel type is Vacation 
             else
             {
                 cbTripTypeDetails.Visibility = Visibility.Hidden;
+                txtIfNotAVacation.Visibility = Visibility.Hidden;
+
+                // Checkbox checked or not 
+                Vacation vacation = _travel as Vacation;
+
+                if (vacation.AllInclusive == true)
+                {
+                    cbxAllInclusiveDetails.IsChecked = true;
+                }
+                else
+                {
+                    cbxAllInclusiveDetails.IsChecked = false;
+                }
+            }
+
+            // Travel time 
+            txtStartDateDetails.Text = _travel.StartDate.ToString("d");
+            txtEndDateDetails.Text = _travel.EndDate.ToString("d");
+
+            if (_travel.TravelDays > 1)
+            {
+                txtTravelLengthDetails.Text = $"{_travel.TravelDays.ToString()} days";
+            }
+            else
+            {
+                txtTravelLengthDetails.Text = $"{_travel.TravelDays.ToString()} day";
             }
         }
     }

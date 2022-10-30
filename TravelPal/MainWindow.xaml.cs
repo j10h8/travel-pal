@@ -116,7 +116,7 @@ namespace TravelPal
             packingList.Add(otherItem);
             DateTime startDate = new DateTime(2022, 12, 4);
             DateTime endDate = new DateTime(2022, 12, 5);
-            Vacation vacation = new(true, "Kingston", Countries.Sweden, 1, packingList, user.UserName, startDate, endDate);
+            Vacation vacation = new(false, "Kingston", Countries.Sweden, 3, packingList, user.UserName, startDate, endDate);
 
             // Create Gandalf's trip
             List<IPackingListItem> packingList2 = new();

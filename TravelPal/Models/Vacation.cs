@@ -17,15 +17,15 @@ namespace TravelPal.Models
 
 
         // ******************** METHODS ********************
-        public bool GetInfo()     // OK to have this return bool instead of string? 
+        public string GetInfo()
         {
             if (AllInclusive)
             {
-                return true;
+                return $"Destination: {Destination} | Country: {Country} | Trip duration: {TravelDays} | All inclusive";
             }
             else
             {
-                return false;
+                return $"Destination: {Destination} | Country: {Country} | Trip duration: {TravelDays} | Not all inclusive";
             }
         }
     }

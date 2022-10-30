@@ -19,7 +19,7 @@ namespace TravelPal.Models
         // ******************** METHODS ********************
         public string GetInfo()
         {
-            return Type.ToString();
+            return $"Trip type: {Type.ToString()} | Destination: {Destination} | Country: {Country} | Trip duration: {TravelDays}";
         }
     }
 }

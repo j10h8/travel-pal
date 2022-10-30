@@ -103,7 +103,7 @@
         <Label
             Grid.Column="1"
             Grid.Row="4"
-            Content="Number of travellers:"
+            Content="No. of travellers:"
             Foreground="MediumSlateBlue"
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"/>
@@ -221,8 +221,31 @@
             <CheckBox
                 Name="cbxAllInclusiveDetails"
                 VerticalAlignment="Center"
-                Margin="10"/>
+                Margin="10"
+                IsEnabled="False"/>
         </Border>
+        <TextBox
+            Name="txtIfNotAVacation"
+            Grid.Column="4"
+            Grid.Row="2"
+            Width="240"
+            Height="45"
+            Background="MintCream"
+            Foreground="MediumSlateBlue"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            HorizontalContentAlignment="Left"
+            VerticalContentAlignment="Center"
+            Text="N/A"
+            BorderBrush="MediumSlateBlue"
+            BorderThickness="2"
+            IsReadOnly="True">
+            <TextBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
         <Label
             Grid.Column="3"
             Grid.Row="3"

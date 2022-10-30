@@ -59,6 +59,7 @@ namespace TravelPal
                     {
                         if (_userManager.SignedInUser.UserName == _userManager.Users[i].UserName)
                         {
+                            // Update creator user name
                             User user = _userManager.Users[i] as User;
                             for (int n = 0; n < _travelManager.Travels.Count; n++)
                             {
@@ -67,6 +68,7 @@ namespace TravelPal
                                     _travelManager.Travels[n].CreatorUserName = txtUpdateUserName.Text.Trim();
                                 }
                             }
+
                             _userManager.Users[i].UserName = txtUpdateUserName.Text.Trim();
                             Countries location = (Countries)Enum.Parse(typeof(Countries), cbUpdateCountry.SelectedItem.ToString().Replace(' ', '_'));
                             _userManager.Users[i].Location = location;
@@ -78,6 +80,7 @@ namespace TravelPal
                 {
                     for (int i = 0; i < _userManager.Users.Count; i++)
                     {
+                        // Update creator user name
                         if (_userManager.SignedInUser.UserName == _userManager.Users[i].UserName)
                         {
                             User user = _userManager.Users[i] as User;
@@ -88,6 +91,7 @@ namespace TravelPal
                                     _travelManager.Travels[n].CreatorUserName = txtUpdateUserName.Text.Trim();
                                 }
                             }
+
                             _userManager.Users[i].UserName = txtUpdateUserName.Text.Trim();
                             Countries location = (Countries)Enum.Parse(typeof(Countries), cbUpdateCountry.SelectedItem.ToString().Replace(' ', '_'));
                             _userManager.Users[i].Location = location;
@@ -112,6 +116,7 @@ namespace TravelPal
                     {
                         if (_userManager.SignedInUser.UserName == _userManager.Users[i].UserName)
                         {
+                            // Update creator user name
                             User user = _userManager.Users[i] as User;
                             for (int n = 0; n < _travelManager.Travels.Count; n++)
                             {
@@ -120,6 +125,7 @@ namespace TravelPal
                                     _travelManager.Travels[n].CreatorUserName = txtUpdateUserName.Text.Trim();
                                 }
                             }
+
                             _userManager.Users[i].UserName = txtUpdateUserName.Text.Trim();
                             _userManager.Users[i].Password = pbUpdatePassword.Password;
                         }
@@ -131,6 +137,7 @@ namespace TravelPal
                     {
                         if (_userManager.SignedInUser.UserName == _userManager.Users[i].UserName)
                         {
+                            // Update creator user name
                             User user = _userManager.Users[i] as User;
                             for (int n = 0; n < _travelManager.Travels.Count; n++)
                             {
@@ -139,6 +146,7 @@ namespace TravelPal
                                     _travelManager.Travels[n].CreatorUserName = txtUpdateUserName.Text.Trim();
                                 }
                             }
+
                             _userManager.Users[i].UserName = txtUpdateUserName.Text.Trim();
                         }
                     }

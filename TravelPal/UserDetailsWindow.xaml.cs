@@ -2,7 +2,6 @@
 using System.Windows;
 using TravelPal.Enums;
 using TravelPal.Managers;
-using TravelPal.Models;
 
 namespace TravelPal
 {
@@ -60,7 +59,6 @@ namespace TravelPal
                         if (_userManager.SignedInUser.UserName == _userManager.Users[i].UserName)
                         {
                             // Update creator user name
-                            User user = _userManager.Users[i] as User;
                             for (int n = 0; n < _travelManager.Travels.Count; n++)
                             {
                                 if (_travelManager.Travels[n].CreatorUserName == _userManager.SignedInUser.UserName)
@@ -68,7 +66,6 @@ namespace TravelPal
                                     _travelManager.Travels[n].CreatorUserName = txtUpdateUserName.Text.Trim();
                                 }
                             }
-
                             _userManager.Users[i].UserName = txtUpdateUserName.Text.Trim();
                             Countries location = (Countries)Enum.Parse(typeof(Countries), cbUpdateCountry.SelectedItem.ToString().Replace(' ', '_'));
                             _userManager.Users[i].Location = location;
@@ -83,7 +80,6 @@ namespace TravelPal
                         // Update creator user name
                         if (_userManager.SignedInUser.UserName == _userManager.Users[i].UserName)
                         {
-                            User user = _userManager.Users[i] as User;
                             for (int n = 0; n < _travelManager.Travels.Count; n++)
                             {
                                 if (_travelManager.Travels[n].CreatorUserName == _userManager.SignedInUser.UserName)
@@ -91,7 +87,6 @@ namespace TravelPal
                                     _travelManager.Travels[n].CreatorUserName = txtUpdateUserName.Text.Trim();
                                 }
                             }
-
                             _userManager.Users[i].UserName = txtUpdateUserName.Text.Trim();
                             Countries location = (Countries)Enum.Parse(typeof(Countries), cbUpdateCountry.SelectedItem.ToString().Replace(' ', '_'));
                             _userManager.Users[i].Location = location;
@@ -117,7 +112,6 @@ namespace TravelPal
                         if (_userManager.SignedInUser.UserName == _userManager.Users[i].UserName)
                         {
                             // Update creator user name
-                            User user = _userManager.Users[i] as User;
                             for (int n = 0; n < _travelManager.Travels.Count; n++)
                             {
                                 if (_travelManager.Travels[n].CreatorUserName == _userManager.SignedInUser.UserName)
@@ -125,7 +119,6 @@ namespace TravelPal
                                     _travelManager.Travels[n].CreatorUserName = txtUpdateUserName.Text.Trim();
                                 }
                             }
-
                             _userManager.Users[i].UserName = txtUpdateUserName.Text.Trim();
                             _userManager.Users[i].Password = pbUpdatePassword.Password;
                         }
@@ -138,7 +131,6 @@ namespace TravelPal
                         if (_userManager.SignedInUser.UserName == _userManager.Users[i].UserName)
                         {
                             // Update creator user name
-                            User user = _userManager.Users[i] as User;
                             for (int n = 0; n < _travelManager.Travels.Count; n++)
                             {
                                 if (_travelManager.Travels[n].CreatorUserName == _userManager.SignedInUser.UserName)
@@ -146,7 +138,6 @@ namespace TravelPal
                                     _travelManager.Travels[n].CreatorUserName = txtUpdateUserName.Text.Trim();
                                 }
                             }
-
                             _userManager.Users[i].UserName = txtUpdateUserName.Text.Trim();
                         }
                     }

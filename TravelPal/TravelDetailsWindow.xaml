@@ -55,6 +55,7 @@
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"/>
         <TextBox
+            x:Name="txtDestinationDetails"
             Grid.Column="2"
             Grid.Row="2"
             Width="240"
@@ -66,7 +67,8 @@
             HorizontalContentAlignment="Left"
             VerticalContentAlignment="Center"
             BorderBrush="MediumSlateBlue"
-            BorderThickness="2">
+            BorderThickness="2"
+            IsReadOnly="True">
             <TextBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -89,12 +91,14 @@
                 BorderBrush="MediumSlateBlue"
                 BorderThickness="2">
             <ComboBox
+            Name="cbCountryDetails"
             Foreground="MediumSlateBlue"
             Width="240"
             HorizontalAlignment="Left"
             HorizontalContentAlignment="Left"
             VerticalAlignment="Center"
-            VerticalContentAlignment="Center"/>
+            VerticalContentAlignment="Center"
+            IsEnabled="False"/>
         </Border>
         <Label
             Grid.Column="1"
@@ -104,6 +108,7 @@
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"/>
         <TextBox
+            Name="txtTravellersDetails"
             Grid.Column="2"
             Grid.Row="4"
             Width="240"
@@ -115,7 +120,8 @@
             HorizontalContentAlignment="Left"
             VerticalContentAlignment="Center"
             BorderBrush="MediumSlateBlue"
-            BorderThickness="2">
+            BorderThickness="2"
+            IsReadOnly="True">
             <TextBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -130,6 +136,7 @@
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"/>
         <TextBox
+            Name="txtTravelTypeDetails"
             Grid.Column="2"
             Grid.Row="5"
             Width="240"
@@ -141,7 +148,8 @@
             HorizontalContentAlignment="Left"
             VerticalContentAlignment="Center"
             BorderBrush="MediumSlateBlue"
-            BorderThickness="2">
+            BorderThickness="2"
+            IsReadOnly="True">
             <TextBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -164,23 +172,19 @@
                 BorderBrush="MediumSlateBlue"
                 BorderThickness="2">
             <ComboBox
+            Name="cbTripTypeDetails"
             Foreground="MediumSlateBlue"
             Width="240"
             HorizontalAlignment="Left"
             HorizontalContentAlignment="Left"
             VerticalAlignment="Center"
-            VerticalContentAlignment="Center"/>
+            VerticalContentAlignment="Center"
+            IsEnabled="False"/>
         </Border>
-        <Label
-            Grid.Column="3"
-            Grid.Row="2"
-            Content="All inclusive:"
-            Foreground="MediumSlateBlue"
-            HorizontalContentAlignment="Right"
-            VerticalContentAlignment="Center"/>
         <TextBox
-            Grid.Column="4"
-            Grid.Row="2"
+            Name="txtIfNotATrip"
+            Grid.Column="2"
+            Grid.Row="6"
             Width="240"
             Height="45"
             Background="MintCream"
@@ -189,8 +193,10 @@
             VerticalAlignment="Center"
             HorizontalContentAlignment="Left"
             VerticalContentAlignment="Center"
+            Text="N/A"
             BorderBrush="MediumSlateBlue"
-            BorderThickness="2">
+            BorderThickness="2"
+            IsReadOnly="True">
             <TextBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -199,12 +205,33 @@
         </TextBox>
         <Label
             Grid.Column="3"
+            Grid.Row="2"
+            Content="All inclusive:"
+            Foreground="MediumSlateBlue"
+            HorizontalContentAlignment="Right"
+            VerticalContentAlignment="Center"/>
+        <Border CornerRadius="5"
+                Grid.Row="2"
+                Grid.Column="4"
+                Width="240"
+                Height="45"
+                HorizontalAlignment="Left"
+                BorderBrush="MediumSlateBlue"
+                BorderThickness="2">
+            <CheckBox
+                Name="cbxAllInclusiveDetails"
+                VerticalAlignment="Center"
+                Margin="10"/>
+        </Border>
+        <Label
+            Grid.Column="3"
             Grid.Row="3"
             Content="Start date:"
             Foreground="MediumSlateBlue"
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"/>
         <TextBox
+            x:Name="txtStartDateDetails"
             Grid.Column="4"
             Grid.Row="3"
             Width="240"
@@ -216,7 +243,8 @@
             HorizontalContentAlignment="Left"
             VerticalContentAlignment="Center"
             BorderBrush="MediumSlateBlue"
-            BorderThickness="2">
+            BorderThickness="2"
+            IsReadOnly="True">
             <TextBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -231,6 +259,7 @@
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"/>
         <TextBox
+            x:Name="txtEndDateDetails"
             Grid.Column="4"
             Grid.Row="4"
             Width="240"
@@ -242,7 +271,8 @@
             HorizontalContentAlignment="Left"
             VerticalContentAlignment="Center"
             BorderBrush="MediumSlateBlue"
-            BorderThickness="2">
+            BorderThickness="2"
+            IsReadOnly="True">
             <TextBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -257,6 +287,7 @@
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"/>
         <TextBox
+            Name="txtTravelLengthDetails"
             Grid.Column="4"
             Grid.Row="5"
             Width="240"
@@ -268,14 +299,16 @@
             HorizontalContentAlignment="Left"
             VerticalContentAlignment="Center"
             BorderBrush="MediumSlateBlue"
-            BorderThickness="2">
+            BorderThickness="2"
+            IsReadOnly="True">
             <TextBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </TextBox.Resources>
         </TextBox>
-        <Button
+        <!--<Button
+            x:Name="btnEditDetails"
             Grid.Column="4"
             Grid.Row="6"
             HorizontalAlignment="Left"
@@ -291,8 +324,9 @@
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources>
-        </Button>
-        <Button
+        </Button>-->
+        <!--<Button
+            Name="btnSaveDetails"
             Grid.Column="4"
             Grid.Row="7"
             HorizontalAlignment="Left"
@@ -308,10 +342,11 @@
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources>
-        </Button>
+        </Button>-->
         <Button
+            Name="btnCancelTravelDetailsWindow"
             Grid.Column="4"
-            Grid.Row="8"
+            Grid.Row="7"
             HorizontalAlignment="Left"
             Width="150"
             Content="Cancel"
@@ -319,7 +354,8 @@
             Background="MediumSlateBlue"
             Foreground="MintCream"
             Margin="45 10 0 10"
-            BorderThickness="0">
+            BorderThickness="0"
+            Click="btnCancelTravelDetailsWindow_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

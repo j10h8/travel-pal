@@ -9,7 +9,7 @@ namespace TravelPal.Models
     {
         public bool AllInclusive { get; set; }
 
-        public Vacation(bool allInclusive, string destination, Countries country, int travellers, List<IPackingListItem> packingList, string creatorsUserName, DateTime startDate, DateTime endDate) : base(destination, country, travellers, packingList, creatorsUserName, startDate, endDate)
+        public Vacation(bool allInclusive, string destination, Countries country, int travellers, List<IPackingListItem> packingList, string creatorUserName, DateTime startDate, DateTime endDate) : base(destination, country, travellers, packingList, creatorUserName, startDate, endDate)
         {
             AllInclusive = allInclusive;
         }
@@ -17,15 +17,15 @@ namespace TravelPal.Models
 
 
         // ******************** METHODS ********************
-        public string GetInfo()     // Change this to return bool instead? 
+        public bool GetInfo()     // OK to have this return bool instead of string? 
         {
             if (AllInclusive)
             {
-                return "All inclusive!";
+                return true;
             }
             else
             {
-                return "Not all inclusive";
+                return false;
             }
         }
     }

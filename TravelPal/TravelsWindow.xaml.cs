@@ -56,7 +56,9 @@ namespace TravelPal
             }
             else
             {
-                TravelDetailsWindow travelDetailsWindow = new(_userManager, _travelManager);
+                ListViewItem item = lvYourTravels.SelectedItem as ListViewItem;
+                Travel travel = item.Tag as Travel;
+                TravelDetailsWindow travelDetailsWindow = new(_userManager, _travelManager, travel);
                 travelDetailsWindow.Show();
 
                 Close();

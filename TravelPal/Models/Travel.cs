@@ -16,13 +16,13 @@ namespace TravelPal.Models
         public DateTime EndDate { get; set; }
         public int TravelDays { get; set; }
 
-        public Travel(string destination, Countries country, int travellers, List<IPackingListItem> packingList, string creatorsUserName, DateTime startDate, DateTime endDate)
+        public Travel(string destination, Countries country, int travellers, List<IPackingListItem> packingList, string creatorUserName, DateTime startDate, DateTime endDate)
         {
             Destination = destination;
             Country = country;
             Travellers = travellers;
             PackingList = packingList;
-            CreatorUserName = creatorsUserName;
+            CreatorUserName = creatorUserName;
             StartDate = startDate;
             EndDate = endDate;
             TravelDays = CalculateTravelDays(startDate, endDate);

@@ -67,7 +67,16 @@ namespace TravelPal
             }
 
             // Travel type 
-            txtTravelTypeDetails.Text = _travel.GetType().Name.ToString();
+            cbTypeOfTravelDetails.Items.Add("Trip");
+            cbTypeOfTravelDetails.Items.Add("Vacation");
+            if (_travel.GetType().Name.ToString() == "Trip")
+            {
+                cbTypeOfTravelDetails.SelectedItem = "Trip";
+            }
+            else
+            {
+                cbTypeOfTravelDetails.SelectedItem = "Vacation";
+            }
 
             // XAML elements visibility if travel type is Trip 
             if (_travel.GetType().Name.ToString() == "Trip")

@@ -19,13 +19,13 @@ namespace TravelPal.Models
         // ******************** METHODS ********************
         public string GetInfo()
         {
-            if (AllInclusive)
+            if (base.TravelDays < 2)
             {
-                return $"Destination: {Destination} | Country: {Country} | Trip duration: {TravelDays} | All inclusive";
+                return $"{base.Country}, {base.TravelDays} day";
             }
             else
             {
-                return $"Destination: {Destination} | Country: {Country} | Trip duration: {TravelDays} | Not all inclusive";
+                return $"{base.Country}, {base.TravelDays} days";
             }
         }
     }

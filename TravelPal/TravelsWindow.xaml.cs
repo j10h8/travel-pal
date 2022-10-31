@@ -64,6 +64,13 @@ namespace TravelPal
                 Close();
             }
         }
+        private void AddTravel_Click(object sender, RoutedEventArgs e)
+        {
+            AddTravelWindow addTravelWindow = new(_userManager, _travelManager);
+            addTravelWindow.Show();
+
+            Close();
+        }
 
         private void btnRemoveTravel_Click(object sender, RoutedEventArgs e)
         {
@@ -125,17 +132,8 @@ namespace TravelPal
                 {
                     ListViewItem item = new ListViewItem();
                     item.Tag = travel;
-
-                    if (travel.TravelDays < 2)
-                    {
-                        item.Content = $"{travel.Country}, {travel.TravelDays} day";
-                        lvYourTravels.Items.Add(item);
-                    }
-                    else
-                    {
-                        item.Content = $"{travel.Country}, {travel.TravelDays} days";
-                        lvYourTravels.Items.Add(item);
-                    }
+                    item.Content = travel.GetInfo();
+                    lvYourTravels.Items.Add(item);
                 }
             }
         }

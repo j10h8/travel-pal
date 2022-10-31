@@ -19,7 +19,14 @@ namespace TravelPal.Models
         // ******************** METHODS ********************
         public string GetInfo()
         {
-            return $"Trip type: {Type.ToString()} | Destination: {Destination} | Country: {Country} | Trip duration: {TravelDays}";
+            if (base.TravelDays < 2)
+            {
+                return $"{base.Country}, {base.TravelDays} day";
+            }
+            else
+            {
+                return $"{base.Country}, {base.TravelDays} days";
+            }
         }
     }
 }

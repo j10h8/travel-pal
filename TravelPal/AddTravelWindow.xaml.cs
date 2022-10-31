@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 using TravelPal.Enums;
 using TravelPal.Managers;
+using TravelPal.Models;
 
 namespace TravelPal
 {
@@ -36,13 +38,11 @@ namespace TravelPal
         {
             if (cbTypeOfTravelAddTravel.SelectedItem.ToString() == "Trip")
             {
-                // Show and set IsEnabled
                 lblTypeOfTrip.Visibility = Visibility.Visible;
                 brdTripTypeDetails.Visibility = Visibility.Visible;
                 cbTripTypeDetailsAddTravel.Visibility = Visibility.Visible;
                 cbTripTypeDetailsAddTravel.IsEnabled = true;
 
-                // Hide and set IsEnabled
                 lblAllInclusive.Visibility = Visibility.Hidden;
                 brdAllInclusive.Visibility = Visibility.Hidden;
                 cbxAllInclusiveDetails.Visibility = Visibility.Hidden;
@@ -51,14 +51,12 @@ namespace TravelPal
             }
             else if (cbTypeOfTravelAddTravel.SelectedItem.ToString() == "Vacation")
             {
-                // Show and set IsEnabled
                 lblAllInclusive.Visibility = Visibility.Visible;
                 brdAllInclusive.Visibility = Visibility.Visible;
                 cbxAllInclusiveDetails.Visibility = Visibility.Visible;
                 cbxAllInclusiveDetails.IsChecked = false;
                 cbxAllInclusiveDetails.IsEnabled = true;
 
-                // Hide and set IsEnabled
                 lblTypeOfTrip.Visibility = Visibility.Hidden;
                 brdTripTypeDetails.Visibility = Visibility.Hidden;
                 cbTripTypeDetailsAddTravel.Visibility = Visibility.Hidden;
@@ -118,18 +116,52 @@ namespace TravelPal
 
         private void cbCountryAddTravel_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            //Om resan går till ett land utanför EU och användaren bor inom EU ska ett TravelDocument med name
-            //“Passport” (med required satt till true) automatiskt läggas till i packlistan
-            //Om resan går till ett annat land, inom EU och användaren bor inom EU, ska ett TravelDocument med
-            //name “Passport” (med required satt till false) automatiskt läggas till i packlistan
-            //Om användaren ändrar destinationsland under tiden ska required för passet ändras därefter
-            //Om användaren bor utanför EU, oavsett destinationsland, ska ett pass(med required true) läggas till
-            //automatiskt
+            int lvIndex = -1;
+
+            foreach (ListViewItem listViewItem in lvPackingList.Items)
+            {
+                if (listViewItem.Content.ToString() == "Passport (required)" || listViewItem.Content.ToString() == "Passport (not required)")
+                {
+                    lvIndex = lvPackingList.Items.IndexOf(listViewItem);
+                }
+            }
+
+            if (lvIndex > -1)
+            {
+                lvPackingList.Items.RemoveAt(lvIndex);
+            }
+
+            if (Enum.IsDefined(typeof(EuropeanCountries), _userManager.SignedInUser.Location.ToString()) && !Enum.IsDefined(typeof(EuropeanCountries), cbCountryAddTravel.SelectedItem.ToString()))
+            {
+                TravelDocument travelDocument = new("Passport", true);
+                ListViewItem item = new();
+                item.Tag = travelDocument;
+                item.Content = travelDocument.GetInfo();
+                lvPackingList.Items.Add(item);
+            }
+
+            if (Enum.IsDefined(typeof(EuropeanCountries), _userManager.SignedInUser.Location.ToString()) && Enum.IsDefined(typeof(EuropeanCountries), cbCountryAddTravel.SelectedItem.ToString()) && cbCountryAddTravel.SelectedItem.ToString() != _userManager.SignedInUser.Location.ToString())
+            {
+                TravelDocument travelDocument = new("Passport", false);
+                ListViewItem item = new();
+                item.Tag = travelDocument;
+                item.Content = travelDocument.GetInfo();
+                lvPackingList.Items.Add(item);
+            }
         }
 
         // ******************** METHODS ********************
         private void UpdateUI()
         {
+            if (!Enum.IsDefined(typeof(EuropeanCountries), _userManager.SignedInUser.Location.ToString()))
+            {
+                TravelDocument travelDocument = new("Passport", true);
+                ListViewItem item = new();
+                item.Tag = travelDocument;
+                item.Content = travelDocument.GetInfo();
+                lvPackingList.Items.Add(item);
+            }
+
             cldEndDate.DisplayDateStart = DateTime.Now;
             cldStartDate.DisplayDateStart = DateTime.Now;
 
@@ -148,26 +180,33 @@ namespace TravelPal
                 cbTripTypeDetailsAddTravel.Items.Add(tripType);
             }
 
-            // Hide and diasable 
+            // Hide and disable 
             lblAllInclusive.Visibility = Visibility.Hidden;
             brdAllInclusive.Visibility = Visibility.Hidden;
             cbxAllInclusiveDetails.Visibility = Visibility.Hidden;
             cbxAllInclusiveDetails.IsChecked = false;
             cbxAllInclusiveDetails.IsEnabled = false;
+
             lblTypeOfTrip.Visibility = Visibility.Hidden;
             brdTripTypeDetails.Visibility = Visibility.Hidden;
             cbTripTypeDetailsAddTravel.Visibility = Visibility.Hidden;
             cbTripTypeDetailsAddTravel.SelectedItem = null;
             cbTripTypeDetailsAddTravel.IsEnabled = false;
+
             lblRequired.Visibility = Visibility.Hidden;
             cbxRequired.IsEnabled = false;
             brdCbxRequired.Visibility = Visibility.Hidden;
+
             txtQuantity.Visibility = Visibility.Hidden;
             lblQuantity.Visibility = Visibility.Hidden;
+
             lblDocument.Visibility = Visibility.Hidden;
             brdCbxDocument.Visibility = Visibility.Hidden;
             cbxDocument.IsEnabled = false;
+
             txtQuantity.IsEnabled = false;
         }
     }
 }
+
+// Remember to make it unable to remove automatically added packing list items (Passport) 

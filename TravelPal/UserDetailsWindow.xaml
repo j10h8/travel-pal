@@ -115,7 +115,8 @@
             HorizontalContentAlignment="Left"
             VerticalContentAlignment="Center"
             BorderBrush="MediumSlateBlue"
-            BorderThickness="2">
+            BorderThickness="2"
+            TextChanged="txtUpdateUserName_TextChanged">
             <TextBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -145,7 +146,8 @@
             VerticalAlignment="Center"
             HorizontalContentAlignment="Left"
             VerticalContentAlignment="Center"
-            BorderThickness="0"/>
+            BorderThickness="0"
+            PasswordChanged="pbUpdatePassword_PasswordChanged"/>
         </Border>
         <Label
             Grid.Column="3"
@@ -170,7 +172,8 @@
             VerticalAlignment="Center"
             HorizontalContentAlignment="Left"
             VerticalContentAlignment="Center"
-            BorderThickness="0"/>
+            BorderThickness="0"
+            PasswordChanged="pbConfirmPassword_PasswordChanged"/>
         </Border>
         <Border CornerRadius="5"
                 Grid.Row="4"

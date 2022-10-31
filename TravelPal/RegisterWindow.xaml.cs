@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Media;
 using TravelPal.Enums;
 using TravelPal.Managers;
 using TravelPal.Models;
@@ -66,6 +67,30 @@ namespace TravelPal
             mainWindow.Show();
 
             Close();
+        }
+
+        private void txtRegisterUserName_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            if (txtRegisterUserName.Text.Length < 3)
+            {
+                txtRegisterUserName.Foreground = new SolidColorBrush(Colors.Red);
+            }
+            else
+            {
+                txtRegisterUserName.Foreground = new SolidColorBrush(Colors.MediumSlateBlue);
+            }
+        }
+
+        private void pbRegisterPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (pbRegisterPassword.Password.Length < 5)
+            {
+                pbRegisterPassword.Foreground = new SolidColorBrush(Colors.Red);
+            }
+            else
+            {
+                pbRegisterPassword.Foreground = new SolidColorBrush(Colors.MediumSlateBlue);
+            }
         }
 
         // ******************** METHODS ********************

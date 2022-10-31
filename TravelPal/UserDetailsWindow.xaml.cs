@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Media;
 using TravelPal.Enums;
 using TravelPal.Managers;
 
@@ -194,6 +195,42 @@ namespace TravelPal
             foreach (string country in countries)
             {
                 cbUpdateCountry.Items.Add(country.Replace('_', ' '));
+            }
+        }
+
+        private void txtUpdateUserName_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            if (txtUpdateUserName.Text.Length < 3)
+            {
+                txtUpdateUserName.Foreground = new SolidColorBrush(Colors.Red);
+            }
+            else
+            {
+                txtUpdateUserName.Foreground = new SolidColorBrush(Colors.MediumSlateBlue);
+            }
+        }
+
+        private void pbUpdatePassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (pbUpdatePassword.Password.Length < 5)
+            {
+                pbUpdatePassword.Foreground = new SolidColorBrush(Colors.Red);
+            }
+            else
+            {
+                pbUpdatePassword.Foreground = new SolidColorBrush(Colors.MediumSlateBlue);
+            }
+        }
+
+        private void pbConfirmPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (pbConfirmPassword.Password.Length < pbUpdatePassword.Password.Length)
+            {
+                pbConfirmPassword.Foreground = new SolidColorBrush(Colors.Red);
+            }
+            else
+            {
+                pbConfirmPassword.Foreground = new SolidColorBrush(Colors.MediumSlateBlue);
             }
         }
     }

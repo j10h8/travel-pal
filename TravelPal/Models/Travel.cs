@@ -33,7 +33,14 @@ namespace TravelPal.Models
         // ******************** METHODS ********************
         public virtual string GetInfo()
         {
-            return $"Destination: {Destination}";   // Possibly add more of the properties to return.
+            if (TravelDays < 2)
+            {
+                return $"{Country}, {TravelDays} day";
+            }
+            else
+            {
+                return $"{Country}, {TravelDays} days";
+            }
         }
 
         /// <summary>

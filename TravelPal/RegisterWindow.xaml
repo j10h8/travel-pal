@@ -62,7 +62,8 @@
             HorizontalContentAlignment="Left"
             VerticalContentAlignment="Center"
             BorderBrush="MediumSlateBlue"
-            BorderThickness="2">
+            BorderThickness="2"
+            TextChanged="txtRegisterUserName_TextChanged">
             <TextBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -91,7 +92,8 @@
             VerticalAlignment="Center"
             HorizontalContentAlignment="Left"
             VerticalContentAlignment="Center"
-            BorderThickness="0"/>
+            BorderThickness="0"
+            PasswordChanged="pbRegisterPassword_PasswordChanged"/>
         </Border>
         <Label
             Grid.Column="0"

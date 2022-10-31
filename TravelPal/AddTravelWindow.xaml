@@ -99,7 +99,8 @@
             HorizontalAlignment="Left"
             HorizontalContentAlignment="Left"
             VerticalAlignment="Center"
-            VerticalContentAlignment="Center"/>
+            VerticalContentAlignment="Center"
+            SelectionChanged="cbCountryAddTravel_SelectionChanged"/>
         </Border>
         <Label
             Grid.Column="1"
@@ -150,9 +151,11 @@
             HorizontalAlignment="Left"
             HorizontalContentAlignment="Left"
             VerticalAlignment="Center"
-            VerticalContentAlignment="Center"/>
+            VerticalContentAlignment="Center"
+            SelectionChanged="cbTypeOfTravelAddTravel_SelectionChanged"/>
         </Border>
         <Label
+            Name="lblTypeOfTrip"
             Grid.Column="1"
             Grid.Row="6"
             Content="Type of trip:"
@@ -166,82 +169,39 @@
                 Height="45"
                 HorizontalAlignment="Left"
                 BorderBrush="MediumSlateBlue"
-                BorderThickness="2">
+                BorderThickness="2"
+                Name="brdTripTypeDetails">
             <ComboBox
-            Name="cbTripTypeDetails"
+            Name="cbTripTypeDetailsAddTravel"
             Foreground="MediumSlateBlue"
             Width="240"
             HorizontalAlignment="Left"
             HorizontalContentAlignment="Left"
             VerticalAlignment="Center"
-            VerticalContentAlignment="Center"
-            IsEnabled="False"/>
+            VerticalContentAlignment="Center"/>
         </Border>
-        <TextBox
-            Name="txtIfNotATrip"
-            Grid.Column="2"
-            Grid.Row="6"
-            Width="240"
-            Height="45"
-            Background="MintCream"
-            Foreground="MediumSlateBlue"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center"
-            HorizontalContentAlignment="Left"
-            VerticalContentAlignment="Center"
-            Text="N/A"
-            BorderBrush="MediumSlateBlue"
-            BorderThickness="2"
-            IsReadOnly="True">
-            <TextBox.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </TextBox.Resources>
-        </TextBox>
         <Label
+            Name="lblAllInclusive"
             Grid.Column="1"
-            Grid.Row="7"
+            Grid.Row="6"
             Content="All inclusive:"
             Foreground="MediumSlateBlue"
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"/>
         <Border CornerRadius="5"
-                Grid.Row="7"
+                Grid.Row="6"
                 Grid.Column="2"
                 Width="240"
                 Height="45"
                 HorizontalAlignment="Left"
                 BorderBrush="MediumSlateBlue"
-                BorderThickness="2">
+                BorderThickness="2"
+                Name="brdAllInclusive">
             <CheckBox
                 Name="cbxAllInclusiveDetails"
                 VerticalAlignment="Center"
-                Margin="10"
-                IsEnabled="False"/>
+                Margin="10"/>
         </Border>
-        <TextBox
-            Name="txtIfNotAVacation"
-            Grid.Column="2"
-            Grid.Row="7"
-            Width="240"
-            Height="45"
-            Background="MintCream"
-            Foreground="MediumSlateBlue"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center"
-            HorizontalContentAlignment="Left"
-            VerticalContentAlignment="Center"
-            Text="N/A"
-            BorderBrush="MediumSlateBlue"
-            BorderThickness="2"
-            IsReadOnly="True">
-            <TextBox.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </TextBox.Resources>
-        </TextBox>
         <Label
             Grid.Column="1"
             Grid.Row="8"
@@ -262,7 +222,8 @@
             HorizontalContentAlignment="Left"
             VerticalContentAlignment="Center"
             BorderBrush="MediumSlateBlue"
-            BorderThickness="2">
+            BorderThickness="2"
+            TextChanged="txtPackingListItem_TextChanged">
             <TextBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -270,6 +231,7 @@
             </TextBox.Resources>
         </TextBox>
         <Label
+            Name="lblDocument"
             Grid.Column="1"
             Grid.Row="9"
             Content="Document:"
@@ -283,13 +245,17 @@
                 Height="45"
                 HorizontalAlignment="Left"
                 BorderBrush="MediumSlateBlue"
-                BorderThickness="2">
+                BorderThickness="2"
+                Name="brdCbxDocument">
             <CheckBox
                 Name="cbxDocument"
                 VerticalAlignment="Center"
-                Margin="10"/>
+                Margin="10"
+                Checked="cbxDocument_Checked"
+                Unchecked="cbxDocument_Unchecked"/>
         </Border>
         <Label
+            Name="lblQuantity"
             Grid.Column="1"
             Grid.Row="10"
             Content="Quantity:"
@@ -297,6 +263,7 @@
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"/>
         <Label
+            Name="lblRequired"
             Grid.Column="1"
             Grid.Row="10"
             Content="Required:"
@@ -304,7 +271,7 @@
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"/>
         <TextBox
-            x:Name="txtQuantity"
+            Name="txtQuantity"
             Grid.Column="2"
             Grid.Row="10"
             Width="240"
@@ -330,7 +297,8 @@
                 Height="45"
                 HorizontalAlignment="Left"
                 BorderBrush="MediumSlateBlue"
-                BorderThickness="2">
+                BorderThickness="2"
+                Name="brdCbxRequired">
             <CheckBox
                 Name="cbxRequired"
                 VerticalAlignment="Center"
@@ -406,6 +374,7 @@
             HorizontalContentAlignment="Center"
             VerticalContentAlignment="Bottom"/>
         <Calendar
+            Name="cldStartDate"
             Grid.Column="3"
             Grid.Row="7"
             Grid.RowSpan="3"
@@ -419,6 +388,7 @@
             HorizontalContentAlignment="Center"
             VerticalContentAlignment="Bottom"/>
         <Calendar
+            Name="cldEndDate"
             Grid.Column="4"
             Grid.Row="7"
             Grid.RowSpan="3"
@@ -433,7 +403,6 @@
             VerticalContentAlignment="Center"/>
         <TextBox
             Name="txtTravelLengthAddTravel"
-            Text="TextTextText"
             Grid.Column="4"
             Grid.Row="10"
             Width="240"
@@ -476,7 +445,8 @@
             Background="MediumSlateBlue"
             Foreground="MintCream"
             Margin="5"
-            BorderThickness="0">
+            BorderThickness="0"
+            Click="btnCancelAddTravelWindow_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

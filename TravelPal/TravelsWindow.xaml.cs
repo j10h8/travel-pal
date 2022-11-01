@@ -87,7 +87,7 @@ namespace TravelPal
 
                 foreach (IUser user in _userManager.Users)
                 {
-                    if (user.UserName == travel.CreatorUserName)
+                    if (user.UserName == travel.CreatorUserName && user.GetType().Name.ToString() == "User")
                     {
                         User identifiedUser = user as User;
                         identifiedUser.Travels.Remove(travel);

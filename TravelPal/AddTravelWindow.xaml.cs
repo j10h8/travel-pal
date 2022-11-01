@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using TravelPal.Enums;
+using TravelPal.Interfaces;
 using TravelPal.Managers;
 using TravelPal.Models;
 
@@ -90,7 +93,7 @@ namespace TravelPal
 
         private void txtPackingListItem_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            if (txtPackingListItem.Text.Length > 0)
+            if (txtPackingListItem.Text.Trim().Length > 0)
             {
                 lblDocument.Visibility = Visibility.Visible;
                 cbxDocument.IsEnabled = true;
@@ -150,6 +153,215 @@ namespace TravelPal
             }
         }
 
+        private void btnAddToPackingList_Click(object sender, RoutedEventArgs e)
+        {
+            if (cbxDocument.IsChecked == true)
+            {
+                bool isRequired = false;
+
+                if (cbxRequired.IsChecked == true)
+                {
+                    isRequired = true;
+                }
+                else
+                {
+                    isRequired = false;
+                }
+
+                TravelDocument travelDocument = new(txtPackingListItem.Text, isRequired);
+                ListViewItem item = new();
+                item.Tag = travelDocument;
+                item.Content = travelDocument.GetInfo();
+                lvPackingList.Items.Add(item);
+
+                txtPackingListItem.Text = null;
+            }
+            else
+            {
+                try
+                {
+                    OtherItem otherItem = new(txtPackingListItem.Text, int.Parse(txtQuantity.Text.Trim()));
+                    ListViewItem item = new();
+                    item.Tag = otherItem;
+                    item.Content = otherItem.GetInfo();
+                    lvPackingList.Items.Add(item);
+
+                    txtPackingListItem.Text = null;
+                }
+                catch (ArgumentNullException ex)
+                {
+                    MessageBox.Show("Please enter a number corresponding to the quantity of the packing list item.", "Warning!");
+                }
+                catch (FormatException ex)
+                {
+                    MessageBox.Show("Please enter a number corresponding to the quantity of the packing list item.", "Warning!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("The input you provided is not accepted by the system. Please change the input and try again.", "Warning!");
+                }
+                finally
+                {
+                    txtQuantity.Text = null;
+                }
+            }
+        }
+
+        private void lvPackingList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lvPackingList.SelectedItems.Count > 0)
+            {
+                btnRemoveFromPackingList.IsEnabled = true;
+                btnRemoveFromPackingList.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                btnRemoveFromPackingList.IsEnabled = false;
+                btnRemoveFromPackingList.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void btnRemoveFromPackingList_Click(object sender, RoutedEventArgs e)
+        {
+            ListViewItem item = lvPackingList.SelectedItem as ListViewItem;
+            lvPackingList.Items.Remove(lvPackingList.SelectedItem);
+
+            if (item.Tag.GetType().Name.ToString() == "TravelDocument")
+            {
+                TravelDocument travelDocument = item.Tag as TravelDocument;
+
+                if (travelDocument.Required == true)
+                {
+                    MessageBox.Show($"You just removed a required travel document ({travelDocument.Name})", "Warning!");
+                }
+            }
+        }
+
+        private void cldStartDate_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int travelDays = 0;
+
+            if (cldStartDate.SelectedDate != null && cldEndDate.SelectedDate != null)
+            {
+                DateTime endDate = (DateTime)cldEndDate.SelectedDate;
+                DateTime startDate = (DateTime)cldStartDate.SelectedDate;
+                TimeSpan timeSpan = endDate - startDate;
+                travelDays = timeSpan.Days;
+            }
+
+            if (travelDays < 0)
+            {
+                MessageBox.Show("The specified start date comes after the specified end date. Please change!", "Warning!");
+            }
+        }
+
+        private void cldEndDate_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int travelDays = 0;
+
+            if (cldStartDate.SelectedDate != null && cldEndDate.SelectedDate != null)
+            {
+                DateTime endDate = (DateTime)cldEndDate.SelectedDate;
+                DateTime startDate = (DateTime)cldStartDate.SelectedDate;
+                TimeSpan timeSpan = endDate - startDate;
+                travelDays = timeSpan.Days;
+                txtTravelLengthAddTravel.Text = travelDays.ToString();
+            }
+
+            if (travelDays < 0)
+            {
+                MessageBox.Show("The specified start date comes after the specified end date. Please change!", "Warning!");
+            }
+
+        }
+
+        private void txtTravelLengthAddTravel_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (Convert.ToInt32(txtTravelLengthAddTravel.Text) < 0)
+            {
+                txtTravelLengthAddTravel.Foreground = new SolidColorBrush(Colors.Red);
+            }
+            else
+            {
+                txtTravelLengthAddTravel.Foreground = new SolidColorBrush(Colors.MediumSlateBlue);
+            }
+        }
+
+        private void btnAddTravel_Click(object sender, RoutedEventArgs e)
+        {
+            if (NullCheck() == "OK")
+            {
+                try
+                {
+                    List<IPackingListItem> packingList = new();
+
+                    foreach (ListViewItem listViewItem in lvPackingList.Items)
+                    {
+                        if (listViewItem.Tag.GetType().Name.ToString() == "TravelDocument")
+                        {
+                            TravelDocument travelDocument = listViewItem.Tag as TravelDocument;
+                            packingList.Add(travelDocument);
+                        }
+                        else
+                        {
+                            OtherItem otherItem = listViewItem.Tag as OtherItem;
+                            packingList.Add(otherItem);
+                        }
+                    }
+
+                    if (cbTypeOfTravelAddTravel.SelectedItem.ToString() == "Trip")
+                    {
+                        Trip trip = new(((TripTypes)Enum.Parse(typeof(TripTypes), cbTripTypeDetailsAddTravel.SelectedItem.ToString().Replace(' ', '_'))), txtDestinationAddTravel.Text, ((Countries)Enum.Parse(typeof(Countries), cbCountryAddTravel.SelectedItem.ToString().Replace(' ', '_'))), int.Parse(txtTravellersAddTravel.Text), packingList, _userManager.SignedInUser.UserName, (DateTime)cldStartDate.SelectedDate, (DateTime)cldEndDate.SelectedDate);
+
+                        if (_userManager.SignedInUser.GetType().Name.ToString() == "Admin")
+                        {
+                            _travelManager.Travels.Add(trip);
+                        }
+                        else
+                        {
+                            User user = _userManager.SignedInUser as User;
+                            _travelManager.Travels.Add(trip);
+                            user.Travels.Add(trip);
+                        }
+                    }
+                    else
+                    {
+                        bool allInclusive = false;
+
+                        if (cbxAllInclusiveDetails.IsChecked == true)
+                        {
+                            allInclusive = true;
+                        }
+
+                        Vacation vacation = new(allInclusive, txtDestinationAddTravel.Text, ((Countries)Enum.Parse(typeof(Countries), cbCountryAddTravel.SelectedItem.ToString().Replace(' ', '_'))), int.Parse(txtTravellersAddTravel.Text), packingList, _userManager.SignedInUser.UserName, (DateTime)cldStartDate.SelectedDate, (DateTime)cldEndDate.SelectedDate);
+
+                        if (_userManager.SignedInUser.GetType().Name.ToString() == "Admin")
+                        {
+                            _travelManager.Travels.Add(vacation);
+                        }
+                        else
+                        {
+                            User user = _userManager.SignedInUser as User;
+                            _travelManager.Travels.Add(vacation);
+                            user.Travels.Add(vacation);
+                        }
+                    }
+                }
+                catch (FormatException ex)
+                {
+                    MessageBox.Show("Please enter a number corresponding to the number of travellers.", "Warning!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("The input you provided is not accepted by the system. Please change the input and try again.", "Warning!");
+                }
+            }
+            else
+            {
+                MessageBox.Show(NullCheck());
+            }
+        }
+
         // ******************** METHODS ********************
         private void UpdateUI()
         {
@@ -205,8 +417,43 @@ namespace TravelPal
             cbxDocument.IsEnabled = false;
 
             txtQuantity.IsEnabled = false;
+
+            btnRemoveFromPackingList.IsEnabled = false;
+            btnRemoveFromPackingList.Visibility = Visibility.Hidden;
+        }
+
+        private string NullCheck()
+        {
+            if (txtDestinationAddTravel.Text.Length == 0)
+            {
+                return "Please specify destination.";
+            }
+            else if (cbCountryAddTravel.SelectedItem == null)
+            {
+                return "Please select destination country.";
+            }
+            else if (txtTravellersAddTravel.Text.Length == 0)
+            {
+                return "Please specify number of travellers.";
+            }
+            else if (cbTypeOfTravelAddTravel.SelectedItem == null)
+            {
+                return "Please select type of travel.";
+            }
+            else if (cbTypeOfTravelAddTravel.SelectedItem.ToString() == "Trip" && cbTripTypeDetailsAddTravel.SelectedItem == null)
+            {
+                return "Please select type of trip.";
+            }
+            else if (!cldStartDate.SelectedDate.HasValue)
+            {
+                return "Please select start date.";
+            }
+            else if (!cldEndDate.SelectedDate.HasValue)
+            {
+                return "Please select end date.";
+            }
+
+            return "OK";
         }
     }
 }
-
-// Remember to make it unable to remove automatically added packing list items (Passport) 

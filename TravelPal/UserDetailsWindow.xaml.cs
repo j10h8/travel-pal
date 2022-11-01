@@ -181,23 +181,6 @@ namespace TravelPal
 
             Close();
         }
-
-
-
-        // ******************** METHODS ********************
-
-        private void UpdateUI()
-        {
-            lblCurrentName.Content = _userManager.SignedInUser.UserName;
-            lblCurrentCountry.Content = _userManager.SignedInUser.Location.ToString().Replace('_', ' ');
-
-            string[] countries = Enum.GetNames(typeof(Countries));
-            foreach (string country in countries)
-            {
-                cbUpdateCountry.Items.Add(country.Replace('_', ' '));
-            }
-        }
-
         private void txtUpdateUserName_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
             if (txtUpdateUserName.Text.Length < 3)
@@ -231,6 +214,22 @@ namespace TravelPal
             else
             {
                 pbConfirmPassword.Foreground = new SolidColorBrush(Colors.MediumSlateBlue);
+            }
+        }
+
+
+
+        // ******************** METHODS ********************
+
+        private void UpdateUI()
+        {
+            lblCurrentName.Content = _userManager.SignedInUser.UserName;
+            lblCurrentCountry.Content = _userManager.SignedInUser.Location.ToString().Replace('_', ' ');
+
+            string[] countries = Enum.GetNames(typeof(Countries));
+            foreach (string country in countries)
+            {
+                cbUpdateCountry.Items.Add(country.Replace('_', ' '));
             }
         }
     }

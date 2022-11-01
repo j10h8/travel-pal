@@ -16,7 +16,8 @@
         FontFamily="Calibri"
         FontSize="15"
         BorderBrush="MediumSlateBlue"
-        BorderThickness="2">
+        BorderThickness="2"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>

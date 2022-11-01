@@ -14,7 +14,8 @@
         MaxWidth="1000"
         Background="MintCream"
         FontFamily="Calibri"
-        FontSize="20">
+        FontSize="20"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="40"/>

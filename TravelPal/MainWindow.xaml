@@ -14,7 +14,8 @@
         MaxWidth="1000"
         Background="MintCream"
         FontFamily="Calibri"
-        FontSize="20">
+        FontSize="20"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="425"/>
@@ -105,7 +106,8 @@
             Foreground="MintCream"
             Margin="10"
             BorderThickness="0"
-            Click="btnSignIn_Click">
+            Click="btnSignIn_Click"
+            IsDefault="True">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

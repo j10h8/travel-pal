@@ -14,7 +14,8 @@
         MaxWidth="1000"
         Background="MintCream"
         FontFamily="Calibri"
-        FontSize="20">
+        FontSize="20"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -315,7 +316,8 @@
             Background="MediumSlateBlue"
             Foreground="MintCream"
             Margin= "5 5 20 5"
-            BorderThickness="0">
+            BorderThickness="0"
+            Click="btnAddToPackingList_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -333,7 +335,8 @@
             Background="MediumSlateBlue"
             Foreground="MintCream"
             Margin= "5 5 20 5"
-            BorderThickness="0">
+            BorderThickness="0"
+            Click="btnRemoveFromPackingList_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -359,7 +362,8 @@
             BorderBrush="MediumSlateBlue"
             BorderThickness="2"
             HorizontalAlignment="Left"
-            SelectionMode="Single">
+            SelectionMode="Single"
+            SelectionChanged="lvPackingList_SelectionChanged">
             <ListView.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -379,7 +383,8 @@
             Grid.Row="7"
             Grid.RowSpan="3"
             VerticalAlignment="Top"
-            BorderThickness="0"/>
+            BorderThickness="0"
+            SelectedDatesChanged="cldStartDate_SelectedDatesChanged"/>
         <Label
             Grid.Column="4"
             Grid.Row="6"
@@ -393,7 +398,8 @@
             Grid.Row="7"
             Grid.RowSpan="3"
             VerticalAlignment="Top"
-            BorderThickness="0"/>
+            BorderThickness="0"
+            SelectedDatesChanged="cldEndDate_SelectedDatesChanged"/>
         <Label
             Grid.Column="3"
             Grid.Row="10"
@@ -414,10 +420,11 @@
             HorizontalContentAlignment="Left"
             VerticalContentAlignment="Center"
             BorderThickness="0"
-            IsReadOnly="True">
+            IsReadOnly="True"
+            TextChanged="txtTravelLengthAddTravel_TextChanged">
         </TextBox>
         <Button
-            Name="btnSaveAddTravel"
+            Name="btnAddTravel"
             Grid.Column="3"
             Grid.Row="11"
             HorizontalAlignment="Center"          
@@ -427,7 +434,8 @@
             Background="MediumSlateBlue"
             Foreground="MintCream"
             Margin="5"
-            BorderThickness="0">
+            BorderThickness="0"
+            Click="btnAddTravel_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

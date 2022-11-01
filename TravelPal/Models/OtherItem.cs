@@ -18,7 +18,7 @@ namespace TravelPal.Models
         // ******************** METHODS ********************
         public string GetInfo()     // TODO: Possibly change what is returned. 
         {
-            return $"{Quantity} {Name}";
+            return $"{Name} x {Quantity}";
         }
     }
 }

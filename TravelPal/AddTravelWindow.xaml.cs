@@ -119,37 +119,40 @@ namespace TravelPal
 
         private void cbCountryAddTravel_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            int lvIndex = -1;
-
-            foreach (ListViewItem listViewItem in lvPackingList.Items)
+            if (Enum.IsDefined(typeof(EuropeanCountries), _userManager.SignedInUser.Location.ToString()))
             {
-                if (listViewItem.Content.ToString() == "Passport (required)" || listViewItem.Content.ToString() == "Passport (not required)")
+                int lvIndex = -1;
+
+                foreach (ListViewItem listViewItem in lvPackingList.Items)
                 {
-                    lvIndex = lvPackingList.Items.IndexOf(listViewItem);
+                    if (listViewItem.Content.ToString() == "Passport (required)" || listViewItem.Content.ToString() == "Passport (not required)")
+                    {
+                        lvIndex = lvPackingList.Items.IndexOf(listViewItem);
+                    }
                 }
-            }
 
-            if (lvIndex > -1)
-            {
-                lvPackingList.Items.RemoveAt(lvIndex);
-            }
+                if (lvIndex > -1)
+                {
+                    lvPackingList.Items.RemoveAt(lvIndex);
+                }
 
-            if (Enum.IsDefined(typeof(EuropeanCountries), _userManager.SignedInUser.Location.ToString()) && !Enum.IsDefined(typeof(EuropeanCountries), cbCountryAddTravel.SelectedItem.ToString()))
-            {
-                TravelDocument travelDocument = new("Passport", true);
-                ListViewItem item = new();
-                item.Tag = travelDocument;
-                item.Content = travelDocument.GetInfo();
-                lvPackingList.Items.Add(item);
-            }
+                if (!Enum.IsDefined(typeof(EuropeanCountries), cbCountryAddTravel.SelectedItem.ToString()))
+                {
+                    TravelDocument travelDocument = new("Passport", true);
+                    ListViewItem item = new();
+                    item.Tag = travelDocument;
+                    item.Content = travelDocument.GetInfo();
+                    lvPackingList.Items.Add(item);
+                }
 
-            if (Enum.IsDefined(typeof(EuropeanCountries), _userManager.SignedInUser.Location.ToString()) && Enum.IsDefined(typeof(EuropeanCountries), cbCountryAddTravel.SelectedItem.ToString()) && cbCountryAddTravel.SelectedItem.ToString() != _userManager.SignedInUser.Location.ToString())
-            {
-                TravelDocument travelDocument = new("Passport", false);
-                ListViewItem item = new();
-                item.Tag = travelDocument;
-                item.Content = travelDocument.GetInfo();
-                lvPackingList.Items.Add(item);
+                if (Enum.IsDefined(typeof(EuropeanCountries), cbCountryAddTravel.SelectedItem.ToString()) && cbCountryAddTravel.SelectedItem.ToString() != _userManager.SignedInUser.Location.ToString())
+                {
+                    TravelDocument travelDocument = new("Passport", false);
+                    ListViewItem item = new();
+                    item.Tag = travelDocument;
+                    item.Content = travelDocument.GetInfo();
+                    lvPackingList.Items.Add(item);
+                }
             }
         }
 
@@ -168,7 +171,7 @@ namespace TravelPal
                     isRequired = false;
                 }
 
-                TravelDocument travelDocument = new(txtPackingListItem.Text, isRequired);
+                TravelDocument travelDocument = new(txtPackingListItem.Text.Trim(), isRequired);
                 ListViewItem item = new();
                 item.Tag = travelDocument;
                 item.Content = travelDocument.GetInfo();
@@ -180,29 +183,32 @@ namespace TravelPal
             {
                 try
                 {
-                    OtherItem otherItem = new(txtPackingListItem.Text, int.Parse(txtQuantity.Text.Trim()));
-                    ListViewItem item = new();
-                    item.Tag = otherItem;
-                    item.Content = otherItem.GetInfo();
-                    lvPackingList.Items.Add(item);
+                    if (int.Parse(txtQuantity.Text.Trim()) < 1)
+                    {
+                        MessageBox.Show("Please enter a number corresponding to the quantity of the packing list item.");
+                    }
+                    else
+                    {
+                        OtherItem otherItem = new(txtPackingListItem.Text.Trim(), int.Parse(txtQuantity.Text.Trim()));
+                        ListViewItem item = new();
+                        item.Tag = otherItem;
+                        item.Content = otherItem.GetInfo();
+                        lvPackingList.Items.Add(item);
 
-                    txtPackingListItem.Text = null;
+                        txtPackingListItem.Text = null;
+                    }
                 }
                 catch (ArgumentNullException ex)
                 {
-                    MessageBox.Show("Please enter a number corresponding to the quantity of the packing list item.", "Warning!");
+                    MessageBox.Show("Please specify quantity of the packing list item.");
                 }
                 catch (FormatException ex)
                 {
-                    MessageBox.Show("Please enter a number corresponding to the quantity of the packing list item.", "Warning!");
+                    MessageBox.Show("Please enter a number corresponding to the quantity of the packing list item.");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("The input you provided is not accepted by the system. Please change the input and try again.", "Warning!");
-                }
-                finally
-                {
-                    txtQuantity.Text = null;
+                    MessageBox.Show("The input you provided is not accepted by the system. Please change the input and try again.");
                 }
             }
         }
@@ -232,7 +238,7 @@ namespace TravelPal
 
                 if (travelDocument.Required == true)
                 {
-                    MessageBox.Show($"You just removed a required travel document ({travelDocument.Name})", "Warning!");
+                    MessageBox.Show($"You just removed a required travel document ({travelDocument.Name})");
                 }
             }
         }
@@ -251,7 +257,7 @@ namespace TravelPal
 
             if (travelDays < 0)
             {
-                MessageBox.Show("The specified start date comes after the specified end date. Please change!", "Warning!");
+                MessageBox.Show("The specified start date comes after the specified end date. Please change!");
             }
         }
 
@@ -270,7 +276,7 @@ namespace TravelPal
 
             if (travelDays < 0)
             {
-                MessageBox.Show("The specified start date comes after the specified end date. Please change!", "Warning!");
+                MessageBox.Show("The specified start date comes after the specified end date. Please change!");
             }
 
         }
@@ -289,7 +295,7 @@ namespace TravelPal
 
         private void btnAddTravel_Click(object sender, RoutedEventArgs e)
         {
-            if (NullCheck() == "OK")
+            if (CheckInputs() == "OK")
             {
                 try
                 {
@@ -311,7 +317,7 @@ namespace TravelPal
 
                     if (cbTypeOfTravelAddTravel.SelectedItem.ToString() == "Trip")
                     {
-                        Trip trip = new(((TripTypes)Enum.Parse(typeof(TripTypes), cbTripTypeDetailsAddTravel.SelectedItem.ToString().Replace(' ', '_'))), txtDestinationAddTravel.Text, ((Countries)Enum.Parse(typeof(Countries), cbCountryAddTravel.SelectedItem.ToString().Replace(' ', '_'))), int.Parse(txtTravellersAddTravel.Text), packingList, _userManager.SignedInUser.UserName, (DateTime)cldStartDate.SelectedDate, (DateTime)cldEndDate.SelectedDate);
+                        Trip trip = new(((TripTypes)Enum.Parse(typeof(TripTypes), cbTripTypeDetailsAddTravel.SelectedItem.ToString().Replace(' ', '_'))), txtDestinationAddTravel.Text.Trim(), ((Countries)Enum.Parse(typeof(Countries), cbCountryAddTravel.SelectedItem.ToString().Replace(' ', '_'))), int.Parse(txtTravellersAddTravel.Text.Trim()), packingList, _userManager.SignedInUser.UserName, (DateTime)cldStartDate.SelectedDate, (DateTime)cldEndDate.SelectedDate);
 
                         if (_userManager.SignedInUser.GetType().Name.ToString() == "Admin")
                         {
@@ -333,7 +339,7 @@ namespace TravelPal
                             allInclusive = true;
                         }
 
-                        Vacation vacation = new(allInclusive, txtDestinationAddTravel.Text, ((Countries)Enum.Parse(typeof(Countries), cbCountryAddTravel.SelectedItem.ToString().Replace(' ', '_'))), int.Parse(txtTravellersAddTravel.Text), packingList, _userManager.SignedInUser.UserName, (DateTime)cldStartDate.SelectedDate, (DateTime)cldEndDate.SelectedDate);
+                        Vacation vacation = new(allInclusive, txtDestinationAddTravel.Text.Trim(), ((Countries)Enum.Parse(typeof(Countries), cbCountryAddTravel.SelectedItem.ToString().Replace(' ', '_'))), int.Parse(txtTravellersAddTravel.Text.Trim()), packingList, _userManager.SignedInUser.UserName, (DateTime)cldStartDate.SelectedDate, (DateTime)cldEndDate.SelectedDate);
 
                         if (_userManager.SignedInUser.GetType().Name.ToString() == "Admin")
                         {
@@ -349,16 +355,16 @@ namespace TravelPal
                 }
                 catch (FormatException ex)
                 {
-                    MessageBox.Show("Please enter a number corresponding to the number of travellers.", "Warning!");
+                    MessageBox.Show("Please enter a number corresponding to the number of travellers.");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("The input you provided is not accepted by the system. Please change the input and try again.", "Warning!");
+                    MessageBox.Show("The input you provided is not accepted by the system. Please change the input and try again.");
                 }
             }
             else
             {
-                MessageBox.Show(NullCheck());
+                MessageBox.Show(CheckInputs());
             }
         }
 
@@ -422,9 +428,9 @@ namespace TravelPal
             btnRemoveFromPackingList.Visibility = Visibility.Hidden;
         }
 
-        private string NullCheck()
+        private string CheckInputs()
         {
-            if (txtDestinationAddTravel.Text.Length == 0)
+            if (txtDestinationAddTravel.Text.Trim().Length == 0)
             {
                 return "Please specify destination.";
             }
@@ -432,9 +438,16 @@ namespace TravelPal
             {
                 return "Please select destination country.";
             }
-            else if (txtTravellersAddTravel.Text.Length == 0)
+            else if (!int.TryParse((txtTravellersAddTravel.Text.Trim()), out int success) || Convert.ToInt32(txtTravellersAddTravel.Text.Trim()) < 1)
             {
-                return "Please specify number of travellers.";
+                if (txtTravellersAddTravel.Text.Trim().Length > 0)
+                {
+                    return "Please enter number corresponding to the number of travellers.";
+                }
+                else
+                {
+                    return "Please specify the number of travellers.";
+                }
             }
             else if (cbTypeOfTravelAddTravel.SelectedItem == null)
             {

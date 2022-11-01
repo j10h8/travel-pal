@@ -41,11 +41,11 @@ namespace TravelPal
         {
             if (txtUserName.Text.Trim().Length == 0 || pbPassword.Password.Trim().Length == 0)
             {
-                MessageBox.Show("Please enter username and password!", "Warning!");
+                MessageBox.Show("Please enter username and password!");
             }
             else if (!_userManager.SignInUser(txtUserName.Text.Trim(), pbPassword.Password.Trim()))
             {
-                MessageBox.Show("User name and/or password do/does not exist!", "Warning!");
+                MessageBox.Show("User name and/or password do/does not exist!");
             }
             else if (_userManager.SignInUser(txtUserName.Text.Trim(), pbPassword.Password.Trim()))
             {
@@ -72,7 +72,7 @@ namespace TravelPal
         // ******************** METHODS ********************
         public void AddGandalf()
         {
-            User user = new("Gandalf", "password", Countries.Sweden);
+            User user = new("Gandalf", "password", Countries.Bangladesh);
 
             // Create Gandalf's vacation
             List<IPackingListItem> packingList = new();

@@ -52,7 +52,7 @@ namespace TravelPal
         {
             if (lvYourTravels.SelectedItems.Count == 0)
             {
-                MessageBox.Show("Please select travel from list before clicking Details.", "Warning!");
+                MessageBox.Show("Please select travel from list before clicking Details.");
             }
             else
             {
@@ -76,7 +76,7 @@ namespace TravelPal
         {
             if (lvYourTravels.SelectedItems.Count == 0)
             {
-                MessageBox.Show("Please select travel from list to remove.", "Warning!");
+                MessageBox.Show("Please select travel from list to remove.");
             }
             else
             {

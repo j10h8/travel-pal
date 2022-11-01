@@ -28,26 +28,26 @@ namespace TravelPal
         // ******************** EVENTS *********************
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            if (txtRegisterUserName.Text.Trim().Length == 0 || pbRegisterPassword.Password.Length == 0 || string.IsNullOrEmpty(cbCountries.Text))
+            if (txtRegisterUserName.Text.Trim().Length == 0 || pbRegisterPassword.Password.Trim().Length == 0 || string.IsNullOrEmpty(cbCountries.Text))
             {
-                MessageBox.Show("Please provide all required inputs (user name, password, and country).", "Warning!");
+                MessageBox.Show("Please provide all required inputs (user name, password, and country).");
             }
             else if (txtRegisterUserName.Text.Trim().Length < 3)
             {
-                MessageBox.Show("Please enter a username with at least three characters.", "Warning!");
+                MessageBox.Show("Please enter a username with at least three characters.");
             }
-            else if (pbRegisterPassword.Password.Length < 5)
+            else if (pbRegisterPassword.Password.Trim().Length < 5)
             {
-                MessageBox.Show("Please enter a password with at least five characters.", "Warning!");
+                MessageBox.Show("Please enter a password with at least five characters.");
             }
             else
             {
                 Countries location = (Countries)Enum.Parse(typeof(Countries), cbCountries.SelectedItem.ToString().Replace(' ', '_'));
-                User user = new(txtRegisterUserName.Text.ToString(), pbRegisterPassword.Password.ToString(), location);
+                User user = new(txtRegisterUserName.Text.Trim().ToString(), pbRegisterPassword.Password.Trim().ToString(), location);
 
                 if (!_userManager.AddUser(user))
                 {
-                    MessageBox.Show("The user name is not available. Please choose a different user name.", "Warning!");
+                    MessageBox.Show("The user name is not available. Please choose a different user name.");
                 }
                 else
                 {
@@ -71,7 +71,7 @@ namespace TravelPal
 
         private void txtRegisterUserName_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            if (txtRegisterUserName.Text.Length < 3)
+            if (txtRegisterUserName.Text.Trim().Length < 3)
             {
                 txtRegisterUserName.Foreground = new SolidColorBrush(Colors.Red);
             }
@@ -83,7 +83,7 @@ namespace TravelPal
 
         private void pbRegisterPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            if (pbRegisterPassword.Password.Length < 5)
+            if (pbRegisterPassword.Password.Trim().Length < 5)
             {
                 pbRegisterPassword.Foreground = new SolidColorBrush(Colors.Red);
             }

@@ -249,6 +249,8 @@ namespace TravelPal
 
             if (cldStartDate.SelectedDate != null && cldEndDate.SelectedDate != null)
             {
+                lblTravelDays.Visibility = Visibility.Visible;
+
                 DateTime endDate = (DateTime)cldEndDate.SelectedDate;
                 DateTime startDate = (DateTime)cldStartDate.SelectedDate;
                 TimeSpan timeSpan = endDate - startDate;
@@ -267,6 +269,8 @@ namespace TravelPal
 
             if (cldStartDate.SelectedDate != null && cldEndDate.SelectedDate != null)
             {
+                lblTravelDays.Visibility = Visibility.Visible;
+
                 DateTime endDate = (DateTime)cldEndDate.SelectedDate;
                 DateTime startDate = (DateTime)cldStartDate.SelectedDate;
                 TimeSpan timeSpan = endDate - startDate;
@@ -317,7 +321,7 @@ namespace TravelPal
 
                     if (cbTypeOfTravelAddTravel.SelectedItem.ToString() == "Trip")
                     {
-                        Trip trip = new(((TripTypes)Enum.Parse(typeof(TripTypes), cbTripTypeDetailsAddTravel.SelectedItem.ToString().Replace(' ', '_'))), txtDestinationAddTravel.Text.Trim(), ((Countries)Enum.Parse(typeof(Countries), cbCountryAddTravel.SelectedItem.ToString().Replace(' ', '_'))), int.Parse(txtTravellersAddTravel.Text.Trim()), packingList, _userManager.SignedInUser.UserName, (DateTime)cldStartDate.SelectedDate, (DateTime)cldEndDate.SelectedDate);
+                        Trip trip = new(((TripTypes)Enum.Parse(typeof(TripTypes), cbTripTypeDetailsAddTravel.SelectedItem.ToString())), txtDestinationAddTravel.Text.Trim(), ((Countries)Enum.Parse(typeof(Countries), cbCountryAddTravel.SelectedItem.ToString().Replace(' ', '_'))), int.Parse(txtTravellersAddTravel.Text.Trim()), packingList, _userManager.SignedInUser.UserName, (DateTime)cldStartDate.SelectedDate, (DateTime)cldEndDate.SelectedDate);
 
                         if (_userManager.SignedInUser.GetType().Name.ToString() == "Admin")
                         {
@@ -366,6 +370,13 @@ namespace TravelPal
             {
                 MessageBox.Show(CheckInputs());
             }
+
+            MessageBox.Show("Your travel was successfully created and has been added to your travel list.");
+
+            TravelsWindow travelsWindow = new(_userManager, _travelManager);
+            travelsWindow.Show();
+
+            Close();
         }
 
         // ******************** METHODS ********************
@@ -426,6 +437,8 @@ namespace TravelPal
 
             btnRemoveFromPackingList.IsEnabled = false;
             btnRemoveFromPackingList.Visibility = Visibility.Hidden;
+
+            lblTravelDays.Visibility = Visibility.Hidden;
         }
 
         private string CheckInputs()

@@ -35,11 +35,11 @@ namespace TravelPal.Models
         {
             if (TravelDays < 2)
             {
-                return $"{Country}, {TravelDays} day";
+                return $"{Country.ToString().Replace('_', ' ')}, {TravelDays} day";
             }
             else
             {
-                return $"{Country}, {TravelDays} days";
+                return $"{Country.ToString().Replace('_', ' ')}, {TravelDays} days";
             }
         }
 

@@ -51,13 +51,7 @@ namespace TravelPal.Managers
 
         public void RemoveUser(IUser user)
         {
-            for (int i = 0; i < Users.Count; i++)
-            {
-                if (user.UserName == Users[i].UserName)
-                {
-                    Users.RemoveAt(i);
-                }
-            }
+            Users.Remove(user);
         }
 
         public bool SignInUser(string userName, string password)

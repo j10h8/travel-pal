@@ -59,7 +59,7 @@ namespace TravelPal
                     {
                         if (_userManager.SignedInUser.UserName == _userManager.Users[i].UserName)
                         {
-                            // Update creator user name
+                            // Creator user name
                             for (int n = 0; n < _travelManager.Travels.Count; n++)
                             {
                                 if (_travelManager.Travels[n].CreatorUserName == _userManager.SignedInUser.UserName)
@@ -78,7 +78,7 @@ namespace TravelPal
                 {
                     for (int i = 0; i < _userManager.Users.Count; i++)
                     {
-                        // Update creator user name
+                        // Creator user name
                         if (_userManager.SignedInUser.UserName == _userManager.Users[i].UserName)
                         {
                             for (int n = 0; n < _travelManager.Travels.Count; n++)

@@ -40,6 +40,7 @@ namespace TravelPal
             InfoWindow infoWindow = new();
             infoWindow.Show();
         }
+
         private void btnViewUserDetails_Click(object sender, RoutedEventArgs e)
         {
             UserDetailsWindow userDetailsWindow = new(_userManager, _travelManager);
@@ -64,6 +65,7 @@ namespace TravelPal
                 Close();
             }
         }
+
         private void AddTravel_Click(object sender, RoutedEventArgs e)
         {
             AddTravelWindow addTravelWindow = new(_userManager, _travelManager);

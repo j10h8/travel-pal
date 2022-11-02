@@ -37,11 +37,11 @@ namespace TravelPal
                 }
             }
 
-            _userManager.RemoveUser(_userManager.SignedInUser); //**************************
+            _userManager.RemoveUser(_userManager.SignedInUser);
 
             foreach (IUser user in _userManager.Users)
             {
-                if (user.UserName == "admin")
+                if (user.GetType().Name.ToString() == "Admin")
                 {
                     _userManager.SignedInUser = user;
                 }

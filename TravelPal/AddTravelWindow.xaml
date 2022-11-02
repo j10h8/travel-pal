@@ -373,7 +373,7 @@
         <Label
             Grid.Column="3"
             Grid.Row="6"
-            Content="Start date:"
+            Content="Start date"
             Foreground="MediumSlateBlue"
             HorizontalContentAlignment="Center"
             VerticalContentAlignment="Bottom"/>
@@ -388,7 +388,7 @@
         <Label
             Grid.Column="4"
             Grid.Row="6"
-            Content="End date:"
+            Content="End date"
             Foreground="MediumSlateBlue"
             HorizontalContentAlignment="Center"
             VerticalContentAlignment="Bottom"/>
@@ -401,6 +401,7 @@
             BorderThickness="0"
             SelectedDatesChanged="cldEndDate_SelectedDatesChanged"/>
         <Label
+            Name="lblTravelDays"
             Grid.Column="3"
             Grid.Row="10"
             Content="Travel length:"

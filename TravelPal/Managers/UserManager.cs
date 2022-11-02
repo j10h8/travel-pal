@@ -51,7 +51,13 @@ namespace TravelPal.Managers
 
         public void RemoveUser(IUser user)
         {
-            Users.Remove(user);         // TODO: Check if a foreach is needed here.
+            for (int i = 0; i < Users.Count; i++)
+            {
+                if (user.UserName == Users[i].UserName)
+                {
+                    Users.RemoveAt(i);
+                }
+            }
         }
 
         public bool SignInUser(string userName, string password)
@@ -93,20 +99,3 @@ namespace TravelPal.Managers
         }
     }
 }
-
-
-
-//public List<User> GetFilteredUserList()
-//{
-//    List<User> users = new();
-
-//    foreach (IUser iUser in Users)
-//    {
-//        if (iUser is User)
-//        {
-//            users.Add(iUser as User);
-//        }
-//    }
-
-//    return users;
-//}

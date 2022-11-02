@@ -26,6 +26,8 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            
+            <RowDefinition Height="*"/>
             <RowDefinition Height="60"/>
             <RowDefinition Height="60"/>
             <RowDefinition Height="30"/>
@@ -73,13 +75,13 @@
         </TextBox>
         <Label
             Grid.Column="0"
-            Grid.Row="3"
+            Grid.Row="4"
             Content="Password:"
             Foreground="MediumSlateBlue"
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"/>
         <Border CornerRadius="5"
-                Grid.Row="3"
+                Grid.Row="4"
                 Grid.Column="2"
                 Width="240"
                 Height="45"
@@ -98,13 +100,38 @@
         </Border>
         <Label
             Grid.Column="0"
-            Grid.Row="4"
+            Grid.Row="5"
+            Content="Confirm password:"
+            Foreground="MediumSlateBlue"
+            HorizontalContentAlignment="Right"
+            VerticalContentAlignment="Center"/>
+        <Border CornerRadius="5"
+                Grid.Row="5"
+                Grid.Column="2"
+                Width="240"
+                Height="45"
+                HorizontalAlignment="Left"
+                BorderBrush="MediumSlateBlue"
+                BorderThickness="2">
+            <PasswordBox
+            Name="pbConfirmPassword"
+            Background="MintCream"
+            Foreground="MediumSlateBlue"
+            VerticalAlignment="Center"
+            HorizontalContentAlignment="Left"
+            VerticalContentAlignment="Center"
+            BorderThickness="0"
+            PasswordChanged="pbConfirmPassword_PasswordChanged"/>
+        </Border>
+        <Label
+            Grid.Column="0"
+            Grid.Row="3"
             Content="Country:"
             Foreground="MediumSlateBlue"
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"/>
         <Border CornerRadius="5"
-                Grid.Row="4"
+                Grid.Row="3"
                 Grid.Column="2"
                 Width="240"
                 Height="45"
@@ -123,7 +150,7 @@
         <Button
             Name="btnRegister"
             Grid.Column="0"
-            Grid.Row="5"
+            Grid.Row="6"
             Grid.ColumnSpan="2"
             Width="150"
             Content="Register"
@@ -141,7 +168,7 @@
         </Button>
         <Label
             Grid.Column="0"
-            Grid.Row="6"
+            Grid.Row="7"
             Grid.ColumnSpan="2"
             Content="- or -"
             Foreground="MediumSlateBlue"
@@ -150,7 +177,7 @@
         <Button
             Name="btnCancelRegister"
             Grid.Column="0"
-            Grid.Row="7"
+            Grid.Row="8"
             Grid.ColumnSpan="2"
             Width="150"
             Content="Cancel"

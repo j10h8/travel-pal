@@ -181,6 +181,7 @@ namespace TravelPal
 
             Close();
         }
+
         private void txtUpdateUserName_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
             if (txtUpdateUserName.Text.Length < 3)
@@ -217,7 +218,20 @@ namespace TravelPal
             }
         }
 
+        private void btnRemoveUser_Click(object sender, RoutedEventArgs e)
+        {
+            if (_userManager.SignedInUser.GetType().Name.ToString() != "Admin")
+            {
+                ConfirmRemoveAccountWindow confirmRemoveAccountWindow = new(_userManager, _travelManager);
 
+                confirmRemoveAccountWindow.Show();
+            }
+            else
+            {
+                MessageBox.Show("Removing the admin user is not allowed.");
+            }
+
+        }
 
         // ******************** METHODS ********************
 

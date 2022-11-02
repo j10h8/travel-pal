@@ -26,6 +26,8 @@ namespace TravelPal
             AddGandalf();
             AddAdmin();
             AddJohnny();
+
+            _userManager.SignedInUser = null;
         }
 
         public MainWindow(UserManager userManager, TravelManager travelManager)

@@ -28,9 +28,9 @@ namespace TravelPal
         // ******************** EVENTS *********************
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            if (txtRegisterUserName.Text.Trim().Length == 0 || pbRegisterPassword.Password.Trim().Length == 0 || string.IsNullOrEmpty(cbCountries.Text))
+            if (txtRegisterUserName.Text.Trim().Length == 0 || pbRegisterPassword.Password.Trim().Length == 0 || string.IsNullOrEmpty(cbCountries.Text) || pbConfirmPassword.Password.Trim().Length == 0)
             {
-                MessageBox.Show("Please provide all required inputs (user name, password, and country).");
+                MessageBox.Show("Please provide all required inputs (user name, country, and password).");
             }
             else if (txtRegisterUserName.Text.Trim().Length < 3)
             {
@@ -39,6 +39,10 @@ namespace TravelPal
             else if (pbRegisterPassword.Password.Trim().Length < 5)
             {
                 MessageBox.Show("Please enter a password with at least five characters.");
+            }
+            else if (pbRegisterPassword.Password.Trim() != pbConfirmPassword.Password.Trim())
+            {
+                MessageBox.Show("'Confirm password' and 'New password' doesn't match.");
             }
             else
             {
@@ -90,6 +94,18 @@ namespace TravelPal
             else
             {
                 pbRegisterPassword.Foreground = new SolidColorBrush(Colors.MediumSlateBlue);
+            }
+        }
+
+        private void pbConfirmPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (pbConfirmPassword.Password.Trim().Length < 5)
+            {
+                pbConfirmPassword.Foreground = new SolidColorBrush(Colors.Red);
+            }
+            else
+            {
+                pbConfirmPassword.Foreground = new SolidColorBrush(Colors.MediumSlateBlue);
             }
         }
 

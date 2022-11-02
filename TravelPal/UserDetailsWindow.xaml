@@ -102,6 +102,25 @@
             Foreground="MediumSlateBlue"
             HorizontalContentAlignment="left"
             VerticalContentAlignment="Top"/>
+        <Button
+            Name="btnRemoveUser"
+            Grid.Column="1"
+            Grid.Row="5"
+            Grid.ColumnSpan="2"
+            Width="150"
+            Content="Remove account"
+            FontSize="18"
+            Background="MediumSlateBlue"
+            Foreground="MintCream"
+            Margin="0 10 0 10"
+            BorderThickness="0"
+            Click="btnRemoveUser_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
         <TextBox
             Name="txtUpdateUserName"
             Grid.Column="4"

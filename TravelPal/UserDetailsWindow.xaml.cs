@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Media;
 using TravelPal.Enums;
 using TravelPal.Managers;
+using TravelPal.Models;
 
 namespace TravelPal
 {
@@ -52,9 +53,11 @@ namespace TravelPal
                 MessageBox.Show("'Confirm password' and 'New password' doesn't match.");
             }
             else
-            {           // Update user name, location, and password 
+            {   // Update user name, location, and password 
                 if (txtUpdateUserName.Text.Trim().Length > 0 && cbUpdateCountry.Text.Length > 0 && pbUpdatePassword.Password.Trim().Length > 0 && pbUpdatePassword.Password == pbConfirmPassword.Password)
                 {
+                    RemoveOldPassports();
+
                     for (int i = 0; i < _userManager.Users.Count; i++)
                     {
                         if (_userManager.SignedInUser.UserName == _userManager.Users[i].UserName)
@@ -73,9 +76,14 @@ namespace TravelPal
                             _userManager.Users[i].Password = pbUpdatePassword.Password.Trim();
                         }
                     }
-                }           // Update user name and location 
+
+                    GenerateNewPassport();
+                }
+                // Update user name and location 
                 else if (txtUpdateUserName.Text.Trim().Length > 0 && cbUpdateCountry.Text.Length > 0 && pbUpdatePassword.Password.Trim().Length == 0)
                 {
+                    RemoveOldPassports();
+
                     for (int i = 0; i < _userManager.Users.Count; i++)
                     {
                         // Creator user name
@@ -93,9 +101,14 @@ namespace TravelPal
                             _userManager.Users[i].Location = location;
                         }
                     }
-                }           // Update location and password 
+
+                    GenerateNewPassport();
+                }
+                // Update location and password 
                 else if (txtUpdateUserName.Text.Trim().Length == 0 && cbUpdateCountry.Text.Length > 0 && pbUpdatePassword.Password.Trim().Length > 0 && pbUpdatePassword.Password == pbConfirmPassword.Password)
                 {
+                    RemoveOldPassports();
+
                     for (int i = 0; i < _userManager.Users.Count; i++)
                     {
                         if (_userManager.SignedInUser.UserName == _userManager.Users[i].UserName)
@@ -105,7 +118,10 @@ namespace TravelPal
                             _userManager.Users[i].Password = pbUpdatePassword.Password.Trim();
                         }
                     }
-                }           // Update user name and password 
+
+                    GenerateNewPassport();
+                }
+                // Update user name and password 
                 else if (txtUpdateUserName.Text.Trim().Length > 0 && cbUpdateCountry.Text.Length == 0 && pbUpdatePassword.Password.Trim().Length > 0 && pbUpdatePassword.Password == pbConfirmPassword.Password)
                 {
                     for (int i = 0; i < _userManager.Users.Count; i++)
@@ -124,7 +140,8 @@ namespace TravelPal
                             _userManager.Users[i].Password = pbUpdatePassword.Password.Trim();
                         }
                     }
-                }           // Update user name 
+                }
+                // Update user name 
                 else if (txtUpdateUserName.Text.Trim().Length > 0 && cbUpdateCountry.Text.Length == 0 && pbUpdatePassword.Password.Trim().Length == 0)
                 {
                     for (int i = 0; i < _userManager.Users.Count; i++)
@@ -142,9 +159,12 @@ namespace TravelPal
                             _userManager.Users[i].UserName = txtUpdateUserName.Text.Trim();
                         }
                     }
-                }           // Update location 
+                }
+                // Update location 
                 else if (txtUpdateUserName.Text.Trim().Length == 0 && cbUpdateCountry.Text.Length > 0 && pbUpdatePassword.Password.Trim().Length == 0)
                 {
+                    RemoveOldPassports();
+
                     for (int i = 0; i < _userManager.Users.Count; i++)
                     {
                         if (_userManager.SignedInUser.UserName == _userManager.Users[i].UserName)
@@ -153,7 +173,10 @@ namespace TravelPal
                             _userManager.Users[i].Location = location;
                         }
                     }
-                }           // Update password 
+
+                    GenerateNewPassport();
+                }
+                // Update password 
                 else if (txtUpdateUserName.Text.Trim().Length == 0 && cbUpdateCountry.Text.Length == 0 && pbUpdatePassword.Password.Trim().Length > 0 && pbUpdatePassword.Password == pbConfirmPassword.Password)
                 {
                     for (int i = 0; i < _userManager.Users.Count; i++)
@@ -244,6 +267,48 @@ namespace TravelPal
             foreach (string country in countries)
             {
                 cbUpdateCountry.Items.Add(country.Replace('_', ' '));
+            }
+        }
+
+        private void RemoveOldPassports()
+        {
+            for (int i = 0; i < _travelManager.Travels.Count; i++)
+            {
+                if (_userManager.SignedInUser.UserName == _travelManager.Travels[i].CreatorUserName)
+                {
+                    for (int n = _travelManager.Travels[i].PackingList.Count - 1; n >= 0; n--)
+                    {
+                        if (_travelManager.Travels[i].PackingList[n].GetInfo() == "Passport (required)" || _travelManager.Travels[i].PackingList[n].GetInfo() == "Passport (not required)")
+                        {
+                            _travelManager.Travels[i].PackingList.RemoveAt(n);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void GenerateNewPassport()
+        {
+            for (int i = 0; i < _travelManager.Travels.Count; i++)
+            {
+                if (_userManager.SignedInUser.UserName == _travelManager.Travels[i].CreatorUserName)
+                {
+                    if (!Enum.IsDefined(typeof(EuropeanCountries), _userManager.SignedInUser.Location.ToString()))
+                    {
+                        TravelDocument travelDocument = new("Passport", true);
+                        _travelManager.Travels[i].PackingList.Add(travelDocument);
+                    }
+                    else if (Enum.IsDefined(typeof(EuropeanCountries), _userManager.SignedInUser.Location.ToString()) && !Enum.IsDefined(typeof(EuropeanCountries), _travelManager.Travels[i].Country.ToString()))
+                    {
+                        TravelDocument travelDocument = new("Passport", true);
+                        _travelManager.Travels[i].PackingList.Add(travelDocument);
+                    }
+                    else if (Enum.IsDefined(typeof(EuropeanCountries), _userManager.SignedInUser.Location.ToString()) && Enum.IsDefined(typeof(EuropeanCountries), _travelManager.Travels[i].Country.ToString()) && _userManager.SignedInUser.Location.ToString() != _travelManager.Travels[i].Country.ToString())
+                    {
+                        TravelDocument travelDocument = new("Passport", false);
+                        _travelManager.Travels[i].PackingList.Add(travelDocument);
+                    }
+                }
             }
         }
     }

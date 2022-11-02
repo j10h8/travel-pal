@@ -75,7 +75,7 @@ namespace TravelPal
             cbCountryAddTravel.IsEnabled = false;
             txtTravellersAddTravel.IsReadOnly = true;
             cbTypeOfTravelAddTravel.IsEnabled = false;
-            cbTripTypeDetailsAddTravel.IsEnabled = false;
+            brdTripTypeDetails.IsEnabled = false;
             brdAllInclusive.IsEnabled = false;
             brdAllInclusive.Visibility = Visibility.Hidden;
             lblTypeOfTrip.Visibility = Visibility.Hidden;
@@ -153,34 +153,6 @@ namespace TravelPal
             }
 
             // Packing list 
-            // To take into account that user might have updated home location after creating the travel             
-            //if (_userManager.SignedInUser.UserName == _travel.CreatorUserName)
-            //{
-            //    // Remove eventual existing passport 
-            //    for (int i = _travel.PackingList.Count - 1; i >= 0; i--)
-            //    {
-            //        if (_travel.PackingList[i].Name == "Passport (required)" || _travel.PackingList[i].Name == "Passport (not required)")
-            //        {
-            //            _travel.PackingList.RemoveAt(i);
-            //        }
-            //    }
-            //    // Add passport dynamically 
-            //    if (!Enum.IsDefined(typeof(EuropeanCountries), _userManager.SignedInUser.Location.ToString()))
-            //    {
-            //        TravelDocument travelDocument = new("Passport", true);
-            //        _travel.PackingList.Add(travelDocument);
-            //    }
-            //    else if (Enum.IsDefined(typeof(EuropeanCountries), _userManager.SignedInUser.Location.ToString()) && !Enum.IsDefined(typeof(EuropeanCountries), _travel.Country.ToString()))
-            //    {
-            //        TravelDocument travelDocument = new("Passport", true);
-            //        _travel.PackingList.Add(travelDocument);
-            //    }
-            //    else if (Enum.IsDefined(typeof(EuropeanCountries), _userManager.SignedInUser.Location.ToString()) && Enum.IsDefined(typeof(EuropeanCountries), _travel.Country.ToString()) && _userManager.SignedInUser.Location.ToString() != _travel.Country.ToString())
-            //    {
-            //        TravelDocument travelDocument = new("Passport", true);
-            //        _travel.PackingList.Add(travelDocument);
-            //    }
-
             foreach (IPackingListItem packingListItem in _travel.PackingList)
             {
                 ListViewItem item = new ListViewItem();
@@ -201,7 +173,6 @@ namespace TravelPal
             {
                 txtTravelLength.Text = $"{_travel.TravelDays.ToString()} day";
             }
-            //}
         }
 
         private void btnEditTravel_Click(object sender, RoutedEventArgs e)

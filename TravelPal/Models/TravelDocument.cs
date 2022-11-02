@@ -16,7 +16,7 @@ namespace TravelPal.Models
 
 
         // ******************** METHODS ********************
-        public string GetInfo()     // TODO: Possibly change what is returned.
+        public string GetInfo()
         {
             if (Required)
             {

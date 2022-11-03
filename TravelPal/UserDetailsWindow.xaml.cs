@@ -251,7 +251,7 @@ namespace TravelPal
             }
             else
             {
-                MessageBox.Show("Removing the admin user is not allowed.");
+                MessageBox.Show("Removing the admin user account is not allowed.");
             }
 
         }

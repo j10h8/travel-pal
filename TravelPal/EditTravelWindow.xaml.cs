@@ -11,17 +11,19 @@ using TravelPal.Models;
 namespace TravelPal
 {
     /// <summary>
-    /// Interaction logic for AddTravelWindow.xaml
+    /// Interaction logic for EditTravelWindow.xaml
     /// </summary>
-    public partial class AddTravelWindow : Window
+    public partial class EditTravelWindow : Window
     {
         TravelManager _travelManager;
         UserManager _userManager;
+        Travel _travel;
 
-        public AddTravelWindow(UserManager userManager, TravelManager travelManager)
+        public EditTravelWindow(UserManager userManager, TravelManager travelManager, Travel travel)
         {
             _travelManager = travelManager;
             _userManager = userManager;
+            _travel = travel;
 
             InitializeComponent();
 
@@ -31,8 +33,8 @@ namespace TravelPal
         // ******************** EVENTS *********************
         private void btnCancelAddTravelWindow_Click(object sender, RoutedEventArgs e)
         {
-            TravelsWindow travelsWindow = new(_userManager, _travelManager);
-            travelsWindow.Show();
+            TravelDetailsWindow travelDetailsWindow = new(_userManager, _travelManager, _travel);
+            travelDetailsWindow.Show();
 
             Close();
         }
@@ -43,13 +45,10 @@ namespace TravelPal
             {
                 lblTypeOfTrip.Visibility = Visibility.Visible;
                 brdTripTypeDetails.Visibility = Visibility.Visible;
-                cbTripTypeDetailsAddTravel.Visibility = Visibility.Visible;
-                cbTripTypeDetailsAddTravel.IsEnabled = true;
+                cbxAllInclusiveDetails.Visibility = Visibility.Hidden;
 
                 lblAllInclusive.Visibility = Visibility.Hidden;
                 brdAllInclusive.Visibility = Visibility.Hidden;
-                cbxAllInclusiveDetails.Visibility = Visibility.Hidden;
-                cbxAllInclusiveDetails.IsEnabled = false;
 
             }
             else if (cbTypeOfTravelAddTravel.SelectedItem.ToString() == "Vacation")
@@ -57,14 +56,9 @@ namespace TravelPal
                 lblAllInclusive.Visibility = Visibility.Visible;
                 brdAllInclusive.Visibility = Visibility.Visible;
                 cbxAllInclusiveDetails.Visibility = Visibility.Visible;
-                cbxAllInclusiveDetails.IsChecked = false;
-                cbxAllInclusiveDetails.IsEnabled = true;
 
                 lblTypeOfTrip.Visibility = Visibility.Hidden;
                 brdTripTypeDetails.Visibility = Visibility.Hidden;
-                cbTripTypeDetailsAddTravel.Visibility = Visibility.Hidden;
-                cbTripTypeDetailsAddTravel.SelectedItem = null;
-                cbTripTypeDetailsAddTravel.IsEnabled = false;
             }
         }
 
@@ -119,7 +113,7 @@ namespace TravelPal
 
         private void cbCountryAddTravel_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            if (Enum.IsDefined(typeof(EuropeanCountries), _userManager.SignedInUser.Location.ToString()))
+            if (Enum.IsDefined(typeof(EuropeanCountries), _userManager.SignedInUser.Location.ToString()))       //********************************************************
             {
                 int lvIndex = -1;
 
@@ -297,8 +291,21 @@ namespace TravelPal
             }
         }
 
-        private void btnAddTravel_Click(object sender, RoutedEventArgs e)
+        private void btnUpdateTravel_Click(object sender, RoutedEventArgs e)
         {
+            string creatorUserName = _travel.CreatorUserName;
+
+            _travelManager.RemoveTravel(_travel);
+
+            foreach (IUser user in _userManager.Users)
+            {
+                if (user.UserName == _travel.CreatorUserName && user.GetType().Name.ToString() == "User")
+                {
+                    User identifiedUser = user as User;
+                    identifiedUser.Travels.Remove(_travel);
+                }
+            }
+
             if (CheckInputs() == "OK")
             {
                 try
@@ -321,7 +328,7 @@ namespace TravelPal
 
                     if (cbTypeOfTravelAddTravel.SelectedItem.ToString() == "Trip")
                     {
-                        Trip trip = new(((TripTypes)Enum.Parse(typeof(TripTypes), cbTripTypeDetailsAddTravel.SelectedItem.ToString())), txtDestinationAddTravel.Text.Trim(), ((Countries)Enum.Parse(typeof(Countries), cbCountryAddTravel.SelectedItem.ToString().Replace(' ', '_'))), int.Parse(txtTravellersAddTravel.Text.Trim()), packingList, _userManager.SignedInUser.UserName, (DateTime)cldStartDate.SelectedDate, (DateTime)cldEndDate.SelectedDate);
+                        Trip trip = new(((TripTypes)Enum.Parse(typeof(TripTypes), cbTripTypeDetailsAddTravel.SelectedItem.ToString())), txtDestinationAddTravel.Text.Trim(), ((Countries)Enum.Parse(typeof(Countries), cbCountryAddTravel.SelectedItem.ToString().Replace(' ', '_'))), int.Parse(txtTravellersAddTravel.Text.Trim()), packingList, creatorUserName, (DateTime)cldStartDate.SelectedDate, (DateTime)cldEndDate.SelectedDate);
 
                         if (_userManager.SignedInUser.GetType().Name.ToString() == "Admin")
                         {
@@ -333,6 +340,8 @@ namespace TravelPal
                             _travelManager.Travels.Add(trip);
                             user.Travels.Add(trip);
                         }
+
+                        _travel = trip;
                     }
                     else
                     {
@@ -343,7 +352,7 @@ namespace TravelPal
                             allInclusive = true;
                         }
 
-                        Vacation vacation = new(allInclusive, txtDestinationAddTravel.Text.Trim(), ((Countries)Enum.Parse(typeof(Countries), cbCountryAddTravel.SelectedItem.ToString().Replace(' ', '_'))), int.Parse(txtTravellersAddTravel.Text.Trim()), packingList, _userManager.SignedInUser.UserName, (DateTime)cldStartDate.SelectedDate, (DateTime)cldEndDate.SelectedDate);
+                        Vacation vacation = new(allInclusive, txtDestinationAddTravel.Text.Trim(), ((Countries)Enum.Parse(typeof(Countries), cbCountryAddTravel.SelectedItem.ToString().Replace(' ', '_'))), int.Parse(txtTravellersAddTravel.Text.Trim()), packingList, creatorUserName, (DateTime)cldStartDate.SelectedDate, (DateTime)cldEndDate.SelectedDate);
 
                         if (_userManager.SignedInUser.GetType().Name.ToString() == "Admin")
                         {
@@ -355,6 +364,8 @@ namespace TravelPal
                             _travelManager.Travels.Add(vacation);
                             user.Travels.Add(vacation);
                         }
+
+                        _travel = vacation;
                     }
                 }
                 catch (FormatException ex)
@@ -371,10 +382,10 @@ namespace TravelPal
                 MessageBox.Show(CheckInputs());
             }
 
-            MessageBox.Show("The travel has been added!");
+            MessageBox.Show("The travel has been updated!");
 
-            TravelsWindow travelsWindow = new(_userManager, _travelManager);
-            travelsWindow.Show();
+            TravelDetailsWindow travelDetailsWindow = new(_userManager, _travelManager, _travel);
+            travelDetailsWindow.Show();
 
             Close();
         }
@@ -382,48 +393,91 @@ namespace TravelPal
         // ******************** METHODS ********************
         private void UpdateUI()
         {
-            if (!Enum.IsDefined(typeof(EuropeanCountries), _userManager.SignedInUser.Location.ToString()))
-            {
-                TravelDocument travelDocument = new("Passport", true);
-                ListViewItem item = new();
-                item.Tag = travelDocument;
-                item.Content = travelDocument.GetInfo();
-                lvPackingList.Items.Add(item);
-            }
+            // Travel destination 
+            txtDestinationAddTravel.Text = _travel.Destination;
 
-            cldEndDate.DisplayDateStart = DateTime.Now;
-            cldStartDate.DisplayDateStart = DateTime.Now;
+            // Travel no. of travellers 
+            txtTravellersAddTravel.Text = _travel.Travellers.ToString();
 
+            // Travel start and and date 
+            cldEndDate.SelectedDate = _travel.EndDate;
+            cldStartDate.SelectedDate = _travel.StartDate;
+
+            // Populate cbCountries 
             string[] countries = Enum.GetNames(typeof(Countries));
             foreach (string country in countries)
             {
                 cbCountryAddTravel.Items.Add(country.Replace('_', ' '));
             }
 
+            // Travel country 
+            cbCountryAddTravel.SelectedItem = _travel.Country.ToString().Replace('_', ' ');
+
+            // Populate cbTypeofTravel
             cbTypeOfTravelAddTravel.Items.Add("Trip");
             cbTypeOfTravelAddTravel.Items.Add("Vacation");
 
+            // Travel type 
+            if (_travel.GetType().Name.ToString() == "Trip")
+            {
+                cbTypeOfTravelAddTravel.SelectedItem = "Trip";
+            }
+            else
+            {
+                cbTypeOfTravelAddTravel.SelectedItem = "Vacation";
+            }
+
+            // Trip type 
+            // Populate cbTripType 
             string[] tripTypes = Enum.GetNames(typeof(TripTypes));
             foreach (string tripType in tripTypes)
             {
                 cbTripTypeDetailsAddTravel.Items.Add(tripType);
+            }
+            // if Trip 
+            if (_travel.GetType().Name.ToString() == "Trip")
+            {
+                Trip trip = _travel as Trip;
+
+                // Travel trip type 
+                cbTripTypeDetailsAddTravel.SelectedItem = trip.Type.ToString();
+            }
+            // if Vacation  
+            else
+            {
+                // Checkbox checked or not 
+                Vacation vacation = _travel as Vacation;
+
+                if (vacation.AllInclusive == true)
+                {
+                    cbxAllInclusiveDetails.IsChecked = true;
+                }
+                else
+                {
+                    cbxAllInclusiveDetails.IsChecked = false;
+                }
+            }
+
+            foreach (IPackingListItem packingListItem in _travel.PackingList)
+            {
+                if (packingListItem.GetInfo().ToString() != "Passport (required)" && packingListItem.GetInfo().ToString() != "Passport (not required")
+                {
+                    ListViewItem item = new ListViewItem();
+                    item.Tag = packingListItem;
+                    item.Content = packingListItem.GetInfo();
+                    lvPackingList.Items.Add(item);
+                }
             }
 
             // Hide and disable 
             lblAllInclusive.Visibility = Visibility.Hidden;
             brdAllInclusive.Visibility = Visibility.Hidden;
             cbxAllInclusiveDetails.Visibility = Visibility.Hidden;
-            cbxAllInclusiveDetails.IsChecked = false;
-            cbxAllInclusiveDetails.IsEnabled = false;
 
             lblTypeOfTrip.Visibility = Visibility.Hidden;
             brdTripTypeDetails.Visibility = Visibility.Hidden;
-            cbTripTypeDetailsAddTravel.Visibility = Visibility.Hidden;
-            cbTripTypeDetailsAddTravel.SelectedItem = null;
-            cbTripTypeDetailsAddTravel.IsEnabled = false;
 
             lblRequired.Visibility = Visibility.Hidden;
-            cbxRequired.IsEnabled = false;
             brdCbxRequired.Visibility = Visibility.Hidden;
 
             txtQuantity.Visibility = Visibility.Hidden;
@@ -431,14 +485,28 @@ namespace TravelPal
 
             lblDocument.Visibility = Visibility.Hidden;
             brdCbxDocument.Visibility = Visibility.Hidden;
-            cbxDocument.IsEnabled = false;
 
-            txtQuantity.IsEnabled = false;
-
-            btnRemoveFromPackingList.IsEnabled = false;
             btnRemoveFromPackingList.Visibility = Visibility.Hidden;
 
             lblTravelDays.Visibility = Visibility.Hidden;
+
+            if (_travel.GetType().Name.ToString() == "Trip")
+            {
+                lblTypeOfTrip.Visibility = Visibility.Visible;
+                brdTripTypeDetails.Visibility = Visibility.Visible;
+
+                lblAllInclusive.Visibility = Visibility.Hidden;
+                brdAllInclusive.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                lblAllInclusive.Visibility = Visibility.Visible;
+                brdAllInclusive.Visibility = Visibility.Visible;
+                cbxAllInclusiveDetails.Visibility = Visibility.Visible;
+
+                lblTypeOfTrip.Visibility = Visibility.Hidden;
+                brdTripTypeDetails.Visibility = Visibility.Hidden;
+            }
         }
 
         private string CheckInputs()

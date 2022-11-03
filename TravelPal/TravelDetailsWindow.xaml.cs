@@ -82,25 +82,19 @@ namespace TravelPal
             lblAllInclusive.Visibility = Visibility.Hidden;
             cbTripTypeDetailsAddTravel.IsEnabled = false;
 
-            // Destination 
+            // Travel destination 
             txtDestinationAddTravel.Text = _travel.Destination;
 
-            // Country 
+            // Populate cbCountry
             string[] countries = Enum.GetNames(typeof(Countries));
             foreach (string country in countries)
             {
                 cbCountryAddTravel.Items.Add(country.Replace('_', ' '));
             }
 
-            foreach (string country in countries)
-            {
-                if (country == _travel.Country.ToString())
-                {
-                    cbCountryAddTravel.SelectedItem = country.Replace('_', ' ');
-                }
-            }
+            cbCountryAddTravel.SelectedItem = _travel.Country.ToString().Replace('_', ' ');
 
-            // No. of travellers 
+            // Travel no. of travellers 
             if (_travel.Travellers > 1)
             {
                 txtTravellersAddTravel.Text = $"{_travel.Travellers.ToString()} travellers";
@@ -110,9 +104,11 @@ namespace TravelPal
                 txtTravellersAddTravel.Text = $"{_travel.Travellers.ToString()} traveller";
             }
 
-            // Type of travel 
+            // Populate cbTypeofTravel
             cbTypeOfTravelAddTravel.Items.Add("Trip");
             cbTypeOfTravelAddTravel.Items.Add("Vacation");
+
+            // Travel type          
             if (_travel.GetType().Name.ToString() == "Trip")
             {
                 cbTypeOfTravelAddTravel.SelectedItem = "Trip";
@@ -177,7 +173,10 @@ namespace TravelPal
 
         private void btnEditTravel_Click(object sender, RoutedEventArgs e)
         {
+            EditTravelWindow editTravelWindow = new(_userManager, _travelManager, _travel);
+            editTravelWindow.Show();
 
+            Close();
         }
     }
 }

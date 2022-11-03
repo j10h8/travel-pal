@@ -18,9 +18,9 @@
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="180"/>
-            <ColumnDefinition Width="260"/>
+            <ColumnDefinition Width="0"/>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="350"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="20"/>
@@ -62,7 +62,7 @@
             x:Name="txtDestinationAddTravel"
             Grid.Column="2"
             Grid.Row="2"
-            Width="240"
+            Width="340"
             Height="45"
             Background="MintCream"
             Foreground="MediumSlateBlue"
@@ -88,7 +88,7 @@
         <Border CornerRadius="5"
                 Grid.Row="3"
                 Grid.Column="2"
-                Width="240"
+                Width="340"
                 Height="45"
                 HorizontalAlignment="Left"
                 BorderBrush="MediumSlateBlue"
@@ -96,7 +96,7 @@
             <ComboBox
             Name="cbCountryAddTravel"
             Foreground="MediumSlateBlue"
-            Width="240"
+            Width="340"
             HorizontalAlignment="Left"
             HorizontalContentAlignment="Left"
             VerticalAlignment="Center"
@@ -114,7 +114,7 @@
             Name="txtTravellersAddTravel"
             Grid.Column="2"
             Grid.Row="4"
-            Width="240"
+            Width="340"
             Height="45"
             Background="MintCream"
             Foreground="MediumSlateBlue"
@@ -140,7 +140,7 @@
         <Border CornerRadius="5"
                 Grid.Row="5"
                 Grid.Column="2"
-                Width="240"
+                Width="340"
                 Height="45"
                 HorizontalAlignment="Left"
                 BorderBrush="MediumSlateBlue"
@@ -148,7 +148,7 @@
             <ComboBox
             Name="cbTypeOfTravelAddTravel"
             Foreground="MediumSlateBlue"
-            Width="240"
+            Width="340"
             HorizontalAlignment="Left"
             HorizontalContentAlignment="Left"
             VerticalAlignment="Center"
@@ -166,7 +166,7 @@
         <Border CornerRadius="5"
                 Grid.Row="6"
                 Grid.Column="2"
-                Width="240"
+                Width="340"
                 Height="45"
                 HorizontalAlignment="Left"
                 BorderBrush="MediumSlateBlue"
@@ -175,7 +175,7 @@
             <ComboBox
             Name="cbTripTypeDetailsAddTravel"
             Foreground="MediumSlateBlue"
-            Width="240"
+            Width="340"
             HorizontalAlignment="Left"
             HorizontalContentAlignment="Left"
             VerticalAlignment="Center"
@@ -192,7 +192,7 @@
         <Border CornerRadius="5"
                 Grid.Row="6"
                 Grid.Column="2"
-                Width="240"
+                Width="340"
                 Height="45"
                 HorizontalAlignment="Left"
                 BorderBrush="MediumSlateBlue"
@@ -214,7 +214,7 @@
             x:Name="txtPackingListItem"
             Grid.Column="2"
             Grid.Row="8"
-            Width="240"
+            Width="340"
             Height="45"
             Background="MintCream"
             Foreground="MediumSlateBlue"
@@ -242,7 +242,7 @@
         <Border CornerRadius="5"
                 Grid.Row="9"
                 Grid.Column="2"
-                Width="240"
+                Width="340"
                 Height="45"
                 HorizontalAlignment="Left"
                 BorderBrush="MediumSlateBlue"
@@ -275,7 +275,7 @@
             Name="txtQuantity"
             Grid.Column="2"
             Grid.Row="10"
-            Width="240"
+            Width="340"
             Height="45"
             Background="MintCream"
             Foreground="MediumSlateBlue"
@@ -294,7 +294,7 @@
         <Border CornerRadius="5"
                 Grid.Row="10"
                 Grid.Column="2"
-                Width="240"
+                Width="340"
                 Height="45"
                 HorizontalAlignment="Left"
                 BorderBrush="MediumSlateBlue"
@@ -356,7 +356,7 @@
             Grid.Row="2"
             Grid.ColumnSpan="3"
             Grid.RowSpan="3"
-            Width="515"
+            Width="460"
             Foreground="MediumSlateBlue"
             Background="MintCream"
             BorderBrush="MediumSlateBlue"

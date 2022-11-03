@@ -190,8 +190,8 @@ namespace TravelPal
 
                 MessageBox.Show("Your user details have been updated!");
 
-                TravelsWindow travelsWindow = new(_userManager, _travelManager);
-                travelsWindow.Show();
+                UserDetailsWindow userDetailsWindow = new(_userManager, _travelManager);
+                userDetailsWindow.Show();
 
                 Close();
             }
@@ -243,17 +243,9 @@ namespace TravelPal
 
         private void btnRemoveUser_Click(object sender, RoutedEventArgs e)
         {
-            if (_userManager.SignedInUser.GetType().Name.ToString() != "Admin")
-            {
-                ConfirmRemoveAccountWindow confirmRemoveAccountWindow = new(_userManager, _travelManager);
+            ConfirmRemoveAccountWindow confirmRemoveAccountWindow = new(_userManager, _travelManager);
 
-                confirmRemoveAccountWindow.Show();
-            }
-            else
-            {
-                MessageBox.Show("Removing the admin user account is not allowed.");
-            }
-
+            confirmRemoveAccountWindow.Show();
         }
 
         // ******************** METHODS ********************
@@ -267,6 +259,15 @@ namespace TravelPal
             foreach (string country in countries)
             {
                 cbUpdateCountry.Items.Add(country.Replace('_', ' '));
+            }
+
+            if (_userManager.SignedInUser.GetType().Name == "Admin")
+            {
+                btnRemoveUser.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                btnManageUserAccounts.Visibility = Visibility.Hidden;
             }
         }
 
@@ -310,6 +311,15 @@ namespace TravelPal
                     }
                 }
             }
+        }
+
+        private void btnManageUserAccounts_Click(object sender, RoutedEventArgs e)
+        {
+            ManageAccountsWindow manageAccountsWindow = new(_userManager, _travelManager);
+
+            manageAccountsWindow.Show();
+
+            Close();
         }
     }
 }

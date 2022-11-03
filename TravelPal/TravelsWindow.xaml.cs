@@ -105,6 +105,15 @@ namespace TravelPal
         {
             lvYourTravels.Items.Clear();
 
+            if (_userManager.SignedInUser.GetType().Name == "Admin")
+            {
+                lblListviewTravels.Content = "All travels";
+            }
+            else
+            {
+                lblListviewTravels.Content = "Your travels";
+            }
+
             lblUserName.Content = _userManager.SignedInUser.UserName;
 
             if (_userManager.SignedInUser is Admin)

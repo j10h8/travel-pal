@@ -1,11 +1,11 @@
-﻿<Window x:Class="TravelPal.ConfirmRemoveAccountWindow"
+﻿<Window x:Class="TravelPal.AdminConfirmRemoveAccountWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TravelPal"
         mc:Ignorable="d"
-        Title="ConfirmRemoveAccountWindow"
+        Title="AdminConfirmRemoveAccountWindow"
         Height="300" 
         MaxHeight="300"
         MinHeight="300"
@@ -48,7 +48,7 @@
             This action can't be undone. 
             <LineBreak />
             <LineBreak />
-            Are you sure that you want to proceed? 
+            Are you sure that you want to proceed?
         </TextBlock>
         <Button
             Grid.Row="1"

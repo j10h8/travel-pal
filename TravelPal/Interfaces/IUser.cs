@@ -7,5 +7,8 @@ namespace TravelPal.Interfaces
         public string UserName { get; set; }
         public string Password { get; set; }
         public Countries Location { get; set; }
+
+        // ******************** METHODS ******************** 
+        public string GetInfo();
     }
 }

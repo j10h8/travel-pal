@@ -8,7 +8,7 @@ namespace TravelPal.Managers
     {
         public List<IUser> Users { get; set; } = new();
         public IUser SignedInUser { get; set; }
-
+        public IUser TemporaryUser { get; set; }
 
 
         // ******************** METHODS ********************

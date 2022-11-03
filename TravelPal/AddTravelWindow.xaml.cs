@@ -17,7 +17,6 @@ namespace TravelPal
     {
         TravelManager _travelManager;
         UserManager _userManager;
-        private int _travelDays;
 
         public AddTravelWindow(UserManager userManager, TravelManager travelManager)
         {
@@ -256,7 +255,6 @@ namespace TravelPal
                 DateTime startDate = (DateTime)cldStartDate.SelectedDate;
                 TimeSpan timeSpan = endDate - startDate;
                 travelDays = timeSpan.Days;
-                _travelDays = travelDays;
                 txtTravelLengthAddTravel.Text = travelDays.ToString();
             }
 
@@ -278,7 +276,6 @@ namespace TravelPal
                 DateTime startDate = (DateTime)cldStartDate.SelectedDate;
                 TimeSpan timeSpan = endDate - startDate;
                 travelDays = timeSpan.Days;
-                _travelDays = travelDays;
                 txtTravelLengthAddTravel.Text = travelDays.ToString();
             }
 
@@ -482,7 +479,7 @@ namespace TravelPal
             {
                 return "Please select end date.";
             }
-            else if (_travelDays < 0)
+            else if (int.Parse(txtTravelLengthAddTravel.Text) < 0)
             {
                 return "The specified start date comes after the specified end date. Please change!";
             }

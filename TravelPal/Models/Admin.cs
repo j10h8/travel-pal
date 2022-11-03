@@ -15,5 +15,10 @@ namespace TravelPal.Models
             Password = password;
             Location = location;
         }
+
+        public string GetInfo()
+        {
+            return $"{UserName} | Location: {Location.ToString()} | Password: {Password}";
+        }
     }
 }

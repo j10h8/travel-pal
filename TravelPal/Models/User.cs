@@ -25,5 +25,10 @@ namespace TravelPal.Models
         {
             return Travels;
         }
+
+        public string GetInfo()
+        {
+            return $"{UserName} | Location: {Location.ToString().Replace('_', ' ')} | Password: {Password}";
+        }
     }
 }

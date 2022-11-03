@@ -246,6 +246,8 @@ namespace TravelPal
             ConfirmRemoveAccountWindow confirmRemoveAccountWindow = new(_userManager, _travelManager);
 
             confirmRemoveAccountWindow.Show();
+
+            Close();
         }
 
         // ******************** METHODS ********************

@@ -23,12 +23,14 @@ namespace TravelPal
 
         private void btnCancelRemove_Click(object sender, RoutedEventArgs e)
         {
+            UserDetailsWindow userDetailsWindow = new(_userManager, _travelManager);
+            userDetailsWindow.Show();
+
             Close();
         }
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
-
             for (int i = _travelManager.Travels.Count() - 1; i >= 0; i--)
             {
                 if (_userManager.SignedInUser.UserName == _travelManager.Travels[i].CreatorUserName)
@@ -47,15 +49,14 @@ namespace TravelPal
                 }
             }
 
-            MessageBox.Show("The user account has been successfully removed!");
+            Hide();
 
-            UserDetailsWindow userDetailsWindow = new(_userManager, _travelManager);
-            userDetailsWindow.Close();
-
-            Close();
+            MessageBox.Show("The user account has been removed.");
 
             MainWindow mainWindow = new(_userManager, _travelManager);
             mainWindow.Show();
+
+            Close();
         }
     }
 }

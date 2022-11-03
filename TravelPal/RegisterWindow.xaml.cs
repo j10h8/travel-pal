@@ -55,6 +55,8 @@ namespace TravelPal
                 }
                 else
                 {
+                    Hide();
+
                     MessageBox.Show("You have been successfully registered!");
 
                     MainWindow mainWindow = new(_userManager, _travelManager);

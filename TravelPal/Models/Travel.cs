@@ -28,8 +28,6 @@ namespace TravelPal.Models
             TravelDays = CalculateTravelDays(startDate, endDate);
         }
 
-
-
         // ******************** METHODS ********************
         public virtual string GetInfo()
         {

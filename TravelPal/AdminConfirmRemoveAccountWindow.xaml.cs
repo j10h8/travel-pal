@@ -31,6 +31,8 @@ namespace TravelPal
 
             _userManager.RemoveUser(_userManager.TemporaryUser);
 
+            Hide();
+
             MessageBox.Show("The user account has been removed.");
 
             ManageAccountsWindow manageAccountsWindow = new(_userManager, _travelManager);

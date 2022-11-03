@@ -14,6 +14,7 @@ namespace TravelPal
         TravelManager _travelManager;
         UserManager _userManager;
 
+        // Constructor to initialize TravelsWindow object. Sets field variables and calls methods UpdateUI and InitializeComponent. 
         public TravelsWindow(UserManager userManager, TravelManager travelManager)
         {
             _travelManager = travelManager;

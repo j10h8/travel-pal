@@ -85,10 +85,20 @@
             Grid.Column="2"
             Grid.Row="3"
             Grid.ColumnSpan="2"
+            Width="380"
+            Height="45"
             Content="User name"
             Foreground="MediumSlateBlue"
-            HorizontalContentAlignment="left"
-            VerticalContentAlignment="Center"/>
+            HorizontalAlignment="left"
+            BorderThickness="2"
+            BorderBrush="MediumSlateBlue"
+            VerticalContentAlignment="Center">
+            <Label.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Label.Resources>
+        </Label>
         <Label
             Grid.Column="1"
             Grid.Row="4"
@@ -101,11 +111,21 @@
             Grid.Column="2"
             Grid.Row="4"
             Grid.ColumnSpan="2"
+                        Width="380"
+            Height="45"
             Content="Country"
             Foreground="MediumSlateBlue"
-            HorizontalContentAlignment="left"
-            VerticalContentAlignment="Center"/>
-        <Button
+            BorderBrush="MediumSlateBlue"
+            BorderThickness="2"
+            HorizontalAlignment="left"
+            VerticalContentAlignment="Center">
+            <Label.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Label.Resources>
+        </Label>
+            <Button
             Name="btnRemoveUser"
             Grid.Column="4"
             Grid.Row="4"
@@ -126,7 +146,7 @@
         <Button
             Name="btnManageUserAccounts"
             Grid.Column="5"
-            Grid.Row="2"
+            Grid.Row="4"
             Width="150"
             Content="User accounts"
             FontSize="18"

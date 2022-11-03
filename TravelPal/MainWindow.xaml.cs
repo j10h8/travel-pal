@@ -16,6 +16,7 @@ namespace TravelPal
         UserManager _userManager;
         TravelManager _travelManager;
 
+        // Constructor that initializes UserManager and TravelManager, sets field variables, and calls methods AddGandalf, AddAdmin, and InitializeComponent. 
         public MainWindow()
         {
             InitializeComponent();
@@ -25,16 +26,17 @@ namespace TravelPal
 
             AddGandalf();
             AddAdmin();
-
-            _userManager.SignedInUser = null;
         }
 
+        // Constructor to initialize MainWindow object. Sets field variables and UserManager SignedInUser, calls method InitializeComponent. 
         public MainWindow(UserManager userManager, TravelManager travelManager)
         {
             InitializeComponent();
 
             _userManager = userManager;
             _travelManager = travelManager;
+
+            _userManager.SignedInUser = null;
         }
 
         // ******************** EVENTS *********************

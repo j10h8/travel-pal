@@ -7,16 +7,15 @@ namespace TravelPal.Models
         public string Name { get; set; }
         public int Quantity { get; set; }
 
+        // Constructor to initialize OtherItem object. Sets OtherItem Name and Quantity. 
         public OtherItem(string name, int quantity)
         {
             Name = name;
             Quantity = quantity;
         }
 
-
-
-        // ******************** METHODS ********************
-        public string GetInfo()     // TODO: Possibly change what is returned. 
+        // Returns string with information about OtherItem name and quantity 
+        public string GetInfo()
         {
             return $"{Name} x {Quantity}";
         }

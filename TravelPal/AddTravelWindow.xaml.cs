@@ -18,6 +18,7 @@ namespace TravelPal
         TravelManager _travelManager;
         UserManager _userManager;
 
+        // Constructor to initialize AddTravelWindow object. Sets field variables and calls methods UpdateUI and InitializeComponent.
         public AddTravelWindow(UserManager userManager, TravelManager travelManager)
         {
             _travelManager = travelManager;
@@ -29,6 +30,8 @@ namespace TravelPal
         }
 
         // ******************** EVENTS *********************
+
+        // Initializes and shows new TravelsWindow and closes AddTravelWindow 
         private void btnCancelAddTravelWindow_Click(object sender, RoutedEventArgs e)
         {
             TravelsWindow travelsWindow = new(_userManager, _travelManager);
@@ -37,6 +40,7 @@ namespace TravelPal
             Close();
         }
 
+        // Changes/updates UI depending on whether selected combobox item is Trip or Vacation 
         private void cbTypeOfTravelAddTravel_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (cbTypeOfTravelAddTravel.SelectedItem.ToString() == "Trip")
@@ -68,6 +72,7 @@ namespace TravelPal
             }
         }
 
+        // Changes/updates UI if checkbox is checked  
         private void cbxDocument_Checked(object sender, RoutedEventArgs e)
         {
             lblRequired.Visibility = Visibility.Visible;
@@ -79,6 +84,7 @@ namespace TravelPal
             txtQuantity.IsEnabled = false;
         }
 
+        // Changes/updates UI if checkbox is unchecked 
         private void cbxDocument_Unchecked(object sender, RoutedEventArgs e)
         {
             lblRequired.Visibility = Visibility.Hidden;
@@ -91,6 +97,7 @@ namespace TravelPal
             txtQuantity.IsEnabled = true;
         }
 
+        // Changes/updates UI depending on if textbox has input or not 
         private void txtPackingListItem_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
             if (txtPackingListItem.Text.Trim().Length > 0)
@@ -116,6 +123,7 @@ namespace TravelPal
                 txtQuantity.IsEnabled = false;
             }
         }
+
 
         private void cbCountryAddTravel_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {

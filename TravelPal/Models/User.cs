@@ -11,6 +11,7 @@ namespace TravelPal.Models
         public Countries Location { get; set; }
         public List<Travel> Travels { get; set; } = new();
 
+        // Constructor to initialize User object. Sets User UserName, Password, and Location. 
         public User(string userName, string password, Countries location)
         {
             UserName = userName;
@@ -19,13 +20,15 @@ namespace TravelPal.Models
         }
 
 
-
         // ******************** METHODS ********************
+
+        // Returns User Travels list 
         public List<Travel> GetUserTravelList()
         {
             return Travels;
         }
 
+        // Returns string with information about User UserName, Location, and Password. 
         public string GetInfo()
         {
             return $"{UserName} | Location: {Location.ToString().Replace('_', ' ')} | Password: {Password}";

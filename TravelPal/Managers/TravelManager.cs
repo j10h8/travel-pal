@@ -8,11 +8,14 @@ namespace TravelPal.Managers
         public List<Travel> Travels { get; set; } = new();
 
         // ******************** METHODS ********************
+
+        // Adds a Travel to Travels list 
         public void AddTravel(Travel travel)
         {
             Travels.Add(travel);
         }
 
+        // Removes a Travel from Travels list 
         public void RemoveTravel(Travel travel)
         {
             Travels.Remove(travel);

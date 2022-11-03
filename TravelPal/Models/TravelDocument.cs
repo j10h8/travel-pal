@@ -7,6 +7,8 @@ namespace TravelPal.Models
         public string Name { get; set; }
         public bool Required { get; set; }
 
+
+        // Constructor to initialize TravelDocument object. Sets TravelDocument Name and Required. 
         public TravelDocument(string name, bool required)
         {
             Name = name;
@@ -14,8 +16,9 @@ namespace TravelPal.Models
         }
 
 
-
         // ******************** METHODS ********************
+
+        // Returns one of two strings (depending on TravelDocument bool Required) with information about TravelDocument Name 
         public string GetInfo()
         {
             if (Required)

@@ -8,7 +8,8 @@ namespace TravelPal.Interfaces
         public string Password { get; set; }
         public Countries Location { get; set; }
 
-        // ******************** METHODS ******************** 
+
+        // Method that base classes that inherit from IPackingListItem have to have 
         public string GetInfo();
     }
 }

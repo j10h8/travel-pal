@@ -12,9 +12,11 @@ namespace TravelPal.Managers
 
 
         // ******************** METHODS ********************
+
+        // Adds user if user name is not already registered in Users list 
         public bool AddUser(IUser user)
         {
-            if (ValidateUserName(user.UserName))        // TODO: Check if return pattern behaves as espected. Check if the bool is intended to be used in this manner.
+            if (ValidateUserName(user.UserName))
             {
                 Users.Add(user);
                 return true;
@@ -23,6 +25,7 @@ namespace TravelPal.Managers
             return false;
         }
 
+        // Checks if user name is already registered in Users list 
         public bool ValidateUserNameUpdate(string newUserName)
         {
             foreach (IUser user in Users)
@@ -36,6 +39,7 @@ namespace TravelPal.Managers
             return true;
         }
 
+        // Checks if user name is already registered in Users list 
         private bool ValidateUserName(string userName)
         {
             foreach (IUser user in Users)
@@ -49,11 +53,13 @@ namespace TravelPal.Managers
             return true;
         }
 
+        // Removes user from Users list 
         public void RemoveUser(IUser user)
         {
             Users.Remove(user);
         }
 
+        // Returns true if provided user name and associated password exist in Users list. Otherwise false. 
         public bool SignInUser(string userName, string password)
         {
             foreach (IUser user in Users)
@@ -69,6 +75,7 @@ namespace TravelPal.Managers
             return false;
         }
 
+        // Updates user name if user name is not already registered in Users list
         public bool UpdateUserName(IUser user, string userName)
         {
             if (ValidateUserName(userName))
@@ -82,11 +89,13 @@ namespace TravelPal.Managers
             }
         }
 
+        // Updates user password 
         public void UpdatePassword(IUser user, string password)
         {
             user.Password = password;
         }
 
+        // Updates user location 
         public void UpdateLocation(IUser user, Countries location)
         {
             user.Location = location;

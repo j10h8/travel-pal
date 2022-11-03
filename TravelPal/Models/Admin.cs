@@ -9,6 +9,7 @@ namespace TravelPal.Models
         public string Password { get; set; }
         public Countries Location { get; set; }
 
+        // Constructor to initialize Admin object. Sets Admin UserName, Password, and Location. 
         public Admin(string userName, string password, Countries location)
         {
             UserName = userName;
@@ -16,6 +17,7 @@ namespace TravelPal.Models
             Location = location;
         }
 
+        // Returns string with information about all three admin properties 
         public string GetInfo()
         {
             return $"{UserName} | Location: {Location.ToString()} | Password: {Password}";

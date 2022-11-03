@@ -15,6 +15,7 @@ namespace TravelPal
         private UserManager _userManager;
         private TravelManager _travelManager;
 
+        // Constructor to initialize RegisterWindow object. Sets field variables and calls methods PopulateCbCountries and InitializeComponent. 
         public RegisterWindow(UserManager userManager, TravelManager travelManager)
         {
             _userManager = userManager;

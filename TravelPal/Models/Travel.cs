@@ -16,6 +16,7 @@ namespace TravelPal.Models
         public DateTime EndDate { get; set; }
         public int TravelDays { get; set; }
 
+        // Constructor to initialize Travel object. 
         public Travel(string destination, Countries country, int travellers, List<IPackingListItem> packingList, string creatorUserName, DateTime startDate, DateTime endDate)
         {
             Destination = destination;
@@ -29,6 +30,8 @@ namespace TravelPal.Models
         }
 
         // ******************** METHODS ********************
+
+        // Returns one of two strings (depending on TravelDays) with information about Travel Country and TravelDays 
         public virtual string GetInfo()
         {
             if (TravelDays < 2)
@@ -41,12 +44,7 @@ namespace TravelPal.Models
             }
         }
 
-        /// <summary>
-        /// Method calculating the number of days between two dates
-        /// </summary>
-        /// <param name="startDate"></param>
-        /// <param name="endDate"></param>
-        /// <returns>The calculated number as int</returns>
+        // Calculates the number of days between two dates and returns the result as an int 
         private int CalculateTravelDays(DateTime startDate, DateTime endDate)
         {
             TimeSpan timeSpan = endDate - startDate;

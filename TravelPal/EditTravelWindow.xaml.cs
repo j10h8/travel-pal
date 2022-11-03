@@ -18,6 +18,7 @@ namespace TravelPal
         TravelManager _travelManager;
         UserManager _userManager;
         Travel _travel;
+        private int _travelDays;
 
         public EditTravelWindow(UserManager userManager, TravelManager travelManager, Travel travel)
         {
@@ -113,7 +114,7 @@ namespace TravelPal
 
         private void cbCountryAddTravel_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            if (Enum.IsDefined(typeof(EuropeanCountries), _userManager.SignedInUser.Location.ToString()))       //********************************************************
+            if (Enum.IsDefined(typeof(EuropeanCountries), _userManager.SignedInUser.Location.ToString()))
             {
                 int lvIndex = -1;
 
@@ -249,6 +250,8 @@ namespace TravelPal
                 DateTime startDate = (DateTime)cldStartDate.SelectedDate;
                 TimeSpan timeSpan = endDate - startDate;
                 travelDays = timeSpan.Days;
+                _travelDays = travelDays;
+                txtTravelLengthAddTravel.Text = travelDays.ToString();
             }
 
             if (travelDays < 0)
@@ -269,6 +272,7 @@ namespace TravelPal
                 DateTime startDate = (DateTime)cldStartDate.SelectedDate;
                 TimeSpan timeSpan = endDate - startDate;
                 travelDays = timeSpan.Days;
+                _travelDays = travelDays;
                 txtTravelLengthAddTravel.Text = travelDays.ToString();
             }
 
@@ -293,23 +297,23 @@ namespace TravelPal
 
         private void btnUpdateTravel_Click(object sender, RoutedEventArgs e)
         {
-            string creatorUserName = _travel.CreatorUserName;
-
-            _travelManager.RemoveTravel(_travel);
-
-            foreach (IUser user in _userManager.Users)
-            {
-                if (user.UserName == _travel.CreatorUserName && user.GetType().Name.ToString() == "User")
-                {
-                    User identifiedUser = user as User;
-                    identifiedUser.Travels.Remove(_travel);
-                }
-            }
-
             if (CheckInputs() == "OK")
             {
                 try
                 {
+                    string creatorUserName = _travel.CreatorUserName;
+
+                    _travelManager.RemoveTravel(_travel);
+
+                    foreach (IUser user in _userManager.Users)
+                    {
+                        if (user.UserName == _travel.CreatorUserName && user.GetType().Name.ToString() == "User")
+                        {
+                            User identifiedUser = user as User;
+                            identifiedUser.Travels.Remove(_travel);
+                        }
+                    }
+
                     List<IPackingListItem> packingList = new();
 
                     foreach (ListViewItem listViewItem in lvPackingList.Items)
@@ -367,6 +371,13 @@ namespace TravelPal
 
                         _travel = vacation;
                     }
+
+                    MessageBox.Show("The travel has been updated!");
+
+                    TravelDetailsWindow travelDetailsWindow = new(_userManager, _travelManager, _travel);
+                    travelDetailsWindow.Show();
+
+                    Close();
                 }
                 catch (FormatException ex)
                 {
@@ -381,13 +392,6 @@ namespace TravelPal
             {
                 MessageBox.Show(CheckInputs());
             }
-
-            MessageBox.Show("The travel has been updated!");
-
-            TravelDetailsWindow travelDetailsWindow = new(_userManager, _travelManager, _travel);
-            travelDetailsWindow.Show();
-
-            Close();
         }
 
         // ******************** METHODS ********************
@@ -458,9 +462,18 @@ namespace TravelPal
                 }
             }
 
+            // Packing list
+            if (!Enum.IsDefined(typeof(EuropeanCountries), _userManager.SignedInUser.Location.ToString()))
+            {
+                TravelDocument travelDocument = new("Passport", true);
+                ListViewItem item = new();
+                item.Tag = travelDocument;
+                item.Content = travelDocument.GetInfo();
+                lvPackingList.Items.Add(item);
+            }
             foreach (IPackingListItem packingListItem in _travel.PackingList)
             {
-                if (packingListItem.GetInfo().ToString() != "Passport (required)" && packingListItem.GetInfo().ToString() != "Passport (not required")
+                if (packingListItem.GetInfo() != "Passport (required)" && packingListItem.GetInfo() != "Passport (not required)")
                 {
                     ListViewItem item = new ListViewItem();
                     item.Tag = packingListItem;
@@ -468,6 +481,16 @@ namespace TravelPal
                     lvPackingList.Items.Add(item);
                 }
             }
+
+            // Travel dates/calendar 
+            lblTravelDays.Visibility = Visibility.Visible;
+            cldEndDate.DisplayDate = _travel.EndDate;
+            cldStartDate.DisplayDate = _travel.StartDate;
+            DateTime endDate = _travel.EndDate;
+            DateTime startDate = _travel.StartDate;
+            TimeSpan timeSpan = endDate - startDate;
+            int travelDays = timeSpan.Days;
+            txtTravelLengthAddTravel.Text = travelDays.ToString();
 
             // Hide and disable 
             lblAllInclusive.Visibility = Visibility.Hidden;
@@ -487,8 +510,6 @@ namespace TravelPal
             brdCbxDocument.Visibility = Visibility.Hidden;
 
             btnRemoveFromPackingList.Visibility = Visibility.Hidden;
-
-            lblTravelDays.Visibility = Visibility.Hidden;
 
             if (_travel.GetType().Name.ToString() == "Trip")
             {
@@ -545,6 +566,10 @@ namespace TravelPal
             else if (!cldEndDate.SelectedDate.HasValue)
             {
                 return "Please select end date.";
+            }
+            else if (_travelDays < 0)
+            {
+                return "The specified start date comes after the specified end date. Please change!";
             }
 
             return "OK";

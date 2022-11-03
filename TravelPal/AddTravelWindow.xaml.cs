@@ -17,6 +17,7 @@ namespace TravelPal
     {
         TravelManager _travelManager;
         UserManager _userManager;
+        private int _travelDays;
 
         public AddTravelWindow(UserManager userManager, TravelManager travelManager)
         {
@@ -255,6 +256,8 @@ namespace TravelPal
                 DateTime startDate = (DateTime)cldStartDate.SelectedDate;
                 TimeSpan timeSpan = endDate - startDate;
                 travelDays = timeSpan.Days;
+                _travelDays = travelDays;
+                txtTravelLengthAddTravel.Text = travelDays.ToString();
             }
 
             if (travelDays < 0)
@@ -275,6 +278,7 @@ namespace TravelPal
                 DateTime startDate = (DateTime)cldStartDate.SelectedDate;
                 TimeSpan timeSpan = endDate - startDate;
                 travelDays = timeSpan.Days;
+                _travelDays = travelDays;
                 txtTravelLengthAddTravel.Text = travelDays.ToString();
             }
 
@@ -356,6 +360,13 @@ namespace TravelPal
                             user.Travels.Add(vacation);
                         }
                     }
+
+                    MessageBox.Show("The travel has been added!");
+
+                    TravelsWindow travelsWindow = new(_userManager, _travelManager);
+                    travelsWindow.Show();
+
+                    Close();
                 }
                 catch (FormatException ex)
                 {
@@ -370,13 +381,6 @@ namespace TravelPal
             {
                 MessageBox.Show(CheckInputs());
             }
-
-            MessageBox.Show("The travel has been added!");
-
-            TravelsWindow travelsWindow = new(_userManager, _travelManager);
-            travelsWindow.Show();
-
-            Close();
         }
 
         // ******************** METHODS ********************
@@ -477,6 +481,10 @@ namespace TravelPal
             else if (!cldEndDate.SelectedDate.HasValue)
             {
                 return "Please select end date.";
+            }
+            else if (_travelDays < 0)
+            {
+                return "The specified start date comes after the specified end date. Please change!";
             }
 
             return "OK";

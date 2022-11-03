@@ -49,7 +49,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             FontFamily="Arial"
-            FontSize="40"
+            FontSize="30"
             Foreground="MediumSlateBlue"/>
         <Label
             Grid.Column="1"

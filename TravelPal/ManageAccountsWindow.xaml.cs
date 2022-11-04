@@ -24,7 +24,10 @@ namespace TravelPal
             UpdateUI();
         }
 
+
         // ******************** EVENTS *********************
+
+        // Closes ManageAccountsWindow and creates and opens UserDetailsWindow
         private void btnCancelManageAccountsWindow_Click(object sender, RoutedEventArgs e)
         {
             UserDetailsWindow userDetailsWindow = new(_userManager, _travelManager);
@@ -34,6 +37,7 @@ namespace TravelPal
             Close();
         }
 
+        // Sets field variable in _userManager as the selected user account and creates and opens AdminConfirmRemoveAccountWindow
         private void btnRemoveUserAccount_Click(object sender, RoutedEventArgs e)
         {
             if (lvUserAccounts.SelectedItems.Count > 0)
@@ -53,7 +57,10 @@ namespace TravelPal
             }
         }
 
+
         // ******************** METHODS ********************
+
+        // Updates window UI 
         private void UpdateUI()
         {
             lvUserAccounts.Items.Clear();

@@ -32,6 +32,8 @@ namespace TravelPal
         }
 
         // ******************** EVENTS *********************
+
+        // Closes window and opens a new TravelsDetailsWindow 
         private void btnCancelAddTravelWindow_Click(object sender, RoutedEventArgs e)
         {
             TravelDetailsWindow travelDetailsWindow = new(_userManager, _travelManager, _travel);
@@ -40,6 +42,7 @@ namespace TravelPal
             Close();
         }
 
+        // Sets UI visibility depending on if Travel is Trip or Vacation 
         private void cbTypeOfTravelAddTravel_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (cbTypeOfTravelAddTravel.SelectedItem.ToString() == "Trip")
@@ -63,6 +66,7 @@ namespace TravelPal
             }
         }
 
+        // Updates UI if checkbox is checked 
         private void cbxDocument_Checked(object sender, RoutedEventArgs e)
         {
             lblRequired.Visibility = Visibility.Visible;
@@ -74,6 +78,7 @@ namespace TravelPal
             txtQuantity.IsEnabled = false;
         }
 
+        // Updates UI if checkbox is unchecked 
         private void cbxDocument_Unchecked(object sender, RoutedEventArgs e)
         {
             lblRequired.Visibility = Visibility.Hidden;
@@ -86,6 +91,7 @@ namespace TravelPal
             txtQuantity.IsEnabled = true;
         }
 
+        // Updates UI if packinglist text is entered 
         private void txtPackingListItem_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
             if (txtPackingListItem.Text.Trim().Length > 0)
@@ -112,6 +118,7 @@ namespace TravelPal
             }
         }
 
+        // Removes eventual existing passwords and adds a new one depending on user location and travel country
         private void cbCountryAddTravel_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (Enum.IsDefined(typeof(EuropeanCountries), _userManager.SignedInUser.Location.ToString()))
@@ -151,6 +158,7 @@ namespace TravelPal
             }
         }
 
+        // Adds item to packing list listview 
         private void btnAddToPackingList_Click(object sender, RoutedEventArgs e)
         {
             if (cbxDocument.IsChecked == true)
@@ -208,6 +216,7 @@ namespace TravelPal
             }
         }
 
+        // Updates UI if item in listview is selected 
         private void lvPackingList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lvPackingList.SelectedItems.Count > 0)
@@ -222,6 +231,7 @@ namespace TravelPal
             }
         }
 
+        // Removes item from packing list listview 
         private void btnRemoveFromPackingList_Click(object sender, RoutedEventArgs e)
         {
             ListViewItem item = lvPackingList.SelectedItem as ListViewItem;
@@ -238,6 +248,7 @@ namespace TravelPal
             }
         }
 
+        // Sets travelday visibility and calculates travel number of days 
         private void cldStartDate_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
             int travelDays = 0;
@@ -259,6 +270,7 @@ namespace TravelPal
             }
         }
 
+        // Sets travelday visibility and calculates travel number of days 
         private void cldEndDate_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
             int travelDays = 0;
@@ -281,6 +293,7 @@ namespace TravelPal
 
         }
 
+        // Sets travel length colour to red if travel days is a negative number 
         private void txtTravelLengthAddTravel_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (Convert.ToInt32(txtTravelLengthAddTravel.Text) < 0)
@@ -293,6 +306,7 @@ namespace TravelPal
             }
         }
 
+        // Removes old travel and adds new travel based on the updated information
         private void btnUpdateTravel_Click(object sender, RoutedEventArgs e)
         {
             if (CheckInputs() == "OK")
@@ -393,6 +407,8 @@ namespace TravelPal
         }
 
         // ******************** METHODS ********************
+
+        // Updates the UI 
         private void UpdateUI()
         {
             // Travel destination 
@@ -528,6 +544,7 @@ namespace TravelPal
             }
         }
 
+        // Checks input and returns error codes for adding a travel
         private string CheckInputs()
         {
             if (txtDestinationAddTravel.Text.Trim().Length == 0)

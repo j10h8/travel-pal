@@ -39,7 +39,10 @@ namespace TravelPal
             _userManager.SignedInUser = null;
         }
 
+
         // ******************** EVENTS *********************
+
+        // Checks provided sign in information and creates and opens TravelsWindow if OK 
         private void btnSignIn_Click(object sender, RoutedEventArgs e)
         {
             if (txtUserName.Text.Trim().Length == 0 || pbPassword.Password.Trim().Length == 0)
@@ -59,6 +62,7 @@ namespace TravelPal
             }
         }
 
+        // Creates and opens RegisterWindow 
         private void btnToRegisterWindow_Click(object sender, RoutedEventArgs e)
         {
             RegisterWindow registerWindow = new(_userManager, _travelManager);
@@ -67,12 +71,16 @@ namespace TravelPal
             Close();
         }
 
+        // Closes entire application 
         private void btnCloseApplication_Click(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);
         }
 
+
         // ******************** METHODS ********************
+
+        // Creates IUser User Gandalf and adds travels 
         public void AddGandalf()
         {
             User user = new("Gandalf", "password", Countries.Sweden);
@@ -109,6 +117,7 @@ namespace TravelPal
             _travelManager.AddTravel(trip);
         }
 
+        // Creates IUser Admin admin 
         public void AddAdmin()
         {
             Admin admin = new("admin", "password", Countries.Sweden);

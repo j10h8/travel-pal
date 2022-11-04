@@ -25,7 +25,10 @@ namespace TravelPal
             UpdateUI();
         }
 
+
         // ******************** EVENTS *********************
+
+        // Signs out user (sets SignedInUser to null), closes window, and creates and opens new MainWindow
         private void btnSignOut_Click(object sender, RoutedEventArgs e)
         {
             _userManager.SignedInUser = null;
@@ -36,12 +39,14 @@ namespace TravelPal
             Close();
         }
 
+        // Creates and shows new InfoWindow 
         private void btnTravelPalInfo_Click(object sender, RoutedEventArgs e)
         {
             InfoWindow infoWindow = new();
             infoWindow.Show();
         }
 
+        // Closes window and creates and opens UserDetailsWindow 
         private void btnViewUserDetails_Click(object sender, RoutedEventArgs e)
         {
             UserDetailsWindow userDetailsWindow = new(_userManager, _travelManager);
@@ -50,6 +55,7 @@ namespace TravelPal
             Close();
         }
 
+        // Closes window and creates and opens new TravelDetailsWindow 
         private void btnViewDetails_Click(object sender, RoutedEventArgs e)
         {
             if (lvYourTravels.SelectedItems.Count == 0)
@@ -67,6 +73,7 @@ namespace TravelPal
             }
         }
 
+        // Closes window and creates and opens new AddTravelWindow 
         private void AddTravel_Click(object sender, RoutedEventArgs e)
         {
             AddTravelWindow addTravelWindow = new(_userManager, _travelManager);
@@ -75,6 +82,7 @@ namespace TravelPal
             Close();
         }
 
+        // Removes specified travel in _travelManager Travel and in users travel list, and updates the UI 
         private void btnRemoveTravel_Click(object sender, RoutedEventArgs e)
         {
             if (lvYourTravels.SelectedItems.Count == 0)
@@ -101,11 +109,15 @@ namespace TravelPal
             }
         }
 
+
         // ******************** METHODS ********************
+
+        // Updates the window UI 
         private void UpdateUI()
         {
             lvYourTravels.Items.Clear();
 
+            // If Admin or User 
             if (_userManager.SignedInUser.GetType().Name == "Admin")
             {
                 lblListviewTravels.Content = "All travels";
@@ -117,6 +129,7 @@ namespace TravelPal
 
             lblUserName.Content = _userManager.SignedInUser.UserName;
 
+            // Populate listview with Travels
             if (_userManager.SignedInUser is Admin)
             {
                 foreach (Travel travel in _travelManager.Travels)

@@ -13,7 +13,7 @@ namespace TravelPal
             InitializeComponent();
         }
 
-        // ******************** EVENTS *********************
+        // Closes window 
         private void btnCloseInfoWindow_Click(object sender, RoutedEventArgs e)
         {
             Close();

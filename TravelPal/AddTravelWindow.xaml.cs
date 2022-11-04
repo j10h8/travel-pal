@@ -40,7 +40,7 @@ namespace TravelPal
             Close();
         }
 
-        // Changes/updates UI depending on whether selected combobox item is Trip or Vacation 
+        // Updates UI depending on whether selected combobox item is Trip or Vacation 
         private void cbTypeOfTravelAddTravel_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (cbTypeOfTravelAddTravel.SelectedItem.ToString() == "Trip")

@@ -30,6 +30,8 @@ namespace TravelPal
         }
 
         // ******************** EVENTS *********************
+
+        // Closes window and creates and opens new TravelsWindow 
         private void btnCancelAddTravelWindow_Click(object sender, RoutedEventArgs e)
         {
             TravelsWindow travelsWindow = new(_userManager, _travelManager);
@@ -37,6 +39,8 @@ namespace TravelPal
 
             Close();
         }
+
+        // Updates UI depending on whether selected combobox item is Trip or Vacation
         private void cbTypeOfTravelAddTravel_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (cbTypeOfTravelAddTravel.SelectedItem.ToString() == "Trip")
@@ -68,7 +72,10 @@ namespace TravelPal
             }
         }
 
+
         // ******************** METHODS ********************
+
+        // Updates/populates UI with specific travel information 
         private void UpdateUI()
         {
             // Hide/lock fields 
@@ -172,6 +179,7 @@ namespace TravelPal
             }
         }
 
+        // Closes window and creates and opens new EditTravelWindow
         private void btnEditTravel_Click(object sender, RoutedEventArgs e)
         {
             EditTravelWindow editTravelWindow = new(_userManager, _travelManager, _travel);

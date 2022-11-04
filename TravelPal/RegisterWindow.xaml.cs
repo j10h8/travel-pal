@@ -26,7 +26,10 @@ namespace TravelPal
             PopulateCbCountries();
         }
 
+
         // ******************** EVENTS *********************
+
+        // Checks input and creates and adds new user if input is OK 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
             if (txtRegisterUserName.Text.Trim().Length == 0 || pbRegisterPassword.Password.Trim().Length == 0 || string.IsNullOrEmpty(cbCountries.Text) || pbConfirmPassword.Password.Trim().Length == 0)
@@ -68,6 +71,7 @@ namespace TravelPal
             }
         }
 
+        // Closes window and creates and opens new MainWindow 
         private void btnCancelRegister_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new(_userManager, _travelManager);
@@ -76,6 +80,7 @@ namespace TravelPal
             Close();
         }
 
+        // Changes textbox text to red if less than 3 characters 
         private void txtRegisterUserName_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
             if (txtRegisterUserName.Text.Trim().Length < 3)
@@ -88,6 +93,7 @@ namespace TravelPal
             }
         }
 
+        // Changes password input to red if less than 5 characters 
         private void pbRegisterPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (pbRegisterPassword.Password.Trim().Length < 5)
@@ -100,6 +106,7 @@ namespace TravelPal
             }
         }
 
+        // Changes confirm password input to red if less than 5 characters 
         private void pbConfirmPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (pbConfirmPassword.Password.Trim().Length < 5)
@@ -112,7 +119,10 @@ namespace TravelPal
             }
         }
 
+
         // ******************** METHODS ********************
+
+        // Populates combobox with Countries enum 
         private void PopulateCbCountries()
         {
             string[] countries = Enum.GetNames(typeof(Countries));

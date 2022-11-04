@@ -124,7 +124,7 @@ namespace TravelPal
             }
         }
 
-
+        // Removes eventual existing passwords and adds a new one depending on user location and travel country
         private void cbCountryAddTravel_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (Enum.IsDefined(typeof(EuropeanCountries), _userManager.SignedInUser.Location.ToString()))
@@ -164,6 +164,7 @@ namespace TravelPal
             }
         }
 
+        // Adds item to packing list
         private void btnAddToPackingList_Click(object sender, RoutedEventArgs e)
         {
             if (cbxDocument.IsChecked == true)
@@ -221,6 +222,7 @@ namespace TravelPal
             }
         }
 
+        // Sets remove button visibility depending on if listview object is selected or not 
         private void lvPackingList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lvPackingList.SelectedItems.Count > 0)
@@ -235,6 +237,7 @@ namespace TravelPal
             }
         }
 
+        // Removes item from packing list 
         private void btnRemoveFromPackingList_Click(object sender, RoutedEventArgs e)
         {
             ListViewItem item = lvPackingList.SelectedItem as ListViewItem;
@@ -251,6 +254,7 @@ namespace TravelPal
             }
         }
 
+        // Sets travelday visibility and calculates travel number of days 
         private void cldStartDate_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
             int travelDays = 0;
@@ -272,6 +276,7 @@ namespace TravelPal
             }
         }
 
+        // Sets travel length visibility and calculates travel number of days 
         private void cldEndDate_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
             int travelDays = 0;
@@ -291,9 +296,9 @@ namespace TravelPal
             {
                 MessageBox.Show("The specified start date comes after the specified end date. Please change!");
             }
-
         }
 
+        // Sets travel length colour to red if travel days is a negative number 
         private void txtTravelLengthAddTravel_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (Convert.ToInt32(txtTravelLengthAddTravel.Text) < 0)
@@ -306,6 +311,7 @@ namespace TravelPal
             }
         }
 
+        // Adds travel if required input is provided
         private void btnAddTravel_Click(object sender, RoutedEventArgs e)
         {
             if (CheckInputs() == "OK")
@@ -389,6 +395,8 @@ namespace TravelPal
         }
 
         // ******************** METHODS ********************
+
+        // Updates window UI 
         private void UpdateUI()
         {
             if (!Enum.IsDefined(typeof(EuropeanCountries), _userManager.SignedInUser.Location.ToString()))
@@ -450,6 +458,7 @@ namespace TravelPal
             lblTravelDays.Visibility = Visibility.Hidden;
         }
 
+        // Checks input and returns error codes for adding a travel 
         private string CheckInputs()
         {
             if (txtDestinationAddTravel.Text.Trim().Length == 0)

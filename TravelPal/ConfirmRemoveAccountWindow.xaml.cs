@@ -22,6 +22,7 @@ namespace TravelPal
             InitializeComponent();
         }
 
+        // Closes window and opens a new UserDetailsWindow 
         private void btnCancelRemove_Click(object sender, RoutedEventArgs e)
         {
             UserDetailsWindow userDetailsWindow = new(_userManager, _travelManager);
@@ -30,6 +31,7 @@ namespace TravelPal
             Close();
         }
 
+        // Removes specified user account and all associated user travels 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
             for (int i = _travelManager.Travels.Count() - 1; i >= 0; i--)

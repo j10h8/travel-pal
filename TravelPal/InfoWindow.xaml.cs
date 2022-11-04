@@ -7,7 +7,7 @@ namespace TravelPal
     /// </summary>
     public partial class InfoWindow : Window
     {
-        // Constructor to initialize InfoWindow object. Calls method InitializeComponent
+        // Constructor to initialize InfoWindow. Calls method InitializeComponent
         public InfoWindow()
         {
             InitializeComponent();

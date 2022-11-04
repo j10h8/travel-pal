@@ -15,7 +15,7 @@ namespace TravelPal
         private UserManager _userManager;
         private TravelManager _travelManager;
 
-        // Constructor to initialize UserDetailsWindow object. Sets field variables and calls methods UpdateUI and InitializeComponent. 
+        // Constructor to initialize UserDetailsWindow. Sets field variables and calls methods UpdateUI and InitializeComponent. 
         public UserDetailsWindow(UserManager userManager, TravelManager travelManager)
         {
             _userManager = userManager;
@@ -26,7 +26,7 @@ namespace TravelPal
             UpdateUI();
         }
 
-        // ******************** EVENTS *********************
+        // Checks input and (if OK) updates user name, password, and/or location, depending on which field(s) contain(s) input 
         private void btnSaveUpdate_Click(object sender, RoutedEventArgs e)
         {
             if (txtUpdateUserName.Text.Trim().Length == 0 && string.IsNullOrEmpty(cbUpdateCountry.Text) && pbUpdatePassword.Password.Trim().Length == 0)
@@ -198,6 +198,7 @@ namespace TravelPal
             }
         }
 
+        // Closes window and initializes and shows a new TravelsWindow
         private void btnCancelDetailsWindow_Click(object sender, RoutedEventArgs e)
         {
             TravelsWindow travelsWindow = new(_userManager, _travelManager);
@@ -206,6 +207,7 @@ namespace TravelPal
             Close();
         }
 
+        // Sets update user name text to red if characters < 3
         private void txtUpdateUserName_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
             if (txtUpdateUserName.Text.Length < 3)
@@ -218,6 +220,7 @@ namespace TravelPal
             }
         }
 
+        // Sets update password text to red if characters < 5
         private void pbUpdatePassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (pbUpdatePassword.Password.Length < 5)
@@ -230,6 +233,7 @@ namespace TravelPal
             }
         }
 
+        // Sets update confirm password text to red if length < update password text
         private void pbConfirmPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (pbConfirmPassword.Password.Length < pbUpdatePassword.Password.Length)
@@ -242,6 +246,7 @@ namespace TravelPal
             }
         }
 
+        // Closes window and initializes and shows a new ConfirmRemoveAccountWindow 
         private void btnRemoveUser_Click(object sender, RoutedEventArgs e)
         {
             ConfirmRemoveAccountWindow confirmRemoveAccountWindow = new(_userManager, _travelManager);
@@ -251,8 +256,9 @@ namespace TravelPal
             Close();
         }
 
-        // ******************** METHODS ********************
 
+
+        // Updates window UI 
         private void UpdateUI()
         {
             lblCurrentName.Content = _userManager.SignedInUser.UserName;
@@ -274,6 +280,7 @@ namespace TravelPal
             }
         }
 
+        // Removes IPackingListItem Passport(s) from signed in users Travel list and in signed in users Travels in TravelManager Travels list 
         private void RemoveOldPassports()
         {
             for (int i = 0; i < _travelManager.Travels.Count; i++)
@@ -291,6 +298,7 @@ namespace TravelPal
             }
         }
 
+        // initializes IPackingListItem Passport depending on travel country and updated user location, and adds to signed in users Travel list and in signed in users Travels in TravelManager Travels list.
         private void GenerateNewPassport()
         {
             for (int i = 0; i < _travelManager.Travels.Count; i++)
@@ -316,6 +324,7 @@ namespace TravelPal
             }
         }
 
+        // Closes window and initializes and shows new ManageAccountsWindow 
         private void btnManageUserAccounts_Click(object sender, RoutedEventArgs e)
         {
             ManageAccountsWindow manageAccountsWindow = new(_userManager, _travelManager);

@@ -13,7 +13,7 @@ namespace TravelPal
         UserManager _userManager;
         TravelManager _travelManager;
 
-        // Constructor to initialize ManageAccountsWindow object. Sets field variables and calls methods UpdateUI and InitializeComponent. 
+        // Constructor to initialize ManageAccountsWindow. Sets field variables and calls methods UpdateUI and InitializeComponent. 
         public ManageAccountsWindow(UserManager userManager, TravelManager travelManager)
         {
             _userManager = userManager;
@@ -24,10 +24,7 @@ namespace TravelPal
             UpdateUI();
         }
 
-
-        // ******************** EVENTS *********************
-
-        // Closes ManageAccountsWindow and creates and opens UserDetailsWindow
+        // Closes ManageAccountsWindow and initializes and shows UserDetailsWindow
         private void btnCancelManageAccountsWindow_Click(object sender, RoutedEventArgs e)
         {
             UserDetailsWindow userDetailsWindow = new(_userManager, _travelManager);
@@ -37,7 +34,7 @@ namespace TravelPal
             Close();
         }
 
-        // Sets field variable in _userManager as the selected user account and creates and opens AdminConfirmRemoveAccountWindow
+        // Sets field variable in _userManager as the selected user account and initializes and shows AdminConfirmRemoveAccountWindow
         private void btnRemoveUserAccount_Click(object sender, RoutedEventArgs e)
         {
             if (lvUserAccounts.SelectedItems.Count > 0)
@@ -58,7 +55,6 @@ namespace TravelPal
         }
 
 
-        // ******************** METHODS ********************
 
         // Updates window UI 
         private void UpdateUI()

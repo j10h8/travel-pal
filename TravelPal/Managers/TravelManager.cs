@@ -7,8 +7,6 @@ namespace TravelPal.Managers
     {
         public List<Travel> Travels { get; set; } = new();
 
-        // ******************** METHODS ********************
-
         // Adds a Travel to Travels list 
         public void AddTravel(Travel travel)
         {

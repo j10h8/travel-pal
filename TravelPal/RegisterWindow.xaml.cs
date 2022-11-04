@@ -15,7 +15,7 @@ namespace TravelPal
         private UserManager _userManager;
         private TravelManager _travelManager;
 
-        // Constructor to initialize RegisterWindow object. Sets field variables and calls methods PopulateCbCountries and InitializeComponent. 
+        // Constructor to initialize RegisterWindow. Sets field variables and calls methods PopulateCbCountries and InitializeComponent. 
         public RegisterWindow(UserManager userManager, TravelManager travelManager)
         {
             _userManager = userManager;
@@ -26,10 +26,7 @@ namespace TravelPal
             PopulateCbCountries();
         }
 
-
-        // ******************** EVENTS *********************
-
-        // Checks input and creates and adds new user if input is OK 
+        // Checks input and initializes and adds new user if input is OK 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
             if (txtRegisterUserName.Text.Trim().Length == 0 || pbRegisterPassword.Password.Trim().Length == 0 || string.IsNullOrEmpty(cbCountries.Text) || pbConfirmPassword.Password.Trim().Length == 0)
@@ -71,7 +68,7 @@ namespace TravelPal
             }
         }
 
-        // Closes window and creates and opens new MainWindow 
+        // Closes window and initializes and shows new MainWindow 
         private void btnCancelRegister_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new(_userManager, _travelManager);
@@ -120,7 +117,6 @@ namespace TravelPal
         }
 
 
-        // ******************** METHODS ********************
 
         // Populates combobox with Countries enum 
         private void PopulateCbCountries()

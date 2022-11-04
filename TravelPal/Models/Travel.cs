@@ -16,7 +16,7 @@ namespace TravelPal.Models
         public DateTime EndDate { get; set; }
         public int TravelDays { get; set; }
 
-        // Constructor to initialize Travel object. 
+        // Constructor to initialize Travel
         public Travel(string destination, Countries country, int travellers, List<IPackingListItem> packingList, string creatorUserName, DateTime startDate, DateTime endDate)
         {
             Destination = destination;
@@ -28,8 +28,6 @@ namespace TravelPal.Models
             EndDate = endDate;
             TravelDays = CalculateTravelDays(startDate, endDate);
         }
-
-        // ******************** METHODS ********************
 
         // Returns one of two strings (depending on TravelDays) with information about Travel Country and TravelDays 
         public virtual string GetInfo()

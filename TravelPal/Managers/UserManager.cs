@@ -10,9 +10,6 @@ namespace TravelPal.Managers
         public IUser SignedInUser { get; set; }
         public IUser TemporaryUser { get; set; }
 
-
-        // ******************** METHODS ********************
-
         // Adds user if user name is not already registered in Users list 
         public bool AddUser(IUser user)
         {

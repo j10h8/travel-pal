@@ -16,7 +16,7 @@ namespace TravelPal
         UserManager _userManager;
         TravelManager _travelManager;
 
-        // Constructor that initializes UserManager and TravelManager, sets field variables, and calls methods AddGandalf, AddAdmin, and InitializeComponent. 
+        // Constructor to initialize MainWindow. Also initializes new UserManager and TravelManager, sets field variables, and calls methods AddGandalf, AddAdmin, and InitializeComponent. 
         public MainWindow()
         {
             InitializeComponent();
@@ -28,7 +28,7 @@ namespace TravelPal
             AddAdmin();
         }
 
-        // Constructor to initialize MainWindow object. Sets field variables and UserManager SignedInUser, calls method InitializeComponent. 
+        // Constructor to initialize MainWindow. Sets field variables and UserManager SignedInUser, calls method InitializeComponent. 
         public MainWindow(UserManager userManager, TravelManager travelManager)
         {
             InitializeComponent();
@@ -39,10 +39,7 @@ namespace TravelPal
             _userManager.SignedInUser = null;
         }
 
-
-        // ******************** EVENTS *********************
-
-        // Checks provided sign in information and creates and opens TravelsWindow if OK 
+        // Checks provided sign in information and initializes and shows TravelsWindow if OK 
         private void btnSignIn_Click(object sender, RoutedEventArgs e)
         {
             if (txtUserName.Text.Trim().Length == 0 || pbPassword.Password.Trim().Length == 0)
@@ -62,7 +59,7 @@ namespace TravelPal
             }
         }
 
-        // Creates and opens RegisterWindow 
+        // initializes and shows RegisterWindow 
         private void btnToRegisterWindow_Click(object sender, RoutedEventArgs e)
         {
             RegisterWindow registerWindow = new(_userManager, _travelManager);
@@ -78,9 +75,8 @@ namespace TravelPal
         }
 
 
-        // ******************** METHODS ********************
 
-        // Creates IUser User Gandalf and adds travels 
+        // initializes IUser User Gandalf and adds travels 
         public void AddGandalf()
         {
             User user = new("Gandalf", "password", Countries.Sweden);
@@ -117,7 +113,7 @@ namespace TravelPal
             _travelManager.AddTravel(trip);
         }
 
-        // Creates IUser Admin admin 
+        // initializes IUser Admin admin 
         public void AddAdmin()
         {
             Admin admin = new("admin", "password", Countries.Sweden);

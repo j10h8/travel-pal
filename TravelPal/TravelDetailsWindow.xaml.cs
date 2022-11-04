@@ -17,7 +17,7 @@ namespace TravelPal
         TravelManager _travelManager;
         Travel _travel;
 
-        // Constructor to initialize TravelDetailsWindow object. Sets field variables and calls methods UpdateUI and InitializeComponent. 
+        // Constructor to initialize TravelDetailsWindow. Sets field variables and calls methods UpdateUI and InitializeComponent. 
         public TravelDetailsWindow(UserManager userManager, TravelManager travelManager, Travel travel)
         {
             _userManager = userManager;
@@ -29,9 +29,7 @@ namespace TravelPal
             UpdateUI();
         }
 
-        // ******************** EVENTS *********************
-
-        // Closes window and creates and opens new TravelsWindow 
+        // Closes window and initializes and shows new TravelsWindow 
         private void btnCancelAddTravelWindow_Click(object sender, RoutedEventArgs e)
         {
             TravelsWindow travelsWindow = new(_userManager, _travelManager);
@@ -73,7 +71,6 @@ namespace TravelPal
         }
 
 
-        // ******************** METHODS ********************
 
         // Updates/populates UI with specific travel information 
         private void UpdateUI()
@@ -179,7 +176,7 @@ namespace TravelPal
             }
         }
 
-        // Closes window and creates and opens new EditTravelWindow
+        // Closes window and initializes and shows new EditTravelWindow
         private void btnEditTravel_Click(object sender, RoutedEventArgs e)
         {
             EditTravelWindow editTravelWindow = new(_userManager, _travelManager, _travel);

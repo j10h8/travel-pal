@@ -9,14 +9,11 @@ namespace TravelPal.Models
     {
         public TripTypes Type { get; set; }
 
-        // Constructor to initialize Trip object. Sets Trip Type and inherited Travel properties. 
+        // Constructor to initialize Trip. Sets Trip Type and inherited Travel properties. 
         public Trip(TripTypes type, string destination, Countries country, int travellers, List<IPackingListItem> packingList, string creatorUserName, DateTime startDate, DateTime endDate) : base(destination, country, travellers, packingList, creatorUserName, startDate, endDate)
         {
             Type = type;
         }
-
-
-        // ******************** METHODS ********************
 
         // Returns one of two strings (depending on Travel TravelDays) with information about Country and TravelDays. 
         public string GetInfo()

@@ -4,8 +4,7 @@
     {
         public string Name { get; set; }
 
-
-        // Method that base classes that inherit from IPackingListItem have to have 
+        // Method that classes that inherit from IPackingListItem have to have 
         public string GetInfo();
     }
 }

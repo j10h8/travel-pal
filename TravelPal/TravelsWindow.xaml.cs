@@ -14,7 +14,7 @@ namespace TravelPal
         TravelManager _travelManager;
         UserManager _userManager;
 
-        // Constructor to initialize TravelsWindow object. Sets field variables and calls methods UpdateUI and InitializeComponent. 
+        // Constructor to initialize TravelsWindow. Sets field variables and calls methods UpdateUI and InitializeComponent. 
         public TravelsWindow(UserManager userManager, TravelManager travelManager)
         {
             _travelManager = travelManager;
@@ -25,10 +25,7 @@ namespace TravelPal
             UpdateUI();
         }
 
-
-        // ******************** EVENTS *********************
-
-        // Signs out user (sets SignedInUser to null), closes window, and creates and opens new MainWindow
+        // Signs out user (sets SignedInUser to null), closes window, and initializes and shows new MainWindow
         private void btnSignOut_Click(object sender, RoutedEventArgs e)
         {
             _userManager.SignedInUser = null;
@@ -39,14 +36,14 @@ namespace TravelPal
             Close();
         }
 
-        // Creates and shows new InfoWindow 
+        // initializes and shows new InfoWindow 
         private void btnTravelPalInfo_Click(object sender, RoutedEventArgs e)
         {
             InfoWindow infoWindow = new();
             infoWindow.Show();
         }
 
-        // Closes window and creates and opens UserDetailsWindow 
+        // Closes window and initializes and shows UserDetailsWindow 
         private void btnViewUserDetails_Click(object sender, RoutedEventArgs e)
         {
             UserDetailsWindow userDetailsWindow = new(_userManager, _travelManager);
@@ -55,7 +52,7 @@ namespace TravelPal
             Close();
         }
 
-        // Closes window and creates and opens new TravelDetailsWindow 
+        // Closes window and initializes and shows new TravelDetailsWindow 
         private void btnViewDetails_Click(object sender, RoutedEventArgs e)
         {
             if (lvYourTravels.SelectedItems.Count == 0)
@@ -73,7 +70,7 @@ namespace TravelPal
             }
         }
 
-        // Closes window and creates and opens new AddTravelWindow 
+        // Closes window and initializes and shows new AddTravelWindow 
         private void AddTravel_Click(object sender, RoutedEventArgs e)
         {
             AddTravelWindow addTravelWindow = new(_userManager, _travelManager);
@@ -110,7 +107,6 @@ namespace TravelPal
         }
 
 
-        // ******************** METHODS ********************
 
         // Updates the window UI 
         private void UpdateUI()

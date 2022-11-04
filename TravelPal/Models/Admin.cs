@@ -9,7 +9,7 @@ namespace TravelPal.Models
         public string Password { get; set; }
         public Countries Location { get; set; }
 
-        // Constructor to initialize Admin object. Sets Admin UserName, Password, and Location. 
+        // Constructor to initialize Admin. Sets Admin UserName, Password, and Location. 
         public Admin(string userName, string password, Countries location)
         {
             UserName = userName;

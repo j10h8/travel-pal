@@ -11,7 +11,7 @@ namespace TravelPal
         private UserManager _userManager;
         private TravelManager _travelManager;
 
-        // Constructor to initialize AdminConfirmRemoveAccountWindow object. Sets field variables and calls method InitializeComponent. 
+        // Constructor to initialize AdminConfirmRemoveAccountWindow. Sets field variables and calls method InitializeComponent. 
         public AdminConfirmRemoveAccountWindow(UserManager userManager, TravelManager travelManager)
         {
             _userManager = userManager;
@@ -43,7 +43,7 @@ namespace TravelPal
             Close();
         }
 
-        // Closes window and opens a new ManageAccountsWindow 
+        // Closes window and shows a new ManageAccountsWindow 
         private void btnCancelRemove_Click(object sender, RoutedEventArgs e)
         {
             ManageAccountsWindow manageAccountsWindow = new(_userManager, _travelManager);

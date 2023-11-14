@@ -1,0 +1,70 @@
+﻿<Window x:Class="TravelPal.InfoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TravelPal"
+        mc:Ignorable="d"
+        Title="InfoWindow"
+        Height="300" 
+        MaxHeight="300"
+        MinHeight="300"
+        Width="500"
+        MaxWidth="500"
+        MinWidth="500"
+        Background="MintCream"
+        FontFamily="Calibri"
+        FontSize="15"
+        BorderBrush="MediumSlateBlue"
+        BorderThickness="2"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock
+            Grid.Row="0"
+            TextWrapping="Wrap"
+            TextAlignment="Justify"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Foreground="MediumSlateBlue"
+            Margin="20">
+            At - TravelPal - we strive to provide 
+            the best place for you to specify and 
+            manage your travels!
+            <LineBreak/>
+            <LineBreak />
+            You can overview all your travels in the 
+            'Your travels' list, see and change the details 
+            of a selected travel, add new travels to the 
+            list, and remove existing travels. 
+            <LineBreak />
+            <LineBreak />
+            Click the User-button to see details about 
+            your user account. Here, you're also able to 
+            change your user details.
+        </TextBlock>
+        <Button
+            Grid.Row="1"
+            Name="btnCloseInfoWindow"
+            Width="100"
+            Height="30"
+            Content="Close window"
+            FontSize="15"
+            Background="MediumSlateBlue"
+            Foreground="MintCream"
+            BorderThickness="0"
+            Click="btnCloseInfoWindow_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+    </Grid>
+</Window>
